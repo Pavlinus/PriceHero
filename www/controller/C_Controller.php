@@ -2,7 +2,8 @@
 
 abstract class C_Controller 
 {
-	protected abstract function render();
+	protected abstract function renderPage();
+	protected abstract function renderContent();
 	
 	public function Request($action)
 	{

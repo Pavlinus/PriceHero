@@ -1,6 +1,8 @@
 <?php
-	include_once('simple_html_dom.php');
+include_once('simple_html_dom.php');
 
+class PriceParser
+{
 	$html = file_get_html('http://steambuy.com/steam/call-of-duty-infinite-warfare/');
 
 	
@@ -10,4 +12,6 @@
 	}
 	
 	echo $matches[0];
+}	
+
 ?>

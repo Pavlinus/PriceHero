@@ -5,7 +5,7 @@ abstract class C_Base extends C_Controller
 	protected $title;
 	protected $content;
 	
-	public function render()
+	public function renderPage()
 	{
 
 		$page = $this->Template('view/v_header.php', array());

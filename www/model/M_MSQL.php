@@ -26,14 +26,17 @@ class M_MSQL
 		$result = mysqli_query($this->connLink, $query);
 		
 		if (!$result)
-			die(mysql_error());
+		{
+			echo mysqli_error($this->connLink);
+			return false;
+		}
 		
 		$n = mysqli_num_rows($result);
 		$arr = array();
 	
 		for($i = 0; $i < $n; $i++)
 		{
-			$row = mysqli_fetch_assoc($result);		
+			$row = mysqli_fetch_assoc($result);
 			$arr[] = $row;
 		}
 		return $arr;				
@@ -115,9 +118,9 @@ class M_MSQL
 	private function connect_db() 
 	{
 		$hostname = 'localhost'; 
-		$username = 'zyqjkokx_pavlin'; 
-		$password = '3S3o5Y9h';
-		$dbName = 'zyqjkokx_creata';
+		$username = 'admin'; 
+		$password = 'admin';
+		$dbName = 'pricehero';
 	
 		setlocale(LC_ALL, 'ru_RU.UTF-8');
 		mb_internal_encoding('UTF-8');
