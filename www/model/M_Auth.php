@@ -10,7 +10,7 @@ include_once "M_MSQL.php";
 
 class M_Auth
 {
-	private $msqli;
+	private $msql;
 	private static $instance;
 	
 	
@@ -48,9 +48,11 @@ class M_Auth
 			return false;
 		}
 		
-		$login = mysql_real_escape_string($login);
+		$login = mysqli_real_escape_string(
+			$this->msql->GetConnectionLink(), $login);
 		$password = md5($password);
-		$password = mysql_real_escape_string($password);
+		$password = mysqli_real_escape_string(
+			$this->msql->GetConnectionLink(), $password);
 		
 		$query = "SELECT user_id, priority FROM t_user ";
 		$query .= "WHERE login = '{$login}' AND password = '{$password}'";
@@ -62,12 +64,13 @@ class M_Auth
 			return false;
 		}
 		
-		if(isset($authRes[0]['priority']) && $authRes[0]['priority'] == '007')
+		if(isset($authRes[0]['priority']) && 
+			$authRes[0]['priority'] == '007')
 		{
 			setcookie('user', '007', time() + 3600);
 		}
 		
-		return true;
+		return $authRes;
 	}
 }
 

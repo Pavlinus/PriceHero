@@ -8,7 +8,7 @@ abstract class C_Controller
 	public function Request($action)
 	{
 		$this->$action();
-		$this->render();
+		$this->renderPage();
 	}
 	
 	public function RequestAjax($action)
@@ -42,7 +42,7 @@ abstract class C_Controller
 	public function __call($name, $params){
         $error = "Не удалось загрузить страницу";
 		//$this->content = $this->Template('view/v_error.php', array('error' => $error));
-		echo $error;
+		echo $error . "<br>".$name."<br>".$params;
 		return;
 	}
 }

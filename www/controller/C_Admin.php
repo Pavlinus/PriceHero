@@ -6,9 +6,9 @@
 * @date 30.07.2016
 */
 
-include_once "../model/M_ControlPanel.php";
-include_once "../model/M_Filter.php";
-include_once "../model/M_Auth.php";
+include_once "/model/M_ControlPanel.php";
+include_once "/model/M_Filter.php";
+include_once "/model/M_Auth.php";
 
 class C_Admin extends C_Base
 {
@@ -19,19 +19,19 @@ class C_Admin extends C_Base
 	
 	public function __construct()
 	{
-		if($cPanel == null)
+		if($this->cPanel == null)
 		{
-			$cPanel = M_ControlPanel::Instance();
+			$this->cPanel = M_ControlPanel::Instance();
 		}
 		
-		if($filter == null)
+		if($this->filter == null)
 		{
-			$filter = M_Filter::Instance();
+			//$filter = M_Filter::Instance();
 		}
 		
-		if($auth == null)
+		if($this->auth == null)
 		{
-			$auth = M_Auth::Instance();
+			$this->auth = M_Auth::Instance();
 		}
 	}
 	
@@ -41,13 +41,15 @@ class C_Admin extends C_Base
 	*/
 	public function action_index()
 	{
-		if($_COOKIE['user'] == '007')
+		if($this->isAdmin())
 		{
-			$content = $this->Template("../view/v_admin.php", array());
+			$this->content = $this->Template("view/v_admin.php", 
+				array());
 		}
 		else
 		{
-			echo $this->Template("../view/v_admin_auth.php", array());
+			$this->content = $this->Template("view/v_admin_auth.php", 
+				array());
 		}
 	}
 	
@@ -59,19 +61,83 @@ class C_Admin extends C_Base
 	{
 		if($this->isPost())
 		{
-			$authRes = $auth->authorize($_REQUEST['login'], $_REQUEST['password']);
+			$authRes = $this->auth->authorize($_REQUEST['au_login'], 
+				$_REQUEST['au_password']);
 			
-			if($authRes)
+			if($authRes && $this->isAdmin($authRes[0]['priority']))
 			{
-				// TODO ====================================
+				$this->content = $this->Template("view/v_admin.php", 
+					array());
+			}
+			else
+			{
+				$error = 'Неверный логин или пароль';
+				$this->content = $this->Template("view/v_admin_auth.php", 
+					array('error' => $error));
 			}
 		}
 	}
 	
 	
+	/**
+	* <p>Проверка на адмиина</p>
+	* @param priority приоритет пользователя (права доступа)
+	* @return TRUE если админ, иначе FALSE
+	*/
+	public function isAdmin($priority = false)
+	{
+		if($priority === '007')
+		{
+			return true;
+		}
+		
+		if(isset($_COOKIE['user']) && $_COOKIE['user'] == '007')
+		{
+			return true;
+		}
+		
+		return false;
+	}
+	
+	
+	/**
+	* <p>Добавление игры</p>
+	* @return
+	*/
 	public function action_addGame()
 	{
 		
+		if($this->isPost())
+		{
+			$gameId = $this->cPanel->addGame();
+			$linksId = array();
+			$totalId = array();
+			
+			if($gameId)
+			{
+				$linksId = $this->cPanel->addLink();
+				
+				if(!empty($linksId))
+				{
+					$totalId = $this->cPanel->addTotal($gameId, $linksId);
+				}
+				
+				// TODO: создать новую таблицу хранения новый ID t_total для t_price
+				if(!empty($totalId))
+				{
+					
+				}
+			}
+			
+		}
+		else
+		{
+			if(isset($_COOKIE['user']) && $_COOKIE['user'] == '007')
+			{
+				$this->content = $this->Template("view/v_admin_add_game.php", 
+					array());
+			}
+		}
 	}
 	
 	
@@ -93,4 +159,3 @@ class C_Admin extends C_Base
 	}
 }
 
-?>

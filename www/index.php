@@ -33,8 +33,13 @@
 	{
 		$act = $_GET['act'];
 	}
+	
 	switch ($ctrl)
 	{
+		case 'admin':
+			$controller = new C_Admin();
+			break;
+			
 		case 'index':
 		default:
 			$controller = new C_Index();
@@ -42,12 +47,5 @@
 	
 	header('Content-type: text/html; charset=utf-8');
 	
-	if($ctrl == 'search' && $act == 'search')
-	{
-		$controller->RequestAjax($action);
-	}
-	else
-	{
-		$controller->Request($action);
-	}
+	$controller->Request($action);
 ?>

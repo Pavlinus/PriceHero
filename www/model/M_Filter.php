@@ -1,6 +1,6 @@
 <?php
 
-class Filter
+class M_Filter
 {
 	private $msql;
 	private static $instance;

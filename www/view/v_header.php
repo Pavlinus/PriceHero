@@ -8,12 +8,8 @@
 	<meta name="keywords" content="" />
 	<link rel="stylesheet/less" href="css/style.less" type="text/css" />
 	<title>Pricer</title>
-	<!--[if IE]>
-	<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-	<![endif]-->
-	<script
-	  src="https://ajax.googleapis.com/ajax/libs/jquery/3.0.0/jquery.min.js" defer>
-	</script>
+	<script src="js/jquery.min.js" type="text/javascript"></script>
+	<script src="js/jquery-ui.min.js" type="text/javascript"></script>
 	<script src="js/less.js" type="text/javascript"></script>
 </head>
 <body>

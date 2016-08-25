@@ -37,6 +37,8 @@ body {
 @c_dbrown: #333333;
 @c_yellow: #faef03;
 @c_lblue: #26D2FC;
+@c_red: #ff4a4a;
+@c_orange: #fb4d01;
 
 
 /* ================ FONTS ================ */
@@ -60,6 +62,10 @@ body {
 	font-family: "RobotoRegular";
 	src: url(../fonts/Roboto-Regular.ttf);
 }
+
+@f_regular: "RobotoRegular";
+@f_bold: "RobotoBold";
+@f_bold_italic: "RobotoBoldItalic";
 
 
 /* ================ MAIN ================ */
@@ -142,7 +148,7 @@ header {
 	
 	.menu {
 		display: block;
-		font-family: "RobotoBold";
+		font-family: @f_bold;
 		padding-bottom: 1.5em;
 		
 		.head {
@@ -183,50 +189,54 @@ header {
 			}
 		}
 	}
+}
+
+.filter {
+	background: #fff;
+	padding: 35px 30px;
 	
-	.filter {
-		background: #fff;
-		padding: 35px 30px;
+	h2 {
+		color: #000;
+		padding-bottom: 0.8em;
+	}
+	
+	.option {
+		display: inline-block;
+		vertical-align: top;
+		color: @c_dgrey;
+		font-size: 0.875em;
+		border: none;
+		background: @c_lgrey;
+		padding: 0.75em;
+		margin: 0 10px 10px 0;
 		
-		h2 {
+		&.active {
+			background: @c_yellow;
+			font-family: @f_bold;
 			color: #000;
-			padding-bottom: 0.8em;
 		}
 		
-		.option {
-			display: inline-block;
-			vertical-align: top;
-			color: @c_dgrey;
-			font-size: 0.875em;
-			border: none;
-			background: @c_lgrey;
-			padding: 0.75em;
-			margin: 0 10px 10px 0;
-			
-			&.active {
-				background: @c_yellow;
-				font-family: "RobotoBold";
-				color: #000;
-			}
-			
-			&:hover {
-				background: @c_yellow;
-				cursor: pointer;
-			}
+		&:hover {
+			background: @c_yellow;
+			cursor: pointer;
 		}
 	}
 }
 
 .product_name {
 	color: #000;
-	font-family: "RobotoBoldItalic";
+	font-family: @f_bold_italic;
 	font-size: 0.875em;
 }
 
 .product_price {
 	color: #000;
-	font-family: "RobotoBoldItalic";
+	font-family: @f_bold_italic;
 	font-size: 1em;
+}
+
+.white_back {
+	background: #fff;
 }
 
 .content {
@@ -290,6 +300,244 @@ header {
 			}
 		}
 	}
+	
+	>.wrapper {
+		width: 100%;
+		padding: 30px 20px;
+		
+		.filter {
+			text-align: center;
+			padding: 0px 30px 5px 30px;
+			
+			.option {
+				display: inline-block;
+			}
+		}
+		
+		.letters_wrapper {
+			text-align: center;
+			padding-bottom: 5px;
+			
+			.letter {
+				font-size: 14px;
+				color: @c_dgrey;
+				font-family: @f_regular;
+				display: inline-block;
+				padding: 5px 8px;
+				
+				&:hover {
+					background: @c_lblue;
+					color: #000;
+					cursor: pointer;
+				}
+			}
+		}
+		
+		.search {
+			width: 340px;
+			display: block;
+			margin: 0 auto;
+			padding: 10px 0;
+			
+			input[type="text"] {
+				width: 300px;
+			}
+			
+			.search_button {
+				top: 10px;
+			}
+		}
+		
+		.result_wrapper {
+			padding: 0px 20px;
+			
+			.row {
+				display: table;
+				width: 100%;
+				padding: 5px 0;
+				
+				.col_3 {
+					display: table-cell;
+					vertical-align: middle;
+					width: 33%;
+					text-align: left;
+					padding: 0 0 5px 15px;
+				}
+				
+				.caption {
+					border-bottom: 1px solid @c_lgrey;
+					color: #000;
+					font-size: 14px;
+					font-family: @f_bold;
+				}
+				
+				.name {
+					font-family: @f_bold_italic;
+					font-size: 14px;
+				}
+				
+				span {
+					font-family: @f_regular;
+					font-size: 14px;
+				}
+				
+				.action {
+					display: block;
+					padding: 3px 5px;
+					border: none;
+					background: @c_orange;
+					color: #fff;
+					font-size: 12px;
+					font-family: @f_regular;
+					
+					&:hover {
+						cursor: pointer;
+						opacity: .9;
+					}
+				}
+			}			
+		}
+	}
+	
+	.form {
+		width: 250px;
+		max-width: 250px;
+		margin: 0 auto;
+		
+		&.add_game {
+			width: 500px;
+			max-width: 500px;
+			margin: 0;
+			
+			input[type="text"] {
+				width: 480px;
+			}
+		}
+		
+		.link_item {
+			position: relative;
+			
+			.rm_link {
+				display: block;
+				position: absolute;
+				right: -30px;
+				top: 0;
+				font-size: 24px;
+				color: @c_dgrey;
+				
+				&:hover {
+					cursor: pointer;
+					color: @c_red;
+				}
+			}
+		}
+		
+		select {
+			width: 100%;
+			padding: 10px;
+			border: 1px solid @c_lgrey;
+		}
+		
+		.item {
+			padding-bottom: 15px;
+		}
+		
+		.input_label {
+			display: block;
+			color: #000;
+			font-size: 14px;
+			font-family: @f_bold;
+			padding-bottom: 5px;
+			
+			&.optional {
+				
+				&:after {
+					content: "";
+				}
+			}
+			
+			&:after {
+				content: "*";
+				color: @c_red;
+				font-size: 14px;
+				font-family: @f_bold;
+			}
+		}
+		
+		input[type="text"] {
+			display: block;
+			border: 1px solid @c_lgrey;
+			background-color: #fff;
+			font-size: 14px;
+			color: #000;
+			padding: 10px;
+			width: 230px;
+			font-family: @f_regular;
+			transition: .5s ease all;
+			
+			&.m_top {
+				margin-top: 10px;
+			}
+		}
+		
+		.form_btn {
+			width: 100%;
+		}
+	}
+	
+	.required {
+		color: @c_red;
+		font-size: 14px;
+		font-family: @f_regular;
+	}
+	
+	.error {
+		display: block;
+		color: @c_red;
+		font-size: 16px;
+		font-family: @f_bold;
+		padding-bottom: 20px;
+		text-align: center;
+	}
+}
+
+.admin_auth {
+	
+	.content {
+		display: block;
+		padding: 30px 0;
+		margin: 0 auto;
+	}
+}
+
+.spacer_30 {
+	height: 30px;
+}
+
+.form_btn {
+	display: block;
+	background: @c_dbrown;
+	color: #fff;
+	font-size: 16px;
+	text-transform: uppercase;
+	font-family: @f_bold;
+	padding: 10px 0;
+	border: none;
+	
+	&.add {
+		display: inline-block;
+		width: auto !important;
+		background: @c_lblue;
+		font-size: 14px;
+		padding: 10px;
+		margin-top: 10px;
+		color: #000;
+	}
+	
+	&:hover {
+		cursor: pointer;
+		opacity: .9;
+	}
 }
 
 section {
@@ -314,11 +562,13 @@ footer {
 		width: 100%;
 		background: #373737;
 		max-width: 100%;
+		padding: 0;
 		
 		.wrapper {
 			width: 100%;
 			max-width: 1170px;
 			padding: 40px;
+			margin: 0 auto;
 			
 			.footer_menu {
 				display: table;
@@ -329,7 +579,7 @@ footer {
 					
 					h3 {
 						color: #fff;
-						font-family: "RobotoBold";
+						font-family: @f_bold;
 						padding-bottom: 20px;
 					}
 					
@@ -337,7 +587,7 @@ footer {
 						display: inline-block;
 						color: #fff;
 						font-size: 0.875em;
-						font-family: "RobotoRegular";
+						font-family: @f_regular;
 						margin: 5px 0;
 						
 						&:hover {
