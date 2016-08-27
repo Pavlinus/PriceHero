@@ -45,35 +45,35 @@ class M_MSQL
 
 	public function Insert($table, $object)
 	{			
-		$columns = array(); 
-		$values = array(); 
-	
-		foreach ($object as $key => $value)
-		{
-			$key = mysqli_real_escape_string($this->connLink, $key . '');
-			$columns[] = $key;
-			
-			if ($value === null)
-			{
-				$values[] = 'NULL';
-			}
-			else
-			{
-				$value = mysqli_real_escape_string($this->connLink, $value . '');
-				$values[] = "'$value'";
-			}
-		}
-		
-		$columns_s = implode(',', $columns); 
-		$values_s = implode(',', $values);  
-			
-		$query = "INSERT INTO $table ($columns_s) VALUES ($values_s)";
-		$result = mysqli_query($this->connLink, $query);
-								
-		if (!$result)
-			die(mysqli_error($this->connLink));
-			
-		return mysqli_insert_id($this->connLink);
+            $columns = array(); 
+            $values = array(); 
+
+            foreach ($object as $key => $value)
+            {
+                $key = mysqli_real_escape_string($this->connLink, $key . '');
+                $columns[] = $key;
+
+                if ($value === null)
+                {
+                    $values[] = 'NULL';
+                }
+                else
+                {
+                    $value = mysqli_real_escape_string($this->connLink, $value . '');
+                    $values[] = "'$value'";
+                }
+            }
+
+            $columns_s = implode(',', $columns); 
+            $values_s = implode(',', $values);  
+
+            $query = "INSERT INTO $table ($columns_s) VALUES ($values_s)";
+            $result = mysqli_query($this->connLink, $query);
+
+            if (!$result)
+                    die(mysqli_error($this->connLink));
+
+            return mysqli_insert_id($this->connLink);
 	}
 	
 

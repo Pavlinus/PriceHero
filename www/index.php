@@ -2,7 +2,7 @@
 
 	function __autoload($classname)
 	{
-		// Если загружается класс контроллера
+		// Если загружается класс контроллера f
 		if(substr($classname, 0, 2) == "C_")
 		{
 			include_once("controller/$classname.php");
