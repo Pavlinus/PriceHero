@@ -170,13 +170,17 @@ class M_ControlPanel {
           return false;
       }
 
-      $platformsArray = array();
-      $linksArray = array();
+      $platformsArray = array();    // массив ID платформ
+      $linksArray = array();        // массив ID ссылок
+      $linkToPlatform = array();    // связывает тип платформы и ссылку
       
       foreach($rows as $row)
       {
-          $linksArray[] = htmlspecialchars($row['link_id']);
-          $platformsArray[] = htmlspecialchars($row['platform_id']);
+          $linkId = htmlspecialchars($row['link_id']);
+          $platformId = htmlspecialchars($row['platform_id']);
+          $linkToPlatform[$linkId] = $platformId;
+          $linksArray[] = $linkId;
+          $platformsArray[] = $platformId;
       }
 
       $gameData = $this->getTblGame($rows[0]['game_id']);
@@ -204,10 +208,11 @@ class M_ControlPanel {
       }
       
       return array(
+          'gameId' => $gameData[0]['game_id'],
           'gameName' => $gameData[0]['name'],
           'genreData' => $genreData,
           'links' => $linksData,
-          'platforms' => $platformsData
+          'linkToPlatform' => $linkToPlatform
       );
     }
     
@@ -306,5 +311,40 @@ class M_ControlPanel {
         }
         
         return $rows[0];
+    }
+    
+    
+    /**
+    * Обновляет существующие данные игры
+    * @return boolean True если сохранение прошло, иначе False
+    */
+    public function updateGameData()
+    {
+        if(!$this->updateTblGame())
+        {
+            return false;
+        }
+    }
+    
+    
+    /**
+    * Обновляет данные игры в `t_game`
+    * @return boolean True если сохранение прошло, иначе False
+    */
+    private function updateTblGame()
+    {
+        if(isset($_REQUEST['gameId']) && $_REQUEST['gameId'] != null)
+        {
+            $id = htmlspecialchars($_REQUEST['gameId']);
+            $name = htmlspecialchars($_REQUEST['name']);
+            $genre = htmlspecialchars($_REQUEST['genre']);
+            $object = array(
+                'name' => $name,
+                'genre_id' => $genre
+            );
+            $where = "game_id=$id";
+            
+            return $this->msql->Update('t_game', $object, $where);
+        }
     }
 }

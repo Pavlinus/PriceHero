@@ -196,7 +196,9 @@ class C_Admin extends C_Base
                 $platforms = $this->fields->getFields('t_platform');
                 $sites = $this->fields->getFields('t_site');
                 $gameData = $this->cPanel->getGameDataToEdit($_REQUEST['id']);
-
+                echo "<pre>";
+                print_r($gameData);
+                echo "</pre>";
                 $this->content = $this->Template(
                         "view/v_admin_edit_game.php", 
                         array(
@@ -211,6 +213,23 @@ class C_Admin extends C_Base
             {
                 header("Location: index.php?c=admin");
             }
+        }
+    }
+    
+    
+    /**
+    * <p>Обработка запроса на изменение данных игры</p>
+    * @return
+    */
+    public function action_editGameAjax()
+    {
+        if($this->isPost())
+        {
+           if(!$this->cPanel->updateGameData())
+           {
+               echo "Ошибка сохранения";
+               exit();
+           }
         }
     }
 

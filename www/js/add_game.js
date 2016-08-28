@@ -9,7 +9,7 @@ $(document).ready(function() {
     * @param
     * @return
     */
-    $('input[type="submit"]').click(function()
+    $('input[type="submit"].add').click(function()
     {
 
         var name = $('input[name="name"]').val();
@@ -23,7 +23,7 @@ $(document).ready(function() {
             var service = $(this).find('select[name="service"]').val();
             var platform = $(this).find('select[name="platform"]').val();
 
-            linksArr[index + '_'] = {
+            linksArr[index] = {
                     link: link, 
                     service: service,
                     platform: platform};
@@ -58,7 +58,7 @@ $(document).ready(function() {
     */
     $('#add_link_btn').click(function() 
     {
-            var newElement = "<div class='link_item'>";
+            var newElement = "<div class='link_item new_link'>";
             newElement += $('.link_item:first-of-type').html();
             newElement += "</div>";
 

@@ -11,7 +11,7 @@
 
                     <form action="" method="post" class="form add_game"
                           enctype="multipart/form-data">
-
+                        <input type="hidden" name="gameId" value="<?=$gameData['gameId']?>">
                         <div class="item">
                             <span class="input_label">
                                 Название
@@ -24,6 +24,7 @@
                             <span class="input_label">
                                 Жанр
                             </span>
+                            
                             <select name="genre">
                                 <? foreach($genres as $genre) : ?>
                                     <? if($genre['genre_id'] == $gameData['genreData']['genre_id']) : ?>
@@ -37,32 +38,51 @@
                                     <? endif; ?>
                                 <? endforeach; ?>
                             </select>
+                            
                         </div>
 
+                        
                         <div class="item">
                             <span class="input_label">
                                 Ссылка
                             </span>
 
                             <div id="link_list">
-                                <div class="link_item">
-                                    <span class='rm_link'>X</span>
-                                    <input type="text" name="link">
-                                    <select name="service">
-                                        <? foreach($sites as $site) : ?>
-                                            <option value="<?=$site['site_id']?>">
-                                                <?=$site['name']?>
-                                            </option>
-                                         <? endforeach; ?>
-                                    </select>
-                                    <select name="platform">
-                                        <option value="1">PC</option>
-                                        <option value="2">PS3</option>
-                                        <option value="3">PS4</option>
-                                        <option value="4">XBox One</option>
-                                        <option value="5">XBox 360</option>
-                                    </select>
-                                </div>
+                                <? foreach($gameData['links'] as $link) : ?>
+                                    <div class="link_item" id="<?=$link['link_id']?>">
+                                        <span class='rm_link'>X</span>
+                                        <input type="text" name="link" value="<?=$link['link']?>">
+
+                                        <select name="service">
+                                            <? foreach($sites as $site) : ?>
+                                                <? if($site['site_id'] == $link['site_id']) : ?>
+                                                    <option value="<?=$site['site_id']?>" selected="selected">
+                                                        <?=$site['name']?>
+                                                    </option>
+                                                <? else : ?>
+                                                    <option value="<?=$site['site_id']?>">
+                                                        <?=$site['name']?>
+                                                    </option>
+                                                <? endif; ?>
+                                             <? endforeach; ?>
+                                        </select>
+
+                                        <select name="platform">
+                                            <? foreach($platforms as $pl) : ?>
+                                                <? if($pl['platform_id'] == $gameData['linkToPlatform'][ $link['link_id'] ]) : ?>
+                                                    <option value="<?=$pl['platform_id']?>" selected="selected">
+                                                        <?=$pl['name']?>
+                                                    </option>
+                                                <? else : ?>
+                                                    <option value="<?=$pl['platform_id']?>">
+                                                        <?=$pl['name']?>
+                                                    </option>
+                                                <? endif; ?>
+                                             <? endforeach; ?>
+                                        </select>
+
+                                    </div>
+                                <? endforeach; ?>
                             </div>
 
                             <button id="add_link_btn" class="form_btn add">Добавить ссылку</button>
@@ -75,7 +95,7 @@
                             <input type="file" name="image">
                         </div>
 
-                        <input type="submit" class="form_btn" value="Добавить игру">
+                        <input type="submit" class="form_btn save" value="Сохранить">
 
                     </form>
 
@@ -86,3 +106,4 @@
 </section>
 
 <script src="js/add_game.js"></script>
+<script src="js/edit_game.js"></script>
