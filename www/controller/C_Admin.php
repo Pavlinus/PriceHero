@@ -16,6 +16,7 @@ class C_Admin extends C_Base
     private $filter;
     private $auth;
     private $parser;
+    private $fields;
 
 
     public function __construct()
@@ -28,6 +29,11 @@ class C_Admin extends C_Base
         if($this->parser == null)
         {
             $this->parser = M_PriceParser::Instance();
+        }
+        
+        if($this->fields == null)
+        {
+            $this->fields = M_Fields::Instance();
         }
 
         if($this->filter == null)
@@ -88,8 +94,7 @@ class C_Admin extends C_Base
 
             if($authRes && $this->isAdmin($authRes[0]['priority']))
             {
-                $this->content = $this->Template("view/v_admin.php", 
-                        array());
+                header("Location: index.php?c=admin");
             }
             else
             {
@@ -130,8 +135,16 @@ class C_Admin extends C_Base
     {
         if(isset($_COOKIE['user']) && $_COOKIE['user'] == '007')
         {
+            $genres = $this->fields->getFields('t_genre');
+            $platforms = $this->fields->getFields('t_platform');
+            $sites = $this->fields->getFields('t_site');
+            
             $this->content = $this->Template("view/v_admin_add_game.php", 
-                    array());
+                    array(
+                        'genres' => $genres,
+                        'platforms' => $platforms,
+                        'sites' => $sites
+                    ));
         }
     }
     
@@ -167,15 +180,48 @@ class C_Admin extends C_Base
             }
         }
     }
+    
+    
+    /**
+    * <p>Вывод интерфейса редактирования игры</p>
+    * @return
+    */
+    public function action_editGame()
+    {
+        if(isset($_COOKIE['user']) && $_COOKIE['user'] == '007')
+        {
+            if(isset($_REQUEST['id']))
+            {
+                $genres = $this->fields->getFields('t_genre');
+                $platforms = $this->fields->getFields('t_platform');
+                $sites = $this->fields->getFields('t_site');
+                $gameData = $this->cPanel->getGameDataToEdit($_REQUEST['id']);
+
+                $this->content = $this->Template(
+                        "view/v_admin_edit_game.php", 
+                        array(
+                            'gameData' => $gameData,
+                            'genres' => $genres,
+                            'platforms' => $platforms,
+                            'sites' => $sites
+                        )
+                );
+            }
+            else
+            {
+                header("Location: index.php?c=admin");
+            }
+        }
+    }
 
 
-    public function action_removeGame($gameId)
+    public function action_removeGame()
     {
 
     }
 
 
-    public function action_saveGame($gameId)
+    public function action_saveGame()
     {
 
     }

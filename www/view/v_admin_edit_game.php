@@ -16,22 +16,27 @@
                             <span class="input_label">
                                 Название
                             </span>
-                            <input type="text" name="name">
+                            <input type="text" name="name" 
+                                   value="<?=$gameData['gameName']?>">
                         </div>
 
                         <div class="item">
                             <span class="input_label">
                                 Жанр
                             </span>
-                            
                             <select name="genre">
                                 <? foreach($genres as $genre) : ?>
-                                    <option value="<?=$genre['genre_id']?>">
-                                        <?=$genre['name']?>
-                                    </option>
+                                    <? if($genre['genre_id'] == $gameData['genreData']['genre_id']) : ?>
+                                        <option value="<?=$genre['genre_id']?>" selected="selected">
+                                            <?=$genre['name']?>
+                                        </option>
+                                    <? else : ?>
+                                        <option value="<?=$genre['genre_id']?>">
+                                            <?=$genre['name']?>
+                                        </option>
+                                    <? endif; ?>
                                 <? endforeach; ?>
                             </select>
-                            
                         </div>
 
                         <div class="item">
@@ -43,23 +48,20 @@
                                 <div class="link_item">
                                     <span class='rm_link'>X</span>
                                     <input type="text" name="link">
-                                    
-                                    <select name="service">    
+                                    <select name="service">
                                         <? foreach($sites as $site) : ?>
                                             <option value="<?=$site['site_id']?>">
                                                 <?=$site['name']?>
                                             </option>
                                          <? endforeach; ?>
                                     </select>
-                                    
                                     <select name="platform">
-                                        <? foreach($platforms as $pl) : ?>
-                                            <option value="<?=$pl['platform_id']?>">
-                                                <?=$pl['name']?>
-                                            </option>
-                                         <? endforeach; ?>
+                                        <option value="1">PC</option>
+                                        <option value="2">PS3</option>
+                                        <option value="3">PS4</option>
+                                        <option value="4">XBox One</option>
+                                        <option value="5">XBox 360</option>
                                     </select>
-                                    
                                 </div>
                             </div>
 

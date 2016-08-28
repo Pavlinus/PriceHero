@@ -31,7 +31,7 @@
 							<span class="input_label">
 								Пароль
 							</span>
-							<input type="text" name="au_password" class="require">
+							<input type="password" name="au_password" class="require">
 						</div>
 						
 						<span class="required">* Обязательные поля</span>

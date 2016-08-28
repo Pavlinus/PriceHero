@@ -147,4 +147,164 @@ class M_ControlPanel {
         
         return $this->msql->Select($query);
     }
+    
+    
+    /**
+    * Получение данных о игре для редактирования
+    * @param int $id ID игры
+    * @return array Массив данных игры
+    */
+    public function getGameDataToEdit($id)
+    {
+      if($id == null || $id == '')
+      {
+        return false;  
+      }
+
+      $gameId = htmlspecialchars($id);
+      $query = "SELECT * FROM t_total WHERE game_id=$gameId";
+      $rows = $this->msql->Select($query);
+      
+      if(!$rows)
+      {
+          return false;
+      }
+
+      $platformsArray = array();
+      $linksArray = array();
+      
+      foreach($rows as $row)
+      {
+          $linksArray[] = htmlspecialchars($row['link_id']);
+          $platformsArray[] = htmlspecialchars($row['platform_id']);
+      }
+
+      $gameData = $this->getTblGame($rows[0]['game_id']);
+      if(!$gameData)
+      {
+          return false;
+      }
+      
+      $linksData = $this->getTblLinkMerged($linksArray);
+      if(!$linksData)
+      {
+          return false;
+      }
+      
+      $platformsData = $this->getTblPlatform($platformsArray);
+      if(!$platformsData)
+      {
+          return false;
+      }
+      
+      $genreData = $this->getTblGenre($gameData[0]['genre_id']);
+      if(!$genreData)
+      {
+          return false;
+      }
+      
+      return array(
+          'gameName' => $gameData[0]['name'],
+          'genreData' => $genreData,
+          'links' => $linksData,
+          'platforms' => $platformsData
+      );
+    }
+    
+    
+    /**
+    * <p>Получение данных о игре из `t_game`</p>
+    * 
+    */
+    public function getTblGame($id)
+    {
+        if($id == null || !is_numeric($id))
+        {
+            return false;
+        }
+        
+        $query = "SELECT * FROM t_game WHERE game_id=$id";
+        
+        return $this->msql->Select($query);
+    }
+    
+    
+    /**
+    * Получение объединенных данных о ссылке из `t_link` и `t_site`
+    * @param array $links Строка ID извлекаемых ссылок
+    * @return array Массив значений ссылок и сервисов, иначе false
+    */
+    public function getTblLinkMerged($links)
+    {
+        if(empty($links))
+        {
+            return false;
+        }
+        
+        $linksStr = '(' . implode($links) . ')';
+        
+        $query = " SELECT * FROM t_link "
+                . "LEFT JOIN t_site ON t_site.site_id=t_link.site_id "
+                . "WHERE link_id IN $linksStr";
+
+        return $this->msql->Select($query);
+    }
+    
+    
+    /**
+    * Получение данных о платформе из `t_platform`
+    * @param array $platforms Строка ID извлекаемых платформ
+    * @return array Массив значений платформ, иначе false
+    */
+    public function getTblPlatform($platforms)
+    {
+        if(empty($platforms))
+        {
+            return false;
+        }
+        
+        $platformsStr = '(' . implode($platforms) . ')';
+        
+        $query = "SELECT * FROM t_platform WHERE platform_id IN $platformsStr";
+        $rows = $this->msql->Select($query);
+        
+        if(!$rows)
+        {
+            return false;
+        }
+        
+        $result = array();
+        
+        foreach($rows as $row)
+        {
+            $result[ $row['platform_id'] ] = $row['name'];
+        }
+        
+        return $result;
+    }
+    
+    
+    /**
+    * Получение данных о жанре из `t_genre`
+    * @param int $genreId ID жанра
+    * @return array Массив значений жанра, иначе false
+    */
+    public function getTblGenre($genreId)
+    {
+        if($genreId == null || !is_numeric($genreId))
+        {
+            return false;
+        }
+        
+        $id = htmlspecialchars($genreId);
+        $query = "SELECT * FROM t_genre WHERE genre_id=$id";
+        $rows = $this->msql->Select($query);
+        
+        if(!$rows)
+        {
+            return false;
+        }
+        
+        return $rows[0];
+    }
 }

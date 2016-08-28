@@ -105,7 +105,7 @@
                                     
                                 </span>
                                 <span class="col_3">
-                                    <a href="/index.php?c=admin&act=editGame&id=<?=$game['game_id']?>" 
+                                    <a href="index.php?c=admin&act=editGame&id=<?=$game['game_id']?>" 
                                        class="action">
                                         Изменить
                                     </a>
