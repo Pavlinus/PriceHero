@@ -225,9 +225,16 @@ class C_Admin extends C_Base
     {
         if($this->isPost())
         {
-           if(!$this->cPanel->updateGameData())
+           $saveResult = $this->cPanel->saveGameData();
+           
+           if($saveResult || $saveResult == array())
            {
-               echo "Ошибка сохранения";
+               echo "Супер! Игра успешно сохранена";
+               exit();
+           }
+           else
+           {
+               echo "Изменения не сохранены";
                exit();
            }
         }

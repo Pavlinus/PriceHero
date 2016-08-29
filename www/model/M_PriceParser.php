@@ -37,6 +37,11 @@ class M_PriceParser
      */
     public function parse($links)
     {
+        if(empty($links))
+        {
+            return array();
+        }
+        
         $linksData = $this->getLinksData($links);
         $priceList = array();
         
@@ -107,6 +112,11 @@ class M_PriceParser
      */
     private function getLinksData($links)
     {
+        if(empty($links))
+        {
+            return false;
+        }
+        
         $select = 'SELECT * FROM t_link ';
         $where = 'WHERE link_id IN ';
         $idArray = array();

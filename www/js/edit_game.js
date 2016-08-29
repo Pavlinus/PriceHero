@@ -9,8 +9,7 @@ $(document).ready(function() {
     */
     $('input[type="submit"].save').click(function()
     {
-        var saved = saveEditedFields();
-        var added = addNewFields();
+        save();
         
         return false;
     });
@@ -20,24 +19,35 @@ $(document).ready(function() {
      * Сохраняем отредактированные поля (уже существующие в БД)
      * @returns 
      */
-    function saveEditedFields()
+    function save()
     {
         var name = $('input[name="name"]').val();
         var genre = $('select[name="genre"]').val();
         var linksArr = {};
+        var newLinksArr = {};
         var gameId = $('input[name="gameId"]').val();
         
         $('.link_item').each(function(index)
         {
+            var link = $(this).find('input').val();
+            var service = $(this).find('select[name="service"]').val();
+            var platform = $(this).find('select[name="platform"]').val();
+            
             // если не новое поле
             if($(this).attr('id') !== undefined)
             {
                 var linkId = $(this).attr('id');
-                var link = $(this).find('input').val();
-                var service = $(this).find('select[name="service"]').val();
-                var platform = $(this).find('select[name="platform"]').val();
 
                 linksArr[index] = {
+                        linkId: linkId,
+                        link: link, 
+                        service: service,
+                        platform: platform
+                };
+            }
+            else
+            {
+                newLinksArr[index] = {
                         linkId: linkId,
                         link: link, 
                         service: service,
@@ -50,7 +60,8 @@ $(document).ready(function() {
             gameId: gameId,
             name: name, 
             genre: genre, 
-            links: linksArr
+            linksUpdate: linksArr,
+            links: newLinksArr
         };
 
         $.ajax({
@@ -63,13 +74,5 @@ $(document).ready(function() {
                 alert(res);
             }
         });
-    }
-    
-    
-    function addNewFields()
-    {
-        
-    }
-
-	
+    }	
 });
