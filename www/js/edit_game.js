@@ -1,6 +1,5 @@
-$(document).ready(function() {
-
-    var deletedLinks = [];      // ID удаленных ссылок
+$(document).ready(function() 
+{
 
     /**
     * <p>Обработчик кнопки сохранить игру.</p>

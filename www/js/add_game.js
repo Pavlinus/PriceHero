@@ -1,5 +1,7 @@
 $(document).ready(function() {
-	
+    
+    var deletedLinks = [];      // ID удаленных ссылок
+    
     bindRemoveBtn();
 
     /**
@@ -14,7 +16,6 @@ $(document).ready(function() {
 
         var name = $('input[name="name"]').val();
         var genre = $('select[name="genre"]').val();
-        var platform = '';
         var linksArr = {};
 
         $('.link_item').each(function(index)
@@ -58,16 +59,16 @@ $(document).ready(function() {
     */
     $('#add_link_btn').click(function() 
     {
-            var newElement = "<div class='link_item new_link'>";
-            newElement += $('.link_item:first-of-type').html();
-            newElement += "</div>";
+        var newElement = "<div class='link_item new_link'>";
+        newElement += $('.link_item:first-of-type').html();
+        newElement += "</div>";
 
-            $('#link_list').append(newElement);
+        $('#link_list').append(newElement);
 
-            var bindItem = $('.rm_link:last-of-type');
-            bindRemoveBtn(bindItem);
+        var bindItem = $('.rm_link:last-of-type');
+        bindRemoveBtn(bindItem);
 
-            return false;
+        return false;
     });
 
 
@@ -79,17 +80,17 @@ $(document).ready(function() {
     */
     function isRemovable()
     {
-            var count = $('.link_item').length;
+        var count = $('.link_item').length;
 
-            if(count > 1)
-            {
-                    return true;
-            }
-            else
-            {
-                    alert("Должна быть хотя бы одна ссылка");
-                    return false;
-            }
+        if(count > 1)
+        {
+            return true;
+        }
+        else
+        {
+            alert("Должна быть хотя бы одна ссылка");
+            return false;
+        }
     }
 
 
@@ -103,15 +104,15 @@ $(document).ready(function() {
     */
     function bindRemoveBtn(item)
     {
-            if(item !== undefined)
-            {
-                    //$(item).bind('click', removeLink);
-                    $('.rm_link:last-of-type').bind('click', removeLink);
-            }
-            else
-            {
-                    $('.rm_link').bind('click', removeLink);
-            }
+        if(item !== undefined)
+        {
+            //$(item).bind('click', removeLink);
+            $('.rm_link:last-of-type').bind('click', removeLink);
+        }
+        else
+        {
+            $('.rm_link').bind('click', removeLink);
+        }
     }
 
 
@@ -122,11 +123,16 @@ $(document).ready(function() {
     */
     function removeLink()
     {
-            if(isRemovable())
+        if(isRemovable())
+        {
+            if($(this).attr('id') !== undefined)
             {
-                    $(this).unbind();
-                    $(this).parent().remove();
+                deletedLinks.push($(this).attr('id'));
             }
+            
+            $(this).unbind();
+            $(this).parent().remove();
+        }
     }
 	
 });

@@ -196,6 +196,13 @@ class C_Admin extends C_Base
                 $platforms = $this->fields->getFields('t_platform');
                 $sites = $this->fields->getFields('t_site');
                 $gameData = $this->cPanel->getGameDataToEdit($_REQUEST['id']);
+                
+                if(!$gameData)
+                {
+                    echo "Не удалось загрузить данные";
+                    exit();
+                }
+                
                 echo "<pre>";
                 print_r($gameData);
                 echo "</pre>";

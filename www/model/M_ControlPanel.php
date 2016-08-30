@@ -167,9 +167,9 @@ class M_ControlPanel {
     */
     public function getGameDataToEdit($id)
     {
-      if($id == null || $id == '')
+      if($id == null || $id == '' || !is_numeric($id))
       {
-        return false;  
+        return false;
       }
 
       $gameId = htmlspecialchars($id);
@@ -199,7 +199,7 @@ class M_ControlPanel {
       {
           return false;
       }
-      
+
       $linksData = $this->getTblLinkMerged($linksArray);
       if(!$linksData)
       {
@@ -257,8 +257,8 @@ class M_ControlPanel {
             return false;
         }
         
-        $linksStr = '(' . implode($links) . ')';
-        
+        $linksStr = '(' . implode(',', $links) . ')';
+
         $query = " SELECT * FROM t_link "
                 . "LEFT JOIN t_site ON t_site.site_id=t_link.site_id "
                 . "WHERE link_id IN $linksStr";
@@ -279,7 +279,7 @@ class M_ControlPanel {
             return false;
         }
         
-        $platformsStr = '(' . implode($platforms) . ')';
+        $platformsStr = '(' . implode(',', $platforms) . ')';
         
         $query = "SELECT * FROM t_platform WHERE platform_id IN $platformsStr";
         $rows = $this->msql->Select($query);
@@ -336,6 +336,9 @@ class M_ControlPanel {
             return false;
         }
         
+        // Обновление ссылок
+        $this->updateLink();
+        
         // Обновление таблицы `t_game`
         $this->updateTblGame();
         
@@ -346,6 +349,34 @@ class M_ControlPanel {
         $totalId = $this->addTotal($_REQUEST['gameId'], $linksId, $priceId);
         
         return $totalId;
+    }
+    
+    
+    /**
+    * Обновление данных в таблицах `t_link`, `t_total`
+    * @return boolean True если сохранение прошло, иначе False
+    */
+    public function updateLink()
+    {
+        foreach($_REQUEST['linksUpdate'] as $link)
+        {
+            $objectLink = array(
+                'site_id' => $link['service'],
+                'link' => $link['link'],
+            );
+            
+            $whereLink = "link_id = {$link['linkId']}";
+            
+            $this->msql->Update('t_link', $objectLink, $whereLink);
+            
+            $objectTotal = array(
+                'platform_id' => $link['platform']
+            );
+            
+            $whereTotal = "link_id = {$link['linkId']}";
+            
+            $this->msql->Update('t_total', $objectTotal, $whereTotal);
+        }
     }
     
     
@@ -368,5 +399,5 @@ class M_ControlPanel {
     }
     
     
-
+    
 }
