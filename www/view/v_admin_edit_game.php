@@ -105,5 +105,4 @@
     </div>
 </section>
 
-<script src="js/add_game.js"></script>
-<script src="js/edit_game.js"></script>
+<script src="js/panel.js"></script>

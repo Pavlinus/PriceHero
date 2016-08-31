@@ -158,6 +158,7 @@ class C_Admin extends C_Base
         if($this->isPost())
         {
             $gameId = $this->cPanel->addGame();
+            $this->cPanel->addGameKeywords($gameId);
             $linksId = array();
 
             if($gameId)
@@ -203,9 +204,6 @@ class C_Admin extends C_Base
                     exit();
                 }
                 
-                echo "<pre>";
-                print_r($gameData);
-                echo "</pre>";
                 $this->content = $this->Template(
                         "view/v_admin_edit_game.php", 
                         array(

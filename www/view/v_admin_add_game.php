@@ -73,7 +73,7 @@
                             <input type="file" name="image">
                         </div>
 
-                        <input type="submit" class="form_btn" value="Добавить игру">
+                        <input type="submit" class="form_btn add_game" value="Добавить игру">
 
                     </form>
 
@@ -83,4 +83,4 @@
     </div>
 </section>
 
-<script src="js/add_game.js"></script>
+<script src="js/panel.js"></script>

@@ -47,6 +47,39 @@ class M_ControlPanel {
         return $this->msql->Insert('t_game', $object);
     }
 
+    
+    /**
+     * <p>Добавляет ключевые слова из названия игры</p>
+     */
+    public function addGameKeywords($gameId)
+    {
+        $name = htmlspecialchars($_POST['name']);
+        
+        $gameWords = explode(" ", $name);
+        $offset = 5;    // 5 столбцов таблицы `t_keywords`
+        $keysArray = array_slice($gameWords, 0, $offset); // массив слов
+
+        $object = array();
+        $index = 'key_';
+        $count = 1;
+        
+        foreach($keysArray as $key)
+        {
+            $object[$index . $count] = htmlspecialchars($key);
+            $count += 1;
+            
+            if($count > 6)
+            {
+                break;
+            }
+        }
+        
+        $object['game_id'] = $gameId;
+
+        $this->msql->Insert('t_keywords', $object);
+    }
+    
+    
     /**
      * <p>Добавляет новую ссылку в БД</p>
      * @return Id новой(ых) ссылки(ок), иначе false
@@ -336,6 +369,11 @@ class M_ControlPanel {
             return false;
         }
         
+        // Удаление ссылок
+        $priceIdArray = $this->deleteTblLink();
+        
+        $this->deleteTblPrice($priceIdArray);
+        
         // Обновление ссылок
         $this->updateLink();
         
@@ -399,5 +437,48 @@ class M_ControlPanel {
     }
     
     
+    /**
+    * Удаляет данные ссылки
+    */
+    private function deleteTblLink()
+    {
+        if(isset($_REQUEST['linksDelete']) && !empty($_REQUEST['linksDelete']))
+        {
+            $priceIdArray = array();
+            
+            foreach($_REQUEST['linksDelete'] as $link)
+            {
+                $this->msql->Delete('t_link', "link_id=$link");
+                
+                $query = "SELECT price_id FROM t_total WHERE link_id=$link";
+                $row = $this->msql->Select($query);
+
+                if($row)
+                {
+                    $priceIdArray[] = $row[0]['price_id'];
+                }
+                
+                $this->msql->Delete('t_total', "link_id=$link");
+            }
+        }
+        
+        return $priceIdArray;
+    }
     
+    
+    /**
+    * Удаляет данные цены
+    */
+    private function deleteTblPrice($priceIdArray)
+    {
+        if(empty($priceIdArray))
+        {
+            return false;
+        }
+        
+        foreach($priceIdArray as $price)
+        {
+            $this->msql->Delete('t_price', "price_id=$price");
+        }
+    }
 }
