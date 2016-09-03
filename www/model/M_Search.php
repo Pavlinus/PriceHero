@@ -48,6 +48,11 @@ class M_Search
                     $games = $mGame->getTblGameList($gameIds);
                 }
                 
+                if(empty($games))
+                {
+                    return array();
+                }
+                
                 return $games;
             }
             else
@@ -55,7 +60,6 @@ class M_Search
                 return false;
             }
 	}
-        
         
         
         /**
@@ -79,7 +83,15 @@ class M_Search
                 }
             }
             
-            return $this->msql->Select($query);
+            $rows = $this->msql->Select($query);
+            $ids = array();
+            
+            foreach($rows as $value)
+            {
+                $ids[] = $value['game_id'];
+            }
+            
+            return $ids;
         }
         
         
@@ -94,7 +106,8 @@ class M_Search
                 
             foreach($keywords as &$word)
             {
-                $word = htmlspecialchars("'".$word."'");
+                $val = strtolower($word);
+                $word = htmlspecialchars("'".$val."'");
             }
             
             return $keywords;

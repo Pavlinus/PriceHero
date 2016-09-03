@@ -43,13 +43,38 @@ class M_Game
     {
         $name = htmlspecialchars($_POST['name']);
         $genre = htmlspecialchars($_POST['genre']);
+        $image = $this->uploadImage();
 
         $object = array(
             'name' => $name,
             'genre_id' => $genre,
-            'image' => '/images/default.jpg');
+            'image' => $image);
 
         return $this->msql->Insert('t_game', $object);
+    }
+    
+    /**
+     * Загрузка изображения
+     * @return string путь к файлу
+     */
+    private function uploadImage()
+    {
+        $uploadPath = '/upload/images/';
+        $default = '/images/game_default.png';
+        print_r($_FILES);
+        if(!isset($_FILES['image']))
+        {
+            return $default;
+        }
+        
+        $uploadFile = $uploadPath . $_FILES['image']['name'];
+        
+        if(move_uploaded_file($_FILES['image']['name'], $uploadFile))
+        {
+            return $uploadFile;
+        }
+        
+        return $default;
     }
     
     /**
@@ -69,7 +94,8 @@ class M_Game
         
         foreach($keysArray as $key)
         {
-            $object[$index . $count] = htmlspecialchars($key);
+            $val = strtolower($key);
+            $object[$index . $count] = htmlspecialchars($val);
             $count += 1;
             
             if($count > 6)
@@ -107,11 +133,11 @@ class M_Game
     */
     public function getTblGameList($idArray)
     {
-        if($idArray == null || !empty($idArray))
+        if($idArray == null || empty($idArray))
         {
             return false;
         }
-        
+
         $idStr = "(" . implode(",", $idArray) . ")";
         
         $query = "SELECT * FROM t_game WHERE game_id IN $idStr";

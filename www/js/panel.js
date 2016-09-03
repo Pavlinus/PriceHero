@@ -210,6 +210,9 @@ $(document).ready(function() {
     }
     
     
+    /**
+     * Обработчик нажатия на кнопку поиска
+     */
     $('#search').click(function()
     {
        var searchStr = $('div.search input[type="text"]').val();
@@ -225,7 +228,8 @@ $(document).ready(function() {
             cache: false,
             success: function(res)
             {
-                alert(res);
+                $('div.wrapper .result_wrapper').remove();
+                $('div.wrapper').append(res);
             }
         });
     });

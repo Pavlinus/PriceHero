@@ -70,7 +70,7 @@
                             <span class="input_label optional">
                                 Картинка
                             </span>
-                            <input type="file" name="image">
+                            <input type="file" name="game_pic" id="game_pic">
                         </div>
 
                         <input type="submit" class="form_btn add_game" value="Добавить игру">

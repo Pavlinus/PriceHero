@@ -162,6 +162,7 @@ class C_Admin extends C_Base
     {
         if($this->isPost())
         {
+            print_r($_FILES);exit();
             $gameId = $this->cPanel->addGame();
             $linksId = array();
 
@@ -255,6 +256,19 @@ class C_Admin extends C_Base
         if($this->isPost())
         {
             $gamesList = $this->search->searchGame();
+            
+            if(!$gamesList)
+            {
+                $gamesList = $this->cPanel->getGamesList(1);
+            }
+
+            echo $this->Template(
+                    'view/v_admin_search_result.php', 
+                    array(
+                        'gameList' => $gamesList
+                    )
+            );
+            exit();
         }
     }
 
