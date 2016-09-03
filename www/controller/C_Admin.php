@@ -17,7 +17,7 @@ class C_Admin extends C_Base
     private $auth;
     private $parser;
     private $fields;
-
+    private $search;
 
     public function __construct()
     {
@@ -44,6 +44,11 @@ class C_Admin extends C_Base
         if($this->auth == null)
         {
             $this->auth = M_Auth::Instance();
+        }
+        
+        if($this->search == null)
+        {
+            $this->search = M_Search::Instance();
         }
     }
 
@@ -158,7 +163,6 @@ class C_Admin extends C_Base
         if($this->isPost())
         {
             $gameId = $this->cPanel->addGame();
-            $this->cPanel->addGameKeywords($gameId);
             $linksId = array();
 
             if($gameId)
@@ -245,14 +249,17 @@ class C_Admin extends C_Base
         }
     }
 
-
-    public function action_removeGame()
+    
+    public function action_findGameAjax()
     {
-
+        if($this->isPost())
+        {
+            $gamesList = $this->search->searchGame();
+        }
     }
 
-
-    public function action_saveGame()
+    
+    public function action_removeGame()
     {
 
     }

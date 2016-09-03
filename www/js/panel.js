@@ -208,4 +208,25 @@ $(document).ready(function() {
             }
         });
     }
+    
+    
+    $('#search').click(function()
+    {
+       var searchStr = $('div.search input[type="text"]').val();
+       
+       var dataArray = {
+           name: searchStr
+       };
+       
+       $.ajax({
+            type: 'POST',
+            url: 'index.php?c=admin&act=findGameAjax',
+            data: dataArray,
+            cache: false,
+            success: function(res)
+            {
+                alert(res);
+            }
+        });
+    });
 });

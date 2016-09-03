@@ -84,8 +84,8 @@
 
                     <div class="search">
                         <input type="text" placeholder="Найти">
-                        <div class="search_reset"></div>
-                        <div class="search_button"></div>
+                        <div id="reset_search" class="search_reset"></div>
+                        <div id="search" class="search_button"></div>
                     </div>
 
                     <div class="result_wrapper">
@@ -120,3 +120,5 @@
         </div>
     </div>
 </section>
+
+<script src="js/panel.js">
