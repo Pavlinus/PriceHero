@@ -40,8 +40,14 @@ class M_Catalog
      */
     public function getLastUpdates()
     {
-        $query = "SELECT price_id FROM t_price ORDER BY lastUpdate DESC LIMIT 10";
+        $query  = "SELECT Price.new_price as price, Game.game_id as gameId, ";
+        $query .= "Price.price_id FROM t_total Total ";
+        $query .= "LEFT JOIN t_game Game USING(game_id) ";
+        $query .= "LEFT JOIN t_price Price USING(price_id) ";
+        $query .= "ORDER BY price ASC LIMIT 15";
+        
         $rows = $this->msql->Select($query);
+        $priceAssoc = array();
         $priceId = array();
         
         if(!$rows)
@@ -51,17 +57,21 @@ class M_Catalog
         
         foreach($rows as $row)
         {
-            $priceId[] = $row['price_id'];
+            if(!isset($priceAssoc[ $row['gameId'] ]))
+            {
+                $priceAssoc[ $row['gameId'] ] = 1;
+                $priceId[] = $row['price_id'];
+            }
         }
         
-        $this->getGamesByPriceId($priceId);
+        return $this->getGamesByPriceId($priceId);
     }
     
     public function getGamesByPriceId($priceId)
     {
         $priceStr = "(" . implode(",", $priceId) . ")";
-        $query = "SELECT Game.name as game, Genre.name as genre, Platform.name as platform, ";
-        $query .= "Price.new_price as price, Link.link FROM t_total total ";
+        $query  = "SELECT Game.name as game, Genre.name as genre, Platform.name as platform, ";
+        $query .= "Price.new_price as price, Link.link, Game.image FROM t_total total ";
         $query .= "LEFT JOIN t_game Game ON (Game.game_id = total.game_id) ";
         $query .= "LEFT JOIN t_genre Genre ON (Genre.genre_id = Game.genre_id) ";
         $query .= "LEFT JOIN t_platform Platform ON (Platform.platform_id = total.platform_id) ";
@@ -71,8 +81,13 @@ class M_Catalog
         
         $rows = $this->msql->Select($query);
         
-        echo "<pre>";
-        print_r($rows);
-        echo "</pre>";
+        if(!$rows)
+        {
+            return array();
+        }
+        else
+        {
+            return $rows;
+        }
     }
 }

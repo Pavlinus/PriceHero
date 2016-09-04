@@ -25,65 +25,21 @@
                 <h2>Последние обновления</h2>
 
                 <div class="products">
-                    <div class="item">
-                        <div class="wrapper">
-                            <img src="images/souls.jpg" alt="">
-                            <div class="product_details">
-                                <span class="product_name">Dark souls 3</span>
-                                <span class="product_price">1990 руб.</span>
+                    
+                    <? foreach($gamesList as $game) : ?>
+                        <a href="<?=$game['link']?>">
+                            <div class="item">
+                                <div class="wrapper">
+                                    <img src="<?=$game['image']?>" alt="">
+                                    <div class="product_details">
+                                        <span class="product_name"><?=$game['game']?></span>
+                                        <span class="product_price"><?=$game['price']?> руб.</span>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="wrapper">
-                            <img src="images/souls.jpg" alt="">
-                            <div class="product_details">
-                                <span class="product_name">Dark souls 3</span>
-                                <span class="product_price">1990 руб.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="wrapper">
-                            <img src="images/souls.jpg" alt="">
-                            <div class="product_details">
-                                <span class="product_name">Dark souls 3</span>
-                                <span class="product_price">1990 руб.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="wrapper">
-                            <img src="images/souls.jpg" alt="">
-                            <div class="product_details">
-                                <span class="product_name">Dark souls 3</span>
-                                <span class="product_price">1990 руб.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="wrapper">
-                            <img src="images/souls.jpg" alt="">
-                            <div class="product_details">
-                                <span class="product_name">Dark souls 3</span>
-                                <span class="product_price">1990 руб.</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="wrapper">
-                            <img src="images/souls.jpg" alt="">
-                            <div class="product_details">
-                                <span class="product_name">Dark souls 3</span>
-                                <span class="product_price">1990 руб.</span>
-                            </div>
-                        </div>
-                    </div>
+                        </a>
+                    <? endforeach; ?>
+                    
                 </div>
             </div>
         </div>

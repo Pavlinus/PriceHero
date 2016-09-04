@@ -18,13 +18,14 @@ class C_Index extends C_Base
         $error = false;
         $login = '';
         
-        $this->mCatalog->getLastUpdates();
+        $gamesList = $this->mCatalog->getLastUpdates();
 
         $this->content = $this->Template('view/v_index.php', 
                 array(
                     'error' => $error,
                     'login' => $login,
-                    'err_msg' => $err_msg
+                    'err_msg' => $err_msg,
+                    'gamesList' => $gamesList
                 )
         );
     }
