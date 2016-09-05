@@ -13,11 +13,11 @@
 
                 <div class="filter">
                     <h2>Фильтр</h2>
-                    <button class="option active">PC</button>
-                    <button class="option">PS4</button>
-                    <button class="option">XBox One</button>
-                    <button class="option">PS3</button>
-                    <button class="option">XBox 360</button>
+                    <? foreach($platforms as $pl) : ?>
+                        <button class="option" value="<?=$pl['platform_id']?>">
+                            <?=$pl['name']?>
+                        </button>
+                    <? endforeach; ?>
                 </div>
             </div>
 
@@ -41,7 +41,10 @@
                     <? endforeach; ?>
                     
                 </div>
+                
             </div>
         </div>
     </div>
 </section>
+
+<script src="/js/index.js"></script>

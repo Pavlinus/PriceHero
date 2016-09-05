@@ -64,12 +64,13 @@ class M_Catalog
             }
         }
         
-        return $this->getGamesByPriceId($priceId);
+        return $this->getGames($priceId, 'total.price_id');
     }
     
-    public function getGamesByPriceId($priceId)
+    
+    public function getGames($arrId, $where)
     {
-        $priceStr = "(" . implode(",", $priceId) . ")";
+        $arrStr = "(" . implode(",", $arrId) . ")";
         $query  = "SELECT Game.name as game, Genre.name as genre, Platform.name as platform, ";
         $query .= "Price.new_price as price, Link.link, Game.image FROM t_total total ";
         $query .= "LEFT JOIN t_game Game ON (Game.game_id = total.game_id) ";
@@ -77,7 +78,7 @@ class M_Catalog
         $query .= "LEFT JOIN t_platform Platform ON (Platform.platform_id = total.platform_id) ";
         $query .= "LEFT JOIN t_price Price ON (Price.price_id = total.price_id) ";
         $query .= "LEFT JOIN t_link Link ON (Link.link_id = total.link_id) ";
-        $query .= "WHERE total.price_id IN $priceStr";
+        $query .= "WHERE $where IN $arrStr";
         
         $rows = $this->msql->Select($query);
         
