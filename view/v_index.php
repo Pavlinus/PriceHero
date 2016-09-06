@@ -14,8 +14,16 @@
                 <div class="filter">
                     <h2>Фильтр</h2>
                     <? foreach($platforms as $pl) : ?>
-                        <button class="option" value="<?=$pl['platform_id']?>">
+                        <button class="option platform" 
+                                value="<?=$pl['platform_id']?>">
                             <?=$pl['name']?>
+                        </button>
+                    <? endforeach; ?>
+                    <br><br>
+                    <? foreach($genres as $gen) : ?>
+                        <button class="option genre" 
+                                value="<?=$gen['genre_id']?>">
+                            <?=$gen['name']?>
                         </button>
                     <? endforeach; ?>
                 </div>
