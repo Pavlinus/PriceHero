@@ -39,6 +39,10 @@
 		case 'admin':
 			$controller = new C_Admin();
 			break;
+                    
+                case 'room':
+			$controller = new C_Room();
+			break;
 			
 		case 'index':
 		default:
@@ -48,4 +52,3 @@
 	header('Content-type: text/html; charset=utf-8');
 	
 	$controller->Request($action);
-?>

@@ -261,6 +261,7 @@ header {
 				width: 250px;
 				padding: 10px;
 				background: #fff;
+                                position: relative;
 				
 				&:hover {
 					background: @c_dbrown;
@@ -273,7 +274,7 @@ header {
 				
 				img {
 					display: block;
-					margin-bottom: 25px;
+					margin-bottom: 15px;
 					width: 250px;
 				}
 				
@@ -296,6 +297,18 @@ header {
 						}
 					}
 				}
+                                
+                                .tracker {
+                                    position: absolute;
+                                    width: 40px;
+                                    height: 40px;
+                                    left: 10px;
+                                    bottom: 10px;
+                                    background-image: url(../images/favorite_not_active.png);
+                                    background-position: center;
+                                    background-repeat: no-repeat;
+                                    background-size: contain;
+                                }
 			}
 		}
 	}

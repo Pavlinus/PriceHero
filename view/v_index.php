@@ -5,9 +5,9 @@
                 <nav class="menu">
                     <ul>
                         <li class="head">Меню</li>
-                        <li><a href="">Главная</a></li>
-                        <li><a href="">Игровая комната</a></li>
-                        <li><a href="">О сервисе</a></li>
+                        <li><a href="index.php">Главная</a></li>
+                        <li><a href="index.php?c=room">Игровая комната</a></li>
+                        <li><a href="index.php?c=about">О сервисе</a></li>
                     </ul>
                 </nav>
 
@@ -43,6 +43,7 @@
                                         <span class="product_name"><?=$game['game']?></span>
                                         <span class="product_price"><?=$game['price']?> руб.</span>
                                     </div>
+                                    <div class="tracker" title="Отслеживать игру"></div>
                                 </div>
                             </div>
                         </a>

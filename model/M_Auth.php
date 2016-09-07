@@ -67,11 +67,33 @@ class M_Auth
 		if(isset($authRes[0]['priority']) && 
 			$authRes[0]['priority'] == '007')
 		{
-			setcookie('user', '007', time() + 3600);
+                    setcookie('user', '007', time() + 3600);
 		}
+                else
+                {
+                    setcookie('user', 'usual', time() + 3600);
+                }
+                
+                setcookie('user_id', $authRes[0]['user_id'], time() + 3600);
 		
 		return $authRes;
 	}
+        
+        
+        /**
+         * Выход из учетной записи
+         * @return boolean true в случает успеха, иначе false
+         */
+        public function logout()
+        {
+            if(isset($_COOKIE['user']) && isset($_COOKIE['user_id']))
+            {
+                setcookie('user', '', time() - 3600);
+                setcookie('user_id', '', time() - 3600);
+                
+                return true;
+            }
+            
+            return false;
+        }
 }
-
-?>
