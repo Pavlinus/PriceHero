@@ -49,21 +49,12 @@ class C_Room extends C_Base
     {
         if(isset($_COOKIE['user']) && isset($_COOKIE['user_id']))
         {
-            $arGameId = $this->room->getUserGamesId();
-            
-            if($arGameId || !empty($arGameId))
-            {
-                $gamesList = $this->catalog->getGames($arGameId, 'Game.game_id');
-            }
-            else
-            {
-                $gamesList = array();
-            }
+            $arGames = $this->room->getGamesList();
             
             $this->content = $this->Template(
                 "view/v_game_room.php", 
                 array(
-                    'gameList' => $gamesList
+                    'gameList' => $arGames
                 )
             );
         }

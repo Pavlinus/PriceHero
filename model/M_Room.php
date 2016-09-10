@@ -12,11 +12,17 @@ class M_Room
 {
     private $msql;
     private static $instance;
+    private $catalog;
 
 
     public function __construct()
     {
         $this->msql = M_MSQL::Instance();
+        
+        if($this->catalog == null)
+        {
+            $this->catalog = M_Catalog::Instance();
+        }
     }
 
 
@@ -36,29 +42,61 @@ class M_Room
 	
     
     /**
-     * Извлекает ID игр, привязанных к пользователю
-     * @return array Массив ID игр, иначе false
+     * Извлекает игры, привязанные к пользователю
+     * @return array Массив ID игр и ID платформ, иначе false
      */
-    public function getUserGamesId()
+    public function getUserGames()
     {
         if(!isset($_COOKIE['user_id']))
         {
             return false;
         }
         
-        $userId = $_COOKIE['user_id'];
-        $query = "SELECT game_id FROM t_tracker WHERE user_id=$userId";
+        $userId = htmlspecialchars($_COOKIE['user_id']);
+        $query = "SELECT game_id, platform_id FROM t_tracker WHERE user_id=$userId";
         $rows = $this->msql->Select($query);
-        $arGameId = array();
+        $arGames = array();
         
         if($rows)
         {
             foreach ($rows as $row)
             {
-                $arGameId[] = $row['game_id'];
+                $arGames[] = array(
+                    'game_id' => $row['game_id'],
+                    'platform_id' => $row['platform_id']
+                );
             }
         }
         
-        return $arGameId;
+        return $arGames;
+    }
+    
+    
+    /**
+     * Извлекает массив данных игр пользователя
+     * @return array массив данных игр
+     */
+    public function getGamesList()
+    {
+        $arGames = $this->getUserGames();
+        $arResult = array();
+        
+        foreach($arGames as $arItem)
+        {
+            $arId = array($arItem['game_id']);
+            $where = 'Game.game_id';
+            $and = array(
+                'Platform.platform_id' => array($arItem['platform_id'])
+            );
+            
+            $row = $this->catalog->getGames($arId, $where, $and);
+            
+            if(!empty($row))
+            {
+                $arResult[] = $row[0];
+            }
+        }
+
+        return $arResult;
     }
 }

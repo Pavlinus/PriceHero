@@ -134,4 +134,9 @@ class M_MSQL
 	{
 		return $this->connLink;
 	}
+        
+        public function getAffectedRows()
+        {
+            return mysqli_affected_rows($this->connLink);
+        }
 }

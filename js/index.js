@@ -119,4 +119,56 @@ $(document).ready(function()
             }
         });
    }
+   
+   var trackerClicked = 0;
+   
+   $('div.tracker').click(function()
+   {
+        var gameId = $(this).parents('div.item').attr('id');
+        var platformId = $(this).parents('div.item')
+                .children('div[name="platform_id"]').text();
+        trackerClicked = gameId;
+        
+        var dataArray = {
+                gameId: gameId,
+                platformId: platformId
+        };
+        
+        $(this).animate({scale: '-=0.1'},{duration: 300});
+      
+        $.ajax({
+            type: 'POST',
+            url: 'index.php?c=index&act=tracker',
+            data: dataArray,
+            cache: false,
+            success: function(res)
+            {
+                $tracker = $('div[id="' + trackerClicked + '"] div.tracker');
+                
+                if(res === '3')
+                {
+                    alert('Для отслеживания игры необходима авторизация');
+                }
+                else if(res === '2')
+                {
+                    alert('Игра добавлена в игровую комнату');
+                    $tracker.addClass('active');
+                    
+                }
+                else if(res === '1')
+                {
+                    alert('Игра удалена из игровой комнаты');
+                    $tracker.removeClass('active');
+                }
+                else
+                {
+                    alert('Не удалось отследить игру');
+                }
+                
+                $tracker.animate({scale: '+=0.1'},{duration: 300});
+            }
+        });
+        
+        return false;
+   });
 });

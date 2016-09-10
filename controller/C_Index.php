@@ -4,6 +4,7 @@ class C_Index extends C_Base
 {
     private $mCatalog;
     private $fields;
+    private $mTracker;
     
     public function __construct()
     {
@@ -15,6 +16,11 @@ class C_Index extends C_Base
         if($this->fields == null)
         {
             $this->fields = M_Fields::Instance();
+        }
+        
+        if($this->mTracker == null)
+        {
+            $this->mTracker = M_Tracker::Instance();
         }
     }
     
@@ -44,6 +50,9 @@ class C_Index extends C_Base
     }
     
     
+    /**
+     * Фильтрация контента
+     */
     function action_filter()
     {
         $platforms = $this->fields->getFields('t_platform');
@@ -76,5 +85,38 @@ class C_Index extends C_Base
                 )
         );
         exit();
+    }
+    
+    
+    /**
+     * Обработка трекинга
+     */
+    public function action_tracker()
+    {
+        if(isset($_COOKIE['user_id']))
+        {
+            $res = $this->mTracker->switchTracker();
+            
+            if($res == M_Tracker::TRACKER_ADD)
+            {
+                echo M_Tracker::TRACKER_ADD;
+                exit();
+            }
+            elseif($res == M_Tracker::TRACKER_DELETE)
+            {
+                echo M_Tracker::TRACKER_DELETE;
+                exit();
+            }
+            else
+            {
+                echo 0;
+                exit();
+            }
+        }
+        else
+        {
+            echo M_Tracker::TRACKER_AUTH;
+            exit();
+        }
     }
 }

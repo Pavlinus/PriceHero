@@ -5,10 +5,9 @@
         <group>
             <file>file:/C:/OpenServer/domains/PriceHero/view/v_index.php</file>
             <file>file:/C:/OpenServer/domains/PriceHero/model/M_Catalog.php</file>
-            <file>file:/C:/OpenServer/domains/PriceHero/view/v_game_room.php</file>
             <file>file:/C:/OpenServer/domains/PriceHero/controller/C_Room.php</file>
+            <file>file:/C:/OpenServer/domains/PriceHero/view/v_game_room.php</file>
             <file>file:/C:/OpenServer/domains/PriceHero/css/style.less</file>
-            <file>file:/C:/OpenServer/domains/PriceHero/model/M_Auth.php</file>
             <file>file:/C:/OpenServer/domains/PriceHero/js/index.js</file>
             <file>file:/C:/OpenServer/domains/PriceHero/model/M_Room.php</file>
         </group>

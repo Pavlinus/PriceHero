@@ -21,11 +21,12 @@ li {
 
 h2 {
 	text-transform: uppercase;
-	font-family: "RobotoBoldItalic";
+	font-family: "RobotoBold";
 }
 
 body {
-	background: #f8f8f8;
+	background: #707070;
+        /*background-image: url(../images/texture_7.jpg);*/
 }
 
 @import 'mixins.less';
@@ -246,36 +247,37 @@ header {
 	padding: 0 0 0 30px;
 	
 	h2 {
-		padding: 0.5em 0 1.2em 1em;
-		color: @c_dgrey;
+		padding: 0.5em 0 0.5em 0em;
+		color: #fff;
+                margin-left: 0.6em;
 	}
 	
 	.products {
 		
 		.item {
 			width: 270px;
-			margin: 0 -4px 1.875em 20px;
+			margin: 0 0px 1em 15px;
 			display: inline-block;
 			
 			.wrapper {
-				width: 250px;
-				padding: 10px;
+				width: 100%;
+				padding: 0px;
 				background: #fff;
                                 position: relative;
 				
 				&:hover {
-					background: @c_dbrown;
+					background: @c_lgrey;
 					cursor: pointer;
 					
 					span {
-						color: #fff;
+						/*color: #fff;*/
 					}
 				}
 				
 				img {
 					display: block;
 					margin-bottom: 15px;
-					width: 250px;
+					width: 100%;
 				}
 				
 				.product_details {
@@ -308,6 +310,10 @@ header {
                                     background-position: center;
                                     background-repeat: no-repeat;
                                     background-size: contain;
+                                    
+                                    &.active {
+                                        background-image: url(../images/favorite_active.png);
+                                    }
                                 }
 			}
 		}
@@ -616,4 +622,11 @@ footer {
 			}
 		}
 	}
+}
+
+div {
+    
+    &.hidden {
+        display: none;
+    }
 }

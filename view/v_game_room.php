@@ -99,10 +99,10 @@
                         
                             <div class="row">
                                 <span class="name col_3">
-                                    <?=$game['name']?>
+                                    <?=$game['game']?>
                                 </span>
                                 <span class="platform col_3">
-                                    
+                                    <?=$game['platform']?>
                                 </span>
                                 <span class="col_3">
                                     <a href="index.php?c=admin&act=editGame&id=<?=$game['game_id']?>" 

@@ -92,15 +92,23 @@ class M_Catalog
      */
     public function getGames($arrId, $where, $and = false)
     {
+        $userId = 0;
+        
+        if(isset($_COOKIE['user_id']))
+        {
+            $userId = htmlspecialchars($_COOKIE['user_id']);
+        }
+        
         $andStr = "";
         $arrStr = "(" . implode(",", $arrId) . ")";
-        $query  = "SELECT Game.name as game, Genre.name as genre, Platform.name as platform, ";
-        $query .= "Price.new_price as price, Link.link, Game.image FROM t_total total ";
+        $query  = "SELECT Game.name as game, Genre.name as genre, Platform.name as platform, Platform.platform_id, ";
+        $query .= "Price.new_price as price, Link.link, Game.image, Game.game_id, Tracker.tracker_id FROM t_total total ";
         $query .= "LEFT JOIN t_game Game ON (Game.game_id = total.game_id) ";
         $query .= "LEFT JOIN t_genre Genre ON (Genre.genre_id = Game.genre_id) ";
         $query .= "LEFT JOIN t_platform Platform ON (Platform.platform_id = total.platform_id) ";
         $query .= "LEFT JOIN t_price Price ON (Price.price_id = total.price_id) ";
         $query .= "LEFT JOIN t_link Link ON (Link.link_id = total.link_id) ";
+        $query .= "LEFT JOIN t_tracker Tracker ON (Tracker.game_id = total.game_id AND Tracker.user_id = $userId) ";
         
         if($and)
         {

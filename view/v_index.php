@@ -36,15 +36,20 @@
                     
                     <? foreach($gamesList as $game) : ?>
                         <a href="<?=$game['link']?>">
-                            <div class="item">
+                            <div class="item" id="<?=$game['game_id']?>">
                                 <div class="wrapper">
                                     <img src="<?=$game['image']?>" alt="">
                                     <div class="product_details">
                                         <span class="product_name"><?=$game['game']?></span>
                                         <span class="product_price"><?=$game['price']?> руб.</span>
                                     </div>
-                                    <div class="tracker" title="Отслеживать игру"></div>
+                                    <? if($game['tracker_id'] != '') : ?>
+                                        <div class="tracker active" title="Отслеживать игру"></div>
+                                    <? else : ?>
+                                        <div class="tracker" title="Отслеживать игру"></div>
+                                     <? endif; ?>
                                 </div>
+                                <div class="hidden" name="platform_id"><?=$game['platform_id']?></div>
                             </div>
                         </a>
                     <? endforeach; ?>
