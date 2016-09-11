@@ -4,7 +4,7 @@
             <div class="side_left">
                 <nav class="menu">
                     <ul>
-                        <li class="head">Меню</li>
+                        <!--li class="head">Меню</li-->
                         <li><a href="index.php">Главная</a></li>
                         <li><a href="index.php?c=room">Игровая комната</a></li>
                         <li><a href="index.php?c=about">О сервисе</a></li>
@@ -12,7 +12,7 @@
                 </nav>
 
                 <div class="filter">
-                    <h2>Фильтр</h2>
+                    <h2>Платформа</h2>
                     <? foreach($platforms as $pl) : ?>
                         <button class="option platform" 
                                 value="<?=$pl['platform_id']?>">
@@ -20,6 +20,7 @@
                         </button>
                     <? endforeach; ?>
                     <br><br>
+                    <h2>Жанр</h2>
                     <? foreach($genres as $gen) : ?>
                         <button class="option genre" 
                                 value="<?=$gen['genre_id']?>">
@@ -40,11 +41,15 @@
                                 <div class="wrapper">
                                     <img src="<?=$game['image']?>" alt="">
                                     <div class="product_details">
-                                        <span class="product_name"><?=$game['game']?></span>
-                                        <span class="product_price"><?=$game['price']?> руб.</span>
+                                        <!--span class="product_name"><?=$game['game']?></span-->
+                                        <span class="product_price">
+                                            <span>
+                                                <?=$game['price']?> руб.
+                                            </span>
+                                        </span>
                                     </div>
                                     <? if($game['tracker_id'] != '') : ?>
-                                        <div class="tracker active" title="Отслеживать игру"></div>
+                                        <div class="tracker active" title="Не отслеживать игру"></div>
                                     <? else : ?>
                                         <div class="tracker" title="Отслеживать игру"></div>
                                      <? endif; ?>

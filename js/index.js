@@ -1,5 +1,6 @@
 $(document).ready(function()
 {
+   bindTrackerHandler();
    var filterPlatformArray = [];
    var filterGenreArray = [];
    
@@ -114,16 +115,68 @@ $(document).ready(function()
             cache: false,
             success: function(res)
             {
+                unbindTrackerHandler();
                 $('.products').remove();
                 $('.content').append(res);
+                bindTrackerHandler();
             }
         });
    }
    
-   var trackerClicked = 0;
    
-   $('div.tracker').click(function()
-   {
+   /**
+     * Обработчик нажатия на кнопку поиска
+     */
+    $('#search').click(function()
+    {
+       var searchStr = $('div.search input[type="text"]').val();
+       
+       var dataArray = {
+           name: searchStr
+       };
+       
+       $.ajax({
+            type: 'POST',
+            url: 'index.php?c=index&act=findGameAjax',
+            data: dataArray,
+            cache: false,
+            success: function(res)
+            {
+                unbindTrackerHandler();
+                $('div.content .products').remove();
+                $('div.content').append(res);
+                bindTrackerHandler();
+            }
+        });
+    });
+    
+    
+    function bindTrackerHandler()
+    {
+        $('div.tracker').each(function()
+        {
+           $(this).bind('click', trackerClickHandler);
+        });
+    }
+    
+    
+    function unbindTrackerHandler()
+    {
+        $('div.tracker').each(function()
+        {
+           $(this).unbind();
+        });
+    }
+    
+    var trackerClicked = 0;
+    
+    
+    /**
+     * Обработчик нажатия на трекер
+     * @returns {Boolean}
+     */
+    function trackerClickHandler()
+    {
         var gameId = $(this).parents('div.item').attr('id');
         var platformId = $(this).parents('div.item')
                 .children('div[name="platform_id"]').text();
@@ -170,5 +223,5 @@ $(document).ready(function()
         });
         
         return false;
-   });
+    }
 });

@@ -99,6 +99,11 @@ class M_Catalog
             $userId = htmlspecialchars($_COOKIE['user_id']);
         }
         
+        if(empty($arrId))
+        {
+            return array();
+        }
+        
         $andStr = "";
         $arrStr = "(" . implode(",", $arrId) . ")";
         $query  = "SELECT Game.name as game, Genre.name as genre, Platform.name as platform, Platform.platform_id, ";

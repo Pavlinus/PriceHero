@@ -73,18 +73,23 @@ class M_Search
             $keys = "(" . implode(",", $keywords) . ")";
             $query = "SELECT game_id FROM t_keywords WHERE ";
 
-            for($i = 1; $i <= count($keywords) && $i <= $tblKeyNum; $i++)
+            for($i = 1; $i <= $tblKeyNum && $i <= $tblKeyNum; $i++)
             {
                 $query .= "key_".$i." IN ".$keys;
 
-                if($i != count($keywords))
+                if($i != $tblKeyNum)
                 {
                     $query .= " OR ";
                 }
             }
-            
+
             $rows = $this->msql->Select($query);
             $ids = array();
+            
+            if(empty($rows))
+            {
+                return $ids;
+            }
             
             foreach($rows as $value)
             {

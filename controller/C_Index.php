@@ -5,6 +5,7 @@ class C_Index extends C_Base
     private $mCatalog;
     private $fields;
     private $mTracker;
+    private $search;
     
     public function __construct()
     {
@@ -21,6 +22,11 @@ class C_Index extends C_Base
         if($this->mTracker == null)
         {
             $this->mTracker = M_Tracker::Instance();
+        }
+        
+        if($this->search == null)
+        {
+            $this->search = M_Search::Instance();
         }
     }
     
@@ -116,6 +122,39 @@ class C_Index extends C_Base
         else
         {
             echo M_Tracker::TRACKER_AUTH;
+            exit();
+        }
+    }
+    
+    
+    public function action_findGameAjax()
+    {
+        if($this->isPost())
+        {
+            $gamesList = $this->search->searchGame();
+            
+            if(!$gamesList || empty($gamesList))
+            {
+                $gamesList = array();
+            }
+            
+            $gamesId = array();
+            foreach($gamesList as $gameItem)
+            {
+                $gamesId[] = $gameItem['game_id'];
+            }
+            
+            $arResult = $this->mCatalog->getGames(
+                    $gamesId, 
+                    'Game.game_id'
+            );
+
+            echo $this->Template(
+                    'view/v_index_search_result.php', 
+                    array(
+                        'gamesList' => $arResult
+                    )
+            );
             exit();
         }
     }

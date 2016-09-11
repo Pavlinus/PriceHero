@@ -72,7 +72,8 @@ class M_Game
         foreach($keysArray as $key)
         {
             $val = strtolower($key);
-            $object[$index . $count] = htmlspecialchars($val);
+            $keyValue = str_replace(':', '', $val);
+            $object[$index . $count] = htmlspecialchars($keyValue);
             $count += 1;
             
             if($count > 6)
@@ -112,13 +113,13 @@ class M_Game
     {
         if($idArray == null || empty($idArray))
         {
-            return false;
+            return array();
         }
 
         $idStr = "(" . implode(",", $idArray) . ")";
         
         $query = "SELECT * FROM t_game WHERE game_id IN $idStr";
-        
+
         return $this->msql->Select($query);
     }
     
