@@ -243,10 +243,19 @@ header {
 .product_price {
 	font-family: @f_bold_italic;
 	font-size: 1em;
+        color: #3A394E;
+        /*padding-top: 10px;*/
+
+        span {
+            display: inline-block;
+            padding: 5px 10px;
+            background: #5e945a;
+            color: #fafafa;
+        }
 }
 
 .white_back {
-	background: #fff;
+	background: #fafafa;
 }
 
 .content {
@@ -255,6 +264,10 @@ header {
 	max-width: 870px;
 	padding: 0 0 0 15px;
         background: #1d293e;
+        
+        &.white {
+            padding: 0;
+        }
 	
 	h2 {
 		padding: 0.5em 0 0.5em 0em;
@@ -276,6 +289,7 @@ header {
 				padding: 0px;
 				background: #DDDBFA;
                                 position: relative;
+                                
 				
 				&:hover {
 					background: #f0f0f0;
@@ -353,7 +367,18 @@ header {
 	
 	>.wrapper {
 		width: 100%;
-		padding: 30px 20px;
+		padding: 30px 0px;
+                
+                &.white_back {
+                                    
+                    .search_button {
+                        right: 0;
+                    }
+
+                    .search_reset {
+                        right: 45px;
+                    }
+                }
 		
 		.filter {
 			text-align: center;
@@ -399,7 +424,7 @@ header {
 		}
 		
 		.result_wrapper {
-			padding: 0px 20px;
+			padding: 15px 20px;
 			
 			.row {
 				display: table;
@@ -412,11 +437,12 @@ header {
 					width: 33%;
 					text-align: left;
 					padding: 0 0 5px 15px;
+                                        color: #1d293e;
 				}
 				
 				.caption {
 					border-bottom: 1px solid @c_lgrey;
-					color: #000;
+					color: #1d293e;
 					font-size: 14px;
 					font-family: @f_bold;
 				}
@@ -435,8 +461,8 @@ header {
 					display: inline-block;
 					padding: 3px 5px;
 					border: none;
-					background: @c_orange;
-					color: #fff;
+					background: #1d293e;
+					color: #fafafa;
 					font-size: 12px;
 					font-family: @f_regular;
 					
@@ -598,18 +624,64 @@ header {
 
 section {
 
-	&.main {
+    &.main {
+
+        &.room {
+
+            img {
+                max-width: 70%;
+            }
             
-		.container {
-                    background: #fafafa;
-			
-			.main_container_wrapper {
-				display: table;
-				width: 100%;
-                                /*padding-top: 15px;*/
-			}
-		}
-	}
+            .result_wrapper .row {
+                padding-bottom: 0;
+                border-bottom: 1px solid #DDDBFA;
+            }
+
+            .result_wrapper .row .action {
+                padding: 10px;
+            }
+            
+            a {
+             color: #1d293e;
+            }
+            
+            .result_wrapper .row .name {
+                font-family: @f_bold;
+                margin-bottom: 5px;
+            }
+            
+            .result_wrapper .row .platform {
+                font-family: @f_regular;
+            }
+            
+            .result_wrapper .row .col_3.game_name {
+                width: 45%;
+            }
+            
+            .result_wrapper .row .col_3 .product_price {
+                font-family: @f_bold_italic;
+                font-size: 1em;
+                color: #3A394E;
+            }
+            
+            .result_wrapper .row .col_3 span {
+                display: inline-block;
+                padding: 10px 10px;
+                background: #5e945a;
+                color: #fafafa;
+            }
+        }
+
+        .container {
+            background: #fafafa;
+
+                .main_container_wrapper {
+                    display: table;
+                    width: 100%;
+                    /*padding-top: 15px;*/
+                }
+        }
+    }
 }
 
 footer {

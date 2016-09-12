@@ -52,11 +52,22 @@ class M_Room
             return false;
         }
         
+        if(isset($_POST['platformId']) && !empty($_POST['platformId']))
+        {
+            $and  = " AND platform_id IN ";
+            $and .= "(" . implode(",", $_POST['platformId']) . ")";
+        }
+        else
+        {
+            $and = '';
+        }
+        
         $userId = htmlspecialchars($_COOKIE['user_id']);
-        $query = "SELECT game_id, platform_id FROM t_tracker WHERE user_id=$userId";
+        $query = "SELECT game_id, platform_id FROM t_tracker ";
+        $query .= "WHERE user_id=$userId $and";
         $rows = $this->msql->Select($query);
         $arGames = array();
-        
+
         if($rows)
         {
             foreach ($rows as $row)

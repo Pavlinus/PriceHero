@@ -17,6 +17,7 @@ class C_Room extends C_Base
     private $search;
     private $room;
     private $catalog;
+    private $fields;
 
     public function __construct()
     {
@@ -39,6 +40,11 @@ class C_Room extends C_Base
         {
             $this->catalog = M_Catalog::Instance();
         }
+        
+        if($this->fields == null)
+        {
+            $this->fields = M_Fields::Instance();
+        }
     }
 
 
@@ -50,11 +56,13 @@ class C_Room extends C_Base
         if(isset($_COOKIE['user']) && isset($_COOKIE['user_id']))
         {
             $arGames = $this->room->getGamesList();
+            $platforms = $this->fields->getFields('t_platform');
             
             $this->content = $this->Template(
                 "view/v_game_room.php", 
                 array(
-                    'gameList' => $arGames
+                    'gameList' => $arGames,
+                    'platforms' => $platforms
                 )
             );
         }
@@ -105,6 +113,34 @@ class C_Room extends C_Base
             $error = 'Вы неавторизованы, либо сессия уже закончена';
             $this->content = $this->Template("view/v_user_auth.php", 
                     array('error' => $error));
+        }
+    }
+    
+    
+    /**
+     * Фильтрация контента
+     */
+    function action_filter()
+    {
+        if(isset($_COOKIE['user']) && isset($_COOKIE['user_id']))
+        {
+            $arGames = $this->room->getGamesList();
+            $platforms = $this->fields->getFields('t_platform');
+            
+            echo $this->Template(
+                "view/v_room_filter_result.php", 
+                array(
+                    'gameList' => $arGames,
+                    'platforms' => $platforms
+                )
+            );
+            exit();
+        }
+        else
+        {
+            $this->content = $this->Template(
+                "view/v_user_auth.php", 
+                array());
         }
     }
 }
