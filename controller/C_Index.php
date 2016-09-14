@@ -127,21 +127,18 @@ class C_Index extends C_Base
     }
     
     
+    /**
+     * Обработка поискового запроса
+     */
     public function action_findGameAjax()
     {
         if($this->isPost())
         {
-            $gamesList = $this->search->searchGame();
+            $gamesId = $this->search->searchGame();
             
-            if(!$gamesList || empty($gamesList))
+            if(!$gamesId || empty($gamesId))
             {
-                $gamesList = array();
-            }
-            
-            $gamesId = array();
-            foreach($gamesList as $gameItem)
-            {
-                $gamesId[] = $gameItem['game_id'];
+                $gamesId = array();
             }
             
             $arResult = $this->mCatalog->getGames(

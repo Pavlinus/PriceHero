@@ -84,6 +84,10 @@ $(document).ready(function()
         });
    }
    
+   $('.search_reset').click(function()
+   {
+       $('.search input').val('');
+   });
    
    /**
      * Обработчик нажатия на кнопку поиска
@@ -98,16 +102,56 @@ $(document).ready(function()
        
        $.ajax({
             type: 'POST',
-            url: 'index.php?c=index&act=findGameAjax',
+            url: 'index.php?c=room&act=findGameAjax',
             data: dataArray,
             cache: false,
             success: function(res)
             {
-                $('div.content .products').remove();
-                $('div.content').append(res);
+                $('.search input').val('');
+                $('.result_wrapper').remove();
+                $('.wrapper.white_back').append(res);
+                
+                $('.filter button.platform').each(function()
+                {
+                   filterPlatformArray[ $(this).attr('value') ] = false;
+                   $(this).removeClass('active');
+                });
             }
         });
     });
     
+    var deleteObjectId = 0;
+    
+    $('#delete').click(function()
+    {
+       var gameId = $('#gameId').text();
+       var platformId = $('#platformId').text();
+       var dataArray = {
+           gameId: gameId,
+           platformId: platformId
+       };
+       
+       deleteObjectId = $(this).parents('div.row').attr('id');
+       
+       $.ajax({
+            type: 'POST',
+            url: 'index.php?c=room&act=delete',
+            data: dataArray,
+            cache: false,
+            success: function(res)
+            {
+                if(res === '1')
+                {
+                    $('div#'+deleteObjectId).remove();
+                }
+                else
+                {
+                    alert('Не удалось удалить игру');
+                }
+            }
+        });
+        
+        return false;
+    });
     
 });

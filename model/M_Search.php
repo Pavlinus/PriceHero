@@ -35,6 +35,10 @@ class M_Search
 	}
 	
 	
+        /**
+         * Поиск ID игр, соответствующих ключевым словам
+         * @return boolean
+         */
 	public function searchGame()
 	{
             if(isset($_REQUEST['name']) && $_REQUEST['name'] != null)
@@ -43,22 +47,11 @@ class M_Search
                 
                 if(!empty($keywords))
                 {
-                    $gameIds = $this->searchGameId($keywords);
-                    $mGame = M_Game::Instance();
-                    $games = $mGame->getTblGameList($gameIds);
+                    return $this->searchGameId($keywords);
                 }
-                
-                if(empty($games))
-                {
-                    return array();
-                }
-                
-                return $games;
             }
-            else
-            {
-                return false;
-            }
+            
+            return false;
 	}
         
         

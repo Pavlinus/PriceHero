@@ -110,4 +110,46 @@ class M_Room
 
         return $arResult;
     }
+    
+    
+    /**
+     * Извлекает игры, привязанные к пользователю, по ID
+     * @return array Массив ID игр и ID платформ
+     */
+    public function getGamesById($arGamesId)
+    {
+        if(!isset($_COOKIE['user_id']))
+        {
+            return false;
+        }
+        
+        if(!empty($arGamesId))
+        {
+            $and  = " AND game_id IN ";
+            $and .= "(" . implode(",", $arGamesId) . ")";
+        }
+        else
+        {
+            return array();
+        }
+        
+        $userId = htmlspecialchars($_COOKIE['user_id']);
+        $query = "SELECT game_id, platform_id FROM t_tracker ";
+        $query .= "WHERE user_id=$userId $and";
+        $rows = $this->msql->Select($query);
+        $arGames = array();
+
+        if($rows)
+        {
+            foreach ($rows as $row)
+            {
+                $arGames[] = array(
+                    'game_id' => $row['game_id'],
+                    'platform_id' => $row['platform_id']
+                );
+            }
+        }
+        
+        return $arGames;
+    }
 }

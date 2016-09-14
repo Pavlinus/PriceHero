@@ -10,6 +10,7 @@ include_once "/model/M_Room.php";
 include_once "/model/M_Search.php";
 include_once "/model/M_Auth.php";
 include_once "/model/M_Catalog.php";
+include_once "/model/M_Tracker.php";
 
 class C_Room extends C_Base
 {
@@ -18,6 +19,7 @@ class C_Room extends C_Base
     private $room;
     private $catalog;
     private $fields;
+    private $tracker;
 
     public function __construct()
     {
@@ -44,6 +46,11 @@ class C_Room extends C_Base
         if($this->fields == null)
         {
             $this->fields = M_Fields::Instance();
+        }
+        
+        if($this->tracker == null)
+        {
+            $this->tracker = M_Tracker::Instance();
         }
     }
 
@@ -141,6 +148,63 @@ class C_Room extends C_Base
             $this->content = $this->Template(
                 "view/v_user_auth.php", 
                 array());
+        }
+    }
+    
+    
+    /**
+     * Удаляем игру из списка отслеживаемых
+     */
+    function action_delete()
+    {
+        if(isset($_REQUEST['gameId']) && isset($_REQUEST['platformId']))
+        {
+            echo $this->tracker->switchTracker();
+            exit();
+        }
+    }
+    
+    
+    /**
+     * Обработчик запроса поиска игр пользователя
+     */
+    public function action_findGameAjax()
+    {
+        if($this->isPost())
+        {
+            $arGamesId = $this->search->searchGame();
+
+            if(!$arGamesId)
+            {
+                $arGamesId = array();
+            }
+            
+            $arUserGames = $this->room->getGamesById($arGamesId);
+            $arResult = array();
+            
+            foreach($arUserGames as $arItem)
+            {
+                $arId = array($arItem['game_id']);
+                $where = 'Game.game_id';
+                $and = array(
+                    'Platform.platform_id' => array($arItem['platform_id'])
+                );
+
+                $row = $this->catalog->getGames($arId, $where, $and);
+
+                if(!empty($row))
+                {
+                    $arResult[] = $row[0];
+                }
+            }
+
+            echo $this->Template(
+                    'view/v_room_search_result.php', 
+                    array(
+                        'gameList' => $arResult
+                    )
+            );
+            exit();
         }
     }
 }

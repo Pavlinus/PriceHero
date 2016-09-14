@@ -123,6 +123,11 @@ $(document).ready(function()
         });
    }
    
+   $('.search_reset').click(function()
+   {
+       $('.search input').val('');
+   });
+   
    
    /**
      * Обработчик нажатия на кнопку поиска
@@ -146,6 +151,20 @@ $(document).ready(function()
                 $('div.content .products').remove();
                 $('div.content').append(res);
                 bindTrackerHandler();
+                
+                $('.search input').val('');
+                
+                $('.filter button.platform').each(function()
+                {
+                   filterPlatformArray[ $(this).attr('value') ] = false;
+                   $(this).removeClass('active');
+                });
+                
+                $('.filter button.genre').each(function()
+                {
+                   filterGenreArray[ $(this).attr('value') ] = false;
+                   $(this).removeClass('active');
+                });
             }
         });
     });
