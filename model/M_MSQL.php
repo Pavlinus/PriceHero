@@ -70,8 +70,11 @@ class M_MSQL
             $query = "INSERT INTO $table ($columns_s) VALUES ($values_s)";
             $result = mysqli_query($this->connLink, $query);
 
-            if (!$result)
-                    die(mysqli_error($this->connLink));
+            if (!$result) 
+            {
+                //die(mysqli_error($this->connLink));
+                return false;
+            }
 
             return mysqli_insert_id($this->connLink);
 	}

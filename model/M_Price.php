@@ -76,4 +76,32 @@ class M_Price
             $this->msql->Delete('t_price', "price_id=$price");
         }
     }
+    
+    
+    /**
+     * Обновление цены
+     * @param array $arNewPrice массив новых цен
+     * @param array $arOldPrice массив старых цен
+     */
+    public function updatePrice($arNewPrice, $arOldPrice)
+    {
+        $date = date("Y-m-d");
+        
+        foreach($arNewPrice as $priceId => $priceValue)
+        {   
+            if($priceValue == '')
+            {
+                continue;
+            }
+            
+            $object = array(
+                'old_price' => $arOldPrice[ $priceId ],
+                'new_price' => $priceValue,
+                'lastUpdate' => $date
+            );
+            $where = "price_id=$priceId";
+            
+            $this->msql->Update('t_price', $object, $where);
+        }
+    }
 }
