@@ -50,7 +50,7 @@ class M_ControlPanel {
     {
         $itemsPerPage = 25;
         $startFrom = $itemsPerPage * ($page - 1);
-        $query = "SELECT * FROM t_game LIMIT $startFrom, $itemsPerPage";
+        $query = "SELECT * FROM t_game ORDER BY name LIMIT $startFrom, $itemsPerPage";
         
         return $this->msql->Select($query);
     }

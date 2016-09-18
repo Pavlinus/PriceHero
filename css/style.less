@@ -154,6 +154,10 @@ header {
 	vertical-align: top;
 	width: 270px;
 	min-width: 270px;
+        
+        &.background {
+            background: #DDDBFA;
+        } 
 	
 	.menu {
 		display: block;
@@ -200,7 +204,7 @@ header {
 	}
 }
 
-.filter {
+.filter, .settings {
 	background: #fafafa;
 	padding: 35px 30px;
 	
@@ -219,6 +223,15 @@ header {
 		background: #DDDBFA;
 		padding: 0.75em;
 		margin: 0 10px 10px 0;
+                
+                &.green {
+                    background: #5e945a;
+                    color: #fafafa;
+                    
+                    &#save {
+                        margin: 10px 0 0 0;
+                    }
+                }
 		
 		&.active {
 			background: #1d293e;
@@ -232,6 +245,19 @@ header {
                         color: #fafafa;
 		}
 	}
+}
+
+.settings {
+    padding: 0 30px 15px 30px; 
+    
+    input[type="text"] {
+        padding: 5px;
+        width: 295px;
+        border: 1px solid #DDDBFA;
+        color: #1d293e;
+        margin: 10px 0;
+        font-size: 14px;
+    }
 }
 
 .product_name {
@@ -470,6 +496,11 @@ header {
 						cursor: pointer;
 						opacity: .9;
 					}
+                                        
+                                        &.edit {
+                                           background: #5e945a;
+                                           margin-right: 15px;
+                                        }
 				}
 			}			
 		}
@@ -492,6 +523,7 @@ header {
 		
 		.link_item {
 			position: relative;
+                        margin-bottom: 10px;
 			
 			.rm_link {
 				display: block;
@@ -499,7 +531,7 @@ header {
 				right: -30px;
 				top: 0;
 				font-size: 24px;
-				color: @c_dgrey;
+				color: #fafafa;
 				
 				&:hover {
 					cursor: pointer;
@@ -525,7 +557,7 @@ header {
 		
 		.input_label {
 			display: block;
-			color: #000;
+			color: #fafafa;
 			font-size: 14px;
 			font-family: @f_bold;
 			padding-bottom: 5px;
@@ -598,8 +630,8 @@ header {
 
 .form_btn {
 	display: block;
-	background: @c_dbrown;
-	color: #fff;
+	background: #DDDBFA;
+	color: #1d293e;
 	font-size: 16px;
 	text-transform: uppercase;
 	font-family: @f_bold;
@@ -609,11 +641,11 @@ header {
 	&.add {
 		display: inline-block;
 		width: auto !important;
-		background: @c_lblue;
+		background: #5e945a;;
 		font-size: 14px;
 		padding: 10px;
 		margin-top: 10px;
-		color: #000;
+		color: #fafafa;
 	}
 	
 	&:hover {

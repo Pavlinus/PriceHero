@@ -1,5 +1,7 @@
 $(document).ready(function()
 {
+   bindDelGameHandler();
+    
    var filterPlatformArray = [];
    
    // Массив фильтра платформ
@@ -78,8 +80,10 @@ $(document).ready(function()
             cache: false,
             success: function(res)
             {
+                unbindDelGameHandler();
                 $('.result_wrapper').remove();
                 $('.wrapper.white_back').append(res);
+                bindDelGameHandler();
             }
         });
    }
@@ -107,9 +111,11 @@ $(document).ready(function()
             cache: false,
             success: function(res)
             {
+                unbindDelGameHandler();
                 $('.search input').val('');
                 $('.result_wrapper').remove();
                 $('.wrapper.white_back').append(res);
+                bindDelGameHandler();
                 
                 $('.filter button.platform').each(function()
                 {
@@ -121,37 +127,51 @@ $(document).ready(function()
     });
     
     var deleteObjectId = 0;
-    
-    $('#delete').click(function()
+    function bindDelGameHandler()
     {
-       var gameId = $('#gameId').text();
-       var platformId = $('#platformId').text();
-       var dataArray = {
-           gameId: gameId,
-           platformId: platformId
-       };
-       
-       deleteObjectId = $(this).parents('div.row').attr('id');
-       
-       $.ajax({
-            type: 'POST',
-            url: 'index.php?c=room&act=delete',
-            data: dataArray,
-            cache: false,
-            success: function(res)
-            {
-                if(res === '1')
-                {
-                    $('div#'+deleteObjectId).remove();
-                }
-                else
-                {
-                    alert('Не удалось удалить игру');
-                }
-            }
+        $('a.delete').each(function()
+        {
+           $(this).bind('click', delTrackerHandler);
         });
-        
-        return false;
-    });
+    }
     
+    function unbindDelGameHandler()
+    {
+        $('a.delete').each(function()
+        {
+           $(this).unbind();
+        });
+    }
+    
+    function delTrackerHandler()
+    {
+        var gameId = $(this).parents('div.row').children('#gameId').text();
+        var platformId = $(this).parents('div.row').children('#platformId').text();
+        var dataArray = {
+            gameId: gameId,
+            platformId: platformId
+        };
+
+        deleteObjectId = $(this).parents('div.row').attr('id');
+
+        $.ajax({
+             type: 'POST',
+             url: 'index.php?c=room&act=delete',
+             data: dataArray,
+             cache: false,
+             success: function(res)
+             {
+                 if(res === '1')
+                 {
+                     $('div#'+deleteObjectId).remove();
+                 }
+                 else
+                 {
+                     alert('Не удалось удалить игру');
+                 }
+             }
+         });
+
+         return false;
+    }
 });

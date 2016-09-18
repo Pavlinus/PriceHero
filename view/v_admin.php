@@ -2,27 +2,20 @@
     <div class="container">
         <div class="main_container_wrapper">
             <div class="side_left">
-                <nav class="menu">
-                    <ul>
-                        <li class="head">Меню</li>
-                        <li><a href="index.php?c=admin">Главная</a></li>
-                        <li><a href="index.php?c=admin&act=addGame">Добавить игру</a></li>
-                        <li><a href="">Выход</a></li>
-                    </ul>
-                </nav>
+               <? require_once "v_admin_nav_menu.php"; ?>
             </div>
 
             <div class="content white">
                 <div class="wrapper white_back">
                     <div class="filter">
-                        <button class="option active">PC</button>
-                        <button class="option">PS4</button>
-                        <button class="option">XBox One</button>
-                        <button class="option">PS3</button>
-                        <button class="option">XBox 360</button>
+                        <? foreach($platforms as $pl) : ?>
+                            <button class="option platform" value="<?= $pl['platform_id'] ?>">
+                                <?= $pl['name'] ?>
+                            </button>
+                        <? endforeach; ?>
                     </div>
 
-                    <div class="letters_wrapper">
+                    <!--div class="letters_wrapper">
                         <span class="letter">A</span>
                         <span class="letter">B</span>
                         <span class="letter">C</span>
@@ -80,19 +73,12 @@
                         <span class="letter">Э</span>
                         <span class="letter">Ю</span>
                         <span class="letter">Я</span>
-                    </div>
-
-                    <div class="search">
-                        <input type="text" placeholder="Найти">
-                        <div id="reset_search" class="search_reset"></div>
-                        <div id="search" class="search_button"></div>
-                    </div>
+                    </div-->
 
                     <div class="result_wrapper">
                         <div class="row">
                             <span class="caption col_3">Название</span>
-                            <span class="caption col_3">Платформа</span>
-                            <span class="caption col_3">Действие</span>
+                            <span class="caption col_3">Действия</span>
                         </div>
                         
                         <? foreach($gameList as $game) : ?>
@@ -101,13 +87,16 @@
                                 <span class="name col_3">
                                     <?=$game['name']?>
                                 </span>
-                                <span class="platform col_3">
                                     
                                 </span>
                                 <span class="col_3">
                                     <a href="index.php?c=admin&act=editGame&id=<?=$game['game_id']?>" 
-                                       class="action">
+                                       class="action edit">
                                         Изменить
+                                    </a>
+                                    <a href="index.php?c=admin&act=removeGame&id=<?=$game['game_id']?>" 
+                                       class="action delGame" id="<?=$game['game_id']?>">
+                                        Удалить
                                     </a>
                                 </span>
                             </div>

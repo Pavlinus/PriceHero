@@ -156,4 +156,53 @@ class M_Game
 
         return $this->msql->Update('t_game', $object, $where);
     }
+    
+    
+    /**
+     * Удаление игры
+     * @param int $gameId ID игры
+     * @return int 1 - успешное удаление, иначе 0
+     */
+    public function delGame($gameId)
+    {
+        if($gameId == null || !is_numeric($gameId))
+        {
+            return 0;
+        }
+        
+        $result = 1;
+        $id = htmlspecialchars($gameId);
+        $where = "game_id=$id";
+        
+        $result *= $this->msql->Delete('t_game', $where);
+        $result *= $this->msql->Delete('t_keywords', $where);
+        
+        $query = "SELECT price_id, link_id FROM t_total WHERE game_id=$id";
+        $rows = $this->msql->Select($query);
+        $arLink = array();
+        $arPrice = array();
+        
+        foreach($rows as $row)
+        {
+            $arLink[] = $row['link_id'];
+            $arPrice[] = $row['price_id'];
+        }
+        
+        $whereLink = "link_id IN (" . implode(",", $arLink) . ")";
+        $result *= $this->msql->Delete('t_link', $whereLink);
+        
+        $wherePrice = "price_id IN (" . implode(",", $arPrice) . ")";
+        $result *= $this->msql->Delete('t_price', $wherePrice);
+        
+        $result *= $this->msql->Delete('t_total', $where);
+        
+        if($result > 0)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
+    }
 }

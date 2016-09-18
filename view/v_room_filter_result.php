@@ -2,7 +2,7 @@
 
     <? foreach($gameList as $game) : ?>
 
-    <div class="row">
+    <div class="row" id="row_<?=$game['game_id']?>">
         <span class="name col_3">
             <a href="<?=$game['link'] ?>">
                 <img src="<?= $game['image'] ?>"/>
@@ -20,11 +20,12 @@
             </span>
         </span>
         <span class="col_3">
-            <a href="index.php?c=room&act=delete&gameId=<?=$game['game_id']?>&platformId=<?=$game['platform_id']?>" 
-               class="action" id="delete">
+            <a class="action delete">
                 Удалить
             </a>
         </span>
+        <span class="hidden" id="gameId"><?=$game['game_id']?></span>
+        <span class="hidden" id="platformId"><?=$game['platform_id']?></span>
     </div>
 
     <? endforeach; ?>

@@ -207,5 +207,25 @@ class C_Room extends C_Base
             exit();
         }
     }
+    
+    
+    public function action_settings()
+    {
+        if(isset($_COOKIE['user']) && isset($_COOKIE['user_id']))
+        {   
+            $this->content = $this->Template(
+                "view/v_room_settings.php", 
+                array(
+                    
+                )
+            );
+        }
+        else
+        {
+            $this->content = $this->Template(
+                "view/v_user_auth.php", 
+                array());
+        }
+    }
 }
 

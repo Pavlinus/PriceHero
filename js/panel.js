@@ -2,6 +2,7 @@ $(document).ready(function() {
     
     var deletedLinks = [];      // ID удаленных ссылок
     
+    bindDelGameHandler();
     bindRemoveBtn();
 
     /**
@@ -281,4 +282,149 @@ $(document).ready(function() {
             }
         });
     });
+    
+    
+    var filterPlatformArray = [];
+   
+   // Массив фильтра платформ
+   $('.filter button.platform').each(function()
+   {
+      filterPlatformArray[ $(this).attr('value') ] = false;
+   });
+   
+   /**
+    * Обработка выбора фильтра
+    */
+   $('.filter button.platform').on('click', handleFilterBtnClick);
+   
+   /**
+    * Обработчик нажатия кнопки фильтра
+    */
+   function handleFilterBtnClick()
+   {
+        var filter_id = $(this).attr('value');
+        var activePlatform = [];
+        var activeGenre = [];
+        var state = false;
+        
+        if($(this).hasClass('active'))
+        {
+            $(this).removeClass('active');
+            state = false;
+        }
+        else
+        {
+            $(this).addClass('active');
+            state = true;
+        }
+        
+        filterPlatformArray[ filter_id ] = state;
+        activePlatform = getActiveFilters(filterPlatformArray);
+        
+        filter(activePlatform, activeGenre);
+   }
+   
+   /**
+    * Возвращает активные поля фильтра
+    * @param {array} arrayFilter массив состояний фильтров
+    * @returns {Array} массив активных фильтров
+    */
+   function getActiveFilters(arrayFilter)
+   {
+        var active = [];
+
+        for(var i = 0; i < arrayFilter.length; i++)
+        {
+            if(arrayFilter[i])
+            {
+                active.push(i);
+            }
+        }
+
+        return active;
+   }
+   
+   /**
+    * Запрос фильтруемых данных
+    * @param {int} arPlatformFilter Массив ID установленных фильтра платформ
+    */
+   function filter(arPlatformFilter)
+   {
+       var dataArray = {
+            platformId: arPlatformFilter
+        };
+       
+       
+       $.ajax({
+            type: 'POST',
+            url: 'index.php?c=admin&act=filter',
+            data: dataArray,
+            cache: false,
+            success: function(res)
+            {
+                unbindDelGameHandler();
+                $('.result_wrapper').remove();
+                $('.wrapper.white_back').append(res);
+                bindDelGameHandler();
+            }
+        });
+    }
+   
+    function bindDelGameHandler()
+    {
+        $('a.delGame').each(function()
+        {
+           $(this).bind('click', delGameHandler);
+        });
+    }
+    
+    function unbindDelGameHandler()
+    {
+        $('a.delGame').each(function()
+        {
+           $(this).unbind();
+        });
+    }
+    
+    var delGameId = 0;
+    /**
+     * Обработчик нажатия кнопки удаления игры
+     * @returns {Boolean}
+     */
+    function delGameHandler()
+    {
+        if(!confirm("Вы действительно хотите удалить игру?"))
+        {
+            return false;
+        }
+        
+        var gameId = $(this).attr('id');
+        var dataArray = {
+            gameId: gameId
+        };
+        delGameId = gameId;
+        
+        $.ajax({
+            type: 'POST',
+            url: 'index.php?c=admin&act=removeGame',
+            data: dataArray,
+            cache: false,
+            success: function(res)
+            {
+                $('a[id="'+delGameId+'"]').parents('div.row').remove();
+                
+                if(res === '1')
+                {
+                    alert('Игра успешно удалена');
+                }
+                else
+                {
+                    alert('Не удалось удалить игру');
+                }
+                
+            }
+        });
+        
+        return false;
+    }
 });

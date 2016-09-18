@@ -1,23 +1,25 @@
 <?php
 
 /**
-* <p>Контроллер панели администратора</p>
+* Контроллер панели администратора
 * @author Pavel Kovyrshin
 * @date 30.07.2016
 */
 
 include_once "/model/M_ControlPanel.php";
-include_once "/model/M_Filter.php";
 include_once "/model/M_Auth.php";
+include_once "/model/M_Game.php";
+include_once "/model/M_Catalog.php";
 
 class C_Admin extends C_Base
 {
     private $cPanel;
-    private $filter;
     private $auth;
     private $parser;
     private $fields;
     private $search;
+    private $mGame;
+    private $mCatalog;
 
     public function __construct()
     {
@@ -36,11 +38,6 @@ class C_Admin extends C_Base
             $this->fields = M_Fields::Instance();
         }
 
-        if($this->filter == null)
-        {
-            //$filter = M_Filter::Instance();
-        }
-
         if($this->auth == null)
         {
             $this->auth = M_Auth::Instance();
@@ -49,6 +46,16 @@ class C_Admin extends C_Base
         if($this->search == null)
         {
             $this->search = M_Search::Instance();
+        }
+        
+        if($this->mGame == null)
+        {
+            $this->mGame = M_Game::Instance();
+        }
+        
+        if($this->mCatalog == null)
+        {
+            $this->mCatalog = M_Catalog::Instance();
         }
     }
 
@@ -61,6 +68,7 @@ class C_Admin extends C_Base
         if($this->isAdmin())
         {
             $gamesList = array();
+            $platforms = $this->fields->getFields('t_platform');
             
             if(isset($_REQUEST['page']))
             {
@@ -74,7 +82,8 @@ class C_Admin extends C_Base
             $this->content = $this->Template(
                     "view/v_admin.php", 
                     array(
-                        'gameList' => $gamesList
+                        'gameList' => $gamesList,
+                        'platforms' => $platforms
                     )
             );
         }
@@ -268,6 +277,9 @@ class C_Admin extends C_Base
     }
 
     
+    /**
+     * Обработка поиска игры
+     */
     public function action_findGameAjax()
     {
         if($this->isPost())
@@ -276,7 +288,11 @@ class C_Admin extends C_Base
             
             if(!$gamesList)
             {
-                $gamesList = $this->cPanel->getGamesList(1);
+                $gamesList = array();
+            }
+            else
+            {
+                $gamesList = $this->mGame->getTblGameList($gamesList);
             }
 
             echo $this->Template(
@@ -288,17 +304,63 @@ class C_Admin extends C_Base
             exit();
         }
     }
+    
+    
+    /**
+     * Выхоод из учетной записи
+     */
+    public function action_logout()
+    {
+        $this->auth->logout();
+        header("Location: index.php?c=admin");
+    }
 
+    
+    /**
+     * Обработка фильтрации данных
+     */
+    public function action_filter()
+    {
+        $platforms = $this->fields->getFields('t_platform');
+        $arPlatform = array(1);    // выбираем PC по умолчанию
+        $and = array();
+        
+        if(isset($_POST['platformId']) && !empty($_POST['platformId']))
+        {
+            $arPlatform = $_POST['platformId'];
+        }
+        
+        $priceList = $this->mCatalog->getPriceUpdates();
+        $and['Price.price_id'] = $priceList;
+        
+        $gamesList = $this->mCatalog->getGames(
+                $arPlatform, 
+                'Platform.platform_id',
+                $and,
+                "ORDER BY Game.name"
+        );
+        
+        echo $this->Template('view/v_admin_filter_result.php', 
+                array(
+                    'gameList' => $gamesList,
+                    'platforms' => $platforms
+                )
+        );
+        exit();
+    }
+    
     
     public function action_removeGame()
     {
-
-    }
-
-
-    public function action_filter()
-    {
-
+        if(isset($_POST['gameId']))
+        {
+            echo $this->mGame->delGame($_POST['gameId']);
+        }
+        else
+        {
+            echo 0;
+        }
+        exit();
     }
 }
 

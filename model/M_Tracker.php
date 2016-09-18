@@ -54,7 +54,7 @@ class M_Tracker
             $query  = "SELECT * FROM t_tracker ";
             $query .= "WHERE game_id=$gameId AND platform_id=$platformId";
             $rows = $this->msql->Select($query);
-
+            
             if(!empty($rows))
             {
                 $trackerId = $rows[0]['tracker_id'];

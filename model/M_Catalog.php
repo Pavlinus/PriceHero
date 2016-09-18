@@ -88,9 +88,10 @@ class M_Catalog
      * @param array $arrId массив ID элементов
      * @param string $where поле таблицы
      * @param array $and дополнительное условие выборки
+     * @param array $order сортировка данных
      * @return array массив данных об играх
      */
-    public function getGames($arrId, $where, $and = false)
+    public function getGames($arrId, $where, $and = false, $order = '')
     {
         $userId = 0;
         
@@ -123,7 +124,7 @@ class M_Catalog
             }
         }
         
-        $query .= "WHERE $where IN $arrStr $andStr";
+        $query .= "WHERE $where IN $arrStr $andStr $order";
 
         $rows = $this->msql->Select($query);
         

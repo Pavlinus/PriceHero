@@ -152,4 +152,11 @@ class M_Room
         
         return $arGames;
     }
+    
+    
+    
+    public function saveSettings()
+    {
+        
+    }
 }

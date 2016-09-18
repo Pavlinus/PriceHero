@@ -1,7 +1,7 @@
 ﻿<section class="main room">
     <div class="container">
         <div class="main_container_wrapper">
-            <div class="side_left">
+            <div class="side_left background">
                 <nav class="menu">
                     <ul>
                         <li><a href="index.php?c=index">Главная</a></li>
@@ -44,8 +44,7 @@
                                     </span>
                                 </span>
                                 <span class="col_3">
-                                    <a href="index.php?c=room&act=delete&gameId=<?=$game['game_id']?>&platformId=<?=$game['platform_id']?>" 
-                                       class="action" id="delete">
+                                    <a class="action delete">
                                         Удалить
                                     </a>
                                 </span>

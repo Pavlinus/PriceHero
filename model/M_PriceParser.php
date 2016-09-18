@@ -98,7 +98,7 @@ class M_PriceParser
         {
             preg_match('/(\d)+/', $span->outertext, $matches);
         }
-        
+
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
