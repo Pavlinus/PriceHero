@@ -14,17 +14,21 @@
     </head>
     <body>
 
-        <header>
-            <div class="container">
-                <div class="header_wrapper">
-                    <div class="logo">
-                        <span>PriceHero</span>
-                    </div>
-                    <div class="search">
-                        <input type="text" placeholder="Найти">
-                        <div class="search_reset"></div>
-                        <div class="search_button" id="search"></div>
-                    </div>
+    <header>
+        <div class="container">
+            <div class="header_wrapper">
+                <div class="logo">
+                    <span>PriceHero</span>
+                </div>
+                <div class="search">
+                    <input type="text" placeholder="Найти">
+                    <div class="search_reset"></div>
+                    <div class="search_button" id="search"></div>
                 </div>
             </div>
-        </header>
+        </div>
+    </header>
+        
+    <div class="info_window">
+        <span>Сообщение</span>
+    </div>

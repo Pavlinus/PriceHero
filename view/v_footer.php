@@ -2,18 +2,11 @@
     <div class="container">
         <div class="wrapper">
             <div class="footer_menu">
-                <div class="item">
-                    <h3>Category</h3>
                     <div>
-                        <a href="">Link1</a>
+                        <a href="/index.php">Главная</a>
+                        <a href="/index.php?c=about">О сервисе</a>
+                        <a href="mailto:pavlin.kov@mail.ru">Напишите нам</a>
                     </div>
-                    <div>
-                        <a href="">Link2</a>
-                    </div>
-                    <div>
-                        <a href="">Link3</a>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -22,6 +15,7 @@
     </div>
 </footer>
 
+<script src="js/effects.js"></script>
 <script src="js/validation_form.js"></script>
 <script src="js/jquery_transform.js"></script>
 </body>

@@ -727,34 +727,30 @@ footer {
 		.wrapper {
 			width: 100%;
 			max-width: 1170px;
-			padding: 40px;
+			padding: 20px 40px;
 			margin: 0 auto;
 			
 			.footer_menu {
 				display: table;
 				width: 100%;
 				
-				.item {
-					width: 200px;
-					
-					h3 {
-						color: #fff;
-						font-family: @f_bold;
-						padding-bottom: 20px;
-					}
-					
-					a {
-						display: inline-block;
-						color: #fff;
-						font-size: 0.875em;
-						font-family: @f_regular;
-						margin: 5px 0;
-						
-						&:hover {
-							text-decoration: underline;
-						}
-					}
-				}
+                                h3 {
+                                    color: #fff;
+                                    font-family: @f_bold;
+                                    padding-bottom: 20px;
+                                }
+
+                                a {
+                                    display: inline-block;
+                                    color: #fff;
+                                    font-size: 0.875em;
+                                    font-family: @f_regular;
+                                    margin: 5px 20px 5px 0;
+
+                                    &:hover {
+                                        text-decoration: underline;
+                                    }
+                                }
 			}
 		}
 	}
@@ -765,4 +761,22 @@ div, span {
     &.hidden {
         display: none;
     }
+}
+
+.info_window {
+    position: fixed;
+    right: -285px;
+    bottom: 125px;
+    background: #DDDBFA;
+    padding: 15px;
+    width: 250px;
+    
+    span {
+        color: #1d293e;
+        font-family: "RobotoBold";
+    }
+}
+
+.info_msg {
+    color: rgb(29, 41, 62);
 }

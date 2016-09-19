@@ -10,6 +10,10 @@ $(document).ready(function()
       filterPlatformArray[ $(this).attr('value') ] = false;
    });
    
+    // Фильтр PC по умолчанию
+   setDefaultFilter();
+   
+   
    // Массив фильтра жанров
    $('.filter button.genre').each(function()
    {
@@ -59,6 +63,8 @@ $(document).ready(function()
                 filterGenreArray[ filter_id ] = state;
                 break;
         }
+        
+        checkFilterSet();
 
         activePlatform = getActiveFilters(filterPlatformArray);
         activeGenre = getActiveFilters(filterGenreArray);
@@ -122,6 +128,39 @@ $(document).ready(function()
             }
         });
    }
+   
+   /**
+    * Установка фильтра по умолчанию
+    * @returns {undefined}
+    */
+   function setDefaultFilter()
+   {
+       filterPlatformArray[1] = true;
+       $('.filter button.platform[value="1"]').addClass('active');
+   }
+   
+   
+   /**
+    * Проверяет на отсутствие установленных фильтров по платформе
+    * @returns {undefined}
+    */
+   function checkFilterSet()
+   {
+        var countActive = 0;
+        for(var i = 0; i < filterPlatformArray.length; i++)
+        {
+            if(filterPlatformArray[i])
+            {
+                countActive += 1;
+            }
+        }
+
+        if(countActive === 0)
+        {
+            setDefaultFilter();
+        }
+   }
+   
    
    $('.search_reset').click(function()
    {
@@ -205,8 +244,6 @@ $(document).ready(function()
                 gameId: gameId,
                 platformId: platformId
         };
-        
-        $(this).animate({scale: '-=0.1'},{duration: 300});
       
         $.ajax({
             type: 'POST',
@@ -219,25 +256,22 @@ $(document).ready(function()
                 
                 if(res === '3')
                 {
-                    alert('Для отслеживания игры необходима авторизация');
+                    playInfoWindow('Для отслеживания игры необходима авторизация');
                 }
                 else if(res === '2')
                 {
-                    alert('Игра добавлена в игровую комнату');
+                    playInfoWindow('Игра добавлена в игровую комнату');
                     $tracker.addClass('active');
-                    
                 }
                 else if(res === '1')
                 {
-                    alert('Игра удалена из игровой комнаты');
+                    playInfoWindow('Игра удалена из игровой комнаты');
                     $tracker.removeClass('active');
                 }
                 else
                 {
-                    alert('Не удалось отследить игру');
+                    playInfoWindow('Не удалось отследить игру');
                 }
-                
-                $tracker.animate({scale: '+=0.1'},{duration: 300});
             }
         });
         

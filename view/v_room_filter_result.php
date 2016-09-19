@@ -4,12 +4,12 @@
 
     <div class="row" id="row_<?=$game['game_id']?>">
         <span class="name col_3">
-            <a href="<?=$game['link'] ?>">
+            <a target="_blank" href="<?=$game['link'] ?>">
                 <img src="<?= $game['image'] ?>"/>
             </a>
         </span>
         <span class="name col_3 game_name">
-            <a href="<?=$game['link'] ?>">
+            <a target="_blank" href="<?=$game['link'] ?>">
                 <p class="name"><?= $game['game'] ?></p>
             </a>
             <p class="platform"><?= $game['platform'] ?></p>

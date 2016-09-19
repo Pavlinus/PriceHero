@@ -58,7 +58,7 @@ $(document).ready(function() {
             cache: false,
             success: function(res)
             {
-                alert(res);
+                playInfoWindow(res);
             }
         });
         
@@ -111,7 +111,7 @@ $(document).ready(function() {
         }
         else
         {
-            alert("Должна быть хотя бы одна ссылка");
+            playInfoWindow("Должна быть хотя бы одна ссылка");
             return false;
         }
     }
@@ -245,7 +245,7 @@ $(document).ready(function() {
             cache: false,
             success: function(res)
             {
-                alert(res);
+                playInfoWindow(res);
             }
         });
         
@@ -415,11 +415,11 @@ $(document).ready(function() {
                 
                 if(res === '1')
                 {
-                    alert('Игра успешно удалена');
+                    playInfoWindow('Игра успешно удалена');
                 }
                 else
                 {
-                    alert('Не удалось удалить игру');
+                    playInfoWindow('Не удалось удалить игру');
                 }
                 
             }

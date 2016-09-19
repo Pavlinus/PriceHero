@@ -1,7 +1,7 @@
 <div class="products">
 
     <? foreach($gamesList as $game) : ?>
-    <a href="<?= $game['link'] ?>">
+    <a target="_blank" href="<?= $game['link'] ?>">
         <div class="item" id="<?=$game['game_id']?>">
             <div class="wrapper">
                 <img src="<?= $game['image'] ?>" alt="">
@@ -17,6 +17,7 @@
                     <div class="tracker" title="Отслеживать игру"></div>
                 <? endif; ?>
             </div>
+            <div class="hidden" name="platform_id"><?=$game['platform_id']?></div>
         </div>
     </a>
     <? endforeach; ?>

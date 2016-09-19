@@ -167,7 +167,7 @@ $(document).ready(function()
                  }
                  else
                  {
-                     alert('Не удалось удалить игру');
+                     playInfoWindow('Не удалось удалить игру');
                  }
              }
          });
