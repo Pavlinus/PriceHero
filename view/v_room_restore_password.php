@@ -12,33 +12,24 @@
             
             <div class="content">
                 <div class="wrapper">
+                    <p class="center_text">На Ваш email будет выслана ссылка для смены пароля</p>
+                    <div class="spacer_30"></div>
                     <div class="form">
                         <? if($error != '') : ?>
                             <span class="error"><?= $error ?></span>
                         <? endif; ?>
                         <form method="post" 
-                              action="index.php?c=room&act=auth">
+                              action="index.php?c=room&act=restorePassword">
                             <div class="item">
                                 <span class="input_label">
-                                    Логин
+                                    Email
                                 </span>
-                                <input type="text" name="au_login" class="require">
+                                <input type="text" name="au_email" class="require">
                             </div>
-
-                            <div class="item">
-                                <span class="input_label">
-                                    Пароль
-                                </span>
-                                <input type="password" name="au_password" class="require">
-                            </div>
-
-                            <span class="required">* Обязательные поля</span>
 
                             <div class="spacer_30"></div>
 
-                            <input type="submit" class="form_btn enter" value="Войти">
-                            <a href="index.php?c=room&act=registration" class="form_btn register">Регистрация</a>
-                            <a href="index.php?c=room&act=restorePassword" class="form_btn register">Восстановить пароль</a>
+                            <input type="submit" class="form_btn" value="Восстановить">
                         </form>
                     </div>
                 </div>

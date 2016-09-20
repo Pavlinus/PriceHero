@@ -17,7 +17,7 @@
                             <span class="error"><?= $error ?></span>
                         <? endif; ?>
                         <form method="post" 
-                              action="index.php?c=room&act=auth">
+                              action="index.php?c=room&act=registration">
                             <div class="item">
                                 <span class="input_label">
                                     Логин
@@ -31,14 +31,19 @@
                                 </span>
                                 <input type="password" name="au_password" class="require">
                             </div>
+                            
+                            <div class="item">
+                                <span class="input_label">
+                                    Email
+                                </span>
+                                <input type="email" name="au_email" class="require">
+                            </div>
 
                             <span class="required">* Обязательные поля</span>
 
                             <div class="spacer_30"></div>
 
-                            <input type="submit" class="form_btn enter" value="Войти">
-                            <a href="index.php?c=room&act=registration" class="form_btn register">Регистрация</a>
-                            <a href="index.php?c=room&act=restorePassword" class="form_btn register">Восстановить пароль</a>
+                            <input type="submit" class="form_btn" value="Сохранить">
                         </form>
                     </div>
                 </div>

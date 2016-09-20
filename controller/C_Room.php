@@ -227,5 +227,61 @@ class C_Room extends C_Base
                 array());
         }
     }
+    
+    
+    /**
+     * Регистрация пользователя
+     */
+    public function action_registration()
+    {
+        $loginErr = '';
+        
+        if($this->IsPost())
+        {
+            $loginErr = 'Логин уже используется';
+            $result = $this->room->saveNewUser();
+            if($result > 0)
+            {
+                $this->auth->authorize($_POST['au_login'], $_POST['au_password']);
+                header("Location: index.php?c=room");
+            }
+            elseif($result < 0)
+            {
+                $this->content = $this->Template(
+                    "view/v_user_registration.php", 
+                    array(
+                        'error' => $loginErr
+                    )
+                );
+            }
+        }
+        else
+        {
+            $this->content = $this->Template(
+                "view/v_user_registration.php", 
+                array(
+                    'error' => $loginErr
+                )
+            );
+        }
+    }
+    
+    
+    public function action_restorePassword()
+    {
+        if($this->IsPost())
+        {
+            $this->room->restorePassword();
+        }
+        else
+        {
+            $this->content = $this->Template(
+                "view/v_room_restore_password.php", 
+                array(
+
+                )
+            );
+        }
+    }
 }
 

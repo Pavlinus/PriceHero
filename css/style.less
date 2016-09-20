@@ -24,6 +24,15 @@ h2 {
 	font-family: "RobotoBold";
 }
 
+p {
+    color: #fafafa;
+    font-family: "RobotoRegular";
+}
+
+.center_text {
+    text-align: center;
+}
+
 body {
     background-image: url(../images/tex.png);
     background-position: center;
@@ -578,7 +587,8 @@ header {
 		}
 		
 		input[type="text"],
-                input[type="password"]{
+                input[type="password"],
+                input[type="email"] {
 			display: block;
 			border: 1px solid @c_lgrey;
 			background-color: #fff;
@@ -596,22 +606,34 @@ header {
 		
 		.form_btn {
 			width: 100%;
+                        
+                        &.register {
+                            margin-top: 10px;
+                            text-align: center;
+                        }
+                        
+                        &.enter {
+                            background: #ff4a4a;
+                            color: #fafafa;
+                        }
 		}
 	}
 	
 	.required {
-		color: @c_red;
-		font-size: 14px;
-		font-family: @f_regular;
+            color: @c_red;
+            font-size: 14px;
+            font-family: @f_regular;
 	}
 	
 	.error {
-		display: block;
-		color: @c_red;
-		font-size: 16px;
-		font-family: @f_bold;
-		padding-bottom: 20px;
-		text-align: center;
+            display: block;
+            color: #fafafa;
+            font-size: 16px;
+            font-family: "RobotoBold";
+            margin-bottom: 10px;
+            text-align: center;
+            padding: 10px 0;
+            background: #ff4a4a;
 	}
 }
 
@@ -750,6 +772,12 @@ footer {
                                     &:hover {
                                         text-decoration: underline;
                                     }
+                                }
+                                
+                                span {
+                                    color: #fff;
+                                    font-size: 0.875em;
+                                    font-family: @f_regular;
                                 }
 			}
 		}

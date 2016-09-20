@@ -7,12 +7,14 @@
 */
 
 include_once "M_MSQL.php";
+include_once "M_Token.php";
 
 class M_Room
 {
     private $msql;
     private static $instance;
     private $catalog;
+    private $token;
 
 
     public function __construct()
@@ -22,6 +24,11 @@ class M_Room
         if($this->catalog == null)
         {
             $this->catalog = M_Catalog::Instance();
+        }
+        
+        if($this->token == null)
+        {
+            $this->token = M_Token::Instance();
         }
     }
 
@@ -154,6 +161,98 @@ class M_Room
     }
     
     
+    /**
+     * Регистрация нового пользователя
+     * @return int -1 - логин существует, 0 - ошибка записи, > 0 - успех
+     */
+    public function saveNewUser()
+    {
+        if(isset($_POST['au_login']) &&
+           isset($_POST['au_password']) &&
+           isset($_POST['au_email']))
+        {
+            $login = htmlspecialchars($_POST['au_login']);
+            $password = htmlspecialchars($_POST['au_password']);
+            $email = htmlspecialchars($_POST['au_email']);
+            
+            if(!$this->checkLogin($login))
+            {
+                return -1;
+            }
+            
+            $object = array(
+                'login' => $login,
+                'password' => md5($password),
+                'email' => $email
+            );
+            
+            return $this->msql->Insert('t_user', $object);
+        }
+    }
+    
+    
+    /**
+     * Проверка существующего логина
+     * @param string $userLogin логин пользователя
+     * @return boolean true если логина не существует, иначе false
+     */
+    private function checkLogin($userLogin)
+    {
+        $login = htmlspecialchars($userLogin);
+        $query = "SELECT * FROM t_user WHERE login='$login'";
+        $rows = $this->msql->Select($query);
+        
+        if(count($rows) > 0)
+        {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    
+    /**
+     * Обработка запроса на восстановление пароля
+     * @return boolean
+     */
+    public function restorePassword()
+    {
+        if(isset($_POST['au_email']))
+        {
+            return false;
+        }
+        
+        $email = htmlspecialchars($_POST['au_email']);
+        $token = $this->token->getToken($email);
+        $this->sendRestoreEmail($email, $token);
+    }
+    
+    
+    /**
+     * Отправка письма для восстановления пароля пользователю
+     * @param string $email email
+     * @param string $token токен
+     */
+    private function sendRestoreEmail($email, $subject, $token)
+    {
+        $to  = "<$email>"; 
+        
+        $subject = "Запрос на смену пароля | sitename";
+        
+        $link =   "http://sitename.ru/index.php?"
+                . "c=room&act=restorePassword&token=$token&email=$email";
+        
+        $message = " <p>Привет, пользователь!</p> </br>";
+        $message = " <p>Для смены пароля своей учетной записи перейди по ссылке ниже:</p> </br>";
+        $message = " <a href='$link'>$link</a> </br>";
+
+        $headers  = "Content-type: text/html; charset=utf-8 \r\n"; 
+        $headers .= "From: От кого письмо <sitename@somemail.com>\r\n"; 
+
+        mail($to, $subject, $message, $headers); 
+    }
+    
+
     
     public function saveSettings()
     {

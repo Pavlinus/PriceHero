@@ -3,7 +3,9 @@
         <div class="content">
             <div class="wrapper">
                 <div class="form">
-                    <span class="error"><?= $error ?></span>
+                    <? if($error != '') : ?>
+                        <span class="error"><?= $error ?></span>
+                    <? endif; ?>
                     <form method="post" 
                           action="index.php?c=admin&act=auth">
                         <div class="item">
