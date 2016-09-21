@@ -47,6 +47,28 @@ class M_Token
         
         return $token;
     }
+    
+    
+    /**
+     * Проверяет наличие токена в БД
+     * @param string $userToken токен
+     * @return boolean true - существует, иначе false
+     */
+    public function checkToken($userToken)
+    {
+        $token = htmlspecialchars($userToken);
+        $query = "SELECT * FROM t_token WHERE token='$token'";
+        $rows = $this->msql->Select($query);
+        
+        if(count($rows) > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
 	
     
     /**
@@ -66,7 +88,7 @@ class M_Token
             'email' => $email
         );
         
-        if(count($rows))
+        if(count($rows) > 0)
         {
             $where = "email='$email'";
             $this->msql->Update('t_token', $object, $where);

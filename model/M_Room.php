@@ -212,19 +212,47 @@ class M_Room
     
     
     /**
+     * Проверяет существование адреса почты в БД
+     * @param string $userEmail email пользователя
+     * @return boolean true - существует, иначе false
+     */
+    private function checkEmail($userEmail)
+    {
+        $email = htmlspecialchars($userEmail);
+        $query = "SELECT * FROM t_user WHERE email='$email'";
+        $rows = $this->msql->Select($query);
+        
+        if(count($rows) > 0)
+        {
+            return true;
+        }
+        
+        return false;
+    }
+    
+    
+    /**
      * Обработка запроса на восстановление пароля
      * @return boolean
      */
     public function restorePassword()
     {
-        if(isset($_POST['au_email']))
+        if(!isset($_POST['au_email']))
         {
             return false;
         }
         
         $email = htmlspecialchars($_POST['au_email']);
+        
+        if(!$this->checkEmail($email))
+        {
+            return false;
+        }
+        
         $token = $this->token->getToken($email);
         $this->sendRestoreEmail($email, $token);
+        
+        return true;
     }
     
     
@@ -233,18 +261,18 @@ class M_Room
      * @param string $email email
      * @param string $token токен
      */
-    private function sendRestoreEmail($email, $subject, $token)
+    private function sendRestoreEmail($email, $token)
     {
         $to  = "<$email>"; 
         
         $subject = "Запрос на смену пароля | sitename";
         
         $link =   "http://sitename.ru/index.php?"
-                . "c=room&act=restorePassword&token=$token&email=$email";
+                . "c=room&act=newPassword&token=$token&email=$email";
         
         $message = " <p>Привет, пользователь!</p> </br>";
-        $message = " <p>Для смены пароля своей учетной записи перейди по ссылке ниже:</p> </br>";
-        $message = " <a href='$link'>$link</a> </br>";
+        $message .= " <p>Для смены пароля своей учетной записи перейди по ссылке ниже:</p> </br>";
+        $message .= " <a href='$link'>$link</a> </br>";
 
         $headers  = "Content-type: text/html; charset=utf-8 \r\n"; 
         $headers .= "From: От кого письмо <sitename@somemail.com>\r\n"; 
@@ -253,6 +281,22 @@ class M_Room
     }
     
 
+    public function newPassword()
+    {
+        
+    }
+    
+    
+    /**
+     * Проверка актуальности токена
+     * @param string $token токен
+     * @return boolean true - существует, иначе false
+     */
+    public function checkToken($token)
+    {
+        return $this->token->checkToken($token);
+    }
+    
     
     public function saveSettings()
     {

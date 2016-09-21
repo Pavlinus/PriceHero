@@ -267,20 +267,88 @@ class C_Room extends C_Base
     }
     
     
+    /**
+     * Обработка запроса восстановления пароля
+     */
     public function action_restorePassword()
     {
         if($this->IsPost())
         {
-            $this->room->restorePassword();
+            if(!$this->room->restorePassword())
+            {
+                $error = 'Неверный email';
+                $this->content = $this->Template(
+                    "view/v_room_restore_password.php", 
+                    array(
+                        'error' => $error
+                    )
+                );
+            }
+            else
+            {
+                $this->content = $this->Template(
+                    "view/v_room_restore_password_result.php", 
+                    array()
+                );
+            }
         }
         else
         {
             $this->content = $this->Template(
                 "view/v_room_restore_password.php", 
-                array(
-
-                )
+                array()
             );
+        }
+    }
+    
+    
+    /**
+     * Установка нового пароля после перехода по ссылке из почты
+     */
+    public function action_newPassword()
+    {
+        if($this->IsPost())
+        {
+            if(isset($_POST['au_password']) && isset($_POST['au_confirm']))
+            {
+                $error = '';
+                
+                if(!$this->room->newPassword())
+                {
+                    $error = 'Не удалось сменить пароль';
+                }
+                
+                $this->content = $this->Template(
+                    "view/v_room_new_password_result.php", 
+                    array(
+                        'error' => $error
+                    )
+                );
+            }
+        }
+        else
+        {
+            if(isset($_GET['token']) && isset($_GET['email']))
+            {
+                // Проверка существования токена
+                if($this->room->checkToken($_GET['token']))
+                {
+                    $this->content = $this->Template(
+                        "view/v_room_new_password.php", 
+                        array()
+                    );
+                }
+                else
+                {
+                    $error = 'Данная ссылка не активна';
+                    $this->content = $this->Template(
+                        "view/v_room_new_password.php", 
+                        array(
+                            'error' => $error
+                        )
+                    );
+                }
+            }
         }
     }
 }
