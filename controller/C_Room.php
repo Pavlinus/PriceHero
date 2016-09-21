@@ -303,53 +303,83 @@ class C_Room extends C_Base
     
     
     /**
-     * Установка нового пароля после перехода по ссылке из почты
+     * Ввод нового пароля после перехода по ссылке из почты
      */
     public function action_newPassword()
     {
-        if($this->IsPost())
+        if(isset($_GET['token']) && isset($_GET['email']))
         {
-            if(isset($_POST['au_password']) && isset($_POST['au_confirm']))
+            // Проверка существования токена
+            if($this->room->checkToken($_GET['token']))
             {
-                $error = '';
-                
-                if(!$this->room->newPassword())
-                {
-                    $error = 'Не удалось сменить пароль';
-                }
-                
                 $this->content = $this->Template(
-                    "view/v_room_new_password_result.php", 
+                    "view/v_room_new_password.php", 
+                    array()
+                );
+            }
+            else
+            {
+                $error = 'Данная ссылка не активна';
+                $this->content = $this->Template(
+                    "view/v_room_new_password.php", 
                     array(
                         'error' => $error
                     )
                 );
             }
+            return;
         }
         else
         {
-            if(isset($_GET['token']) && isset($_GET['email']))
-            {
-                // Проверка существования токена
-                if($this->room->checkToken($_GET['token']))
-                {
-                    $this->content = $this->Template(
-                        "view/v_room_new_password.php", 
-                        array()
-                    );
-                }
-                else
-                {
-                    $error = 'Данная ссылка не активна';
-                    $this->content = $this->Template(
-                        "view/v_room_new_password.php", 
-                        array(
-                            'error' => $error
-                        )
-                    );
-                }
-            }
+            $error = 'Недостаточно данных для восстановления';
+            $this->content = $this->Template(
+                "view/v_room_new_password.php", 
+                array(
+                    'error' => $error
+                )
+            );
+            return;
         }
+        
+        $this->content = $this->Template(
+            "view/v_user_auth.php", 
+            array()
+        );
+    }
+    
+    
+    /**
+     * Сохранение нового пароля пользователя
+     */
+    public function action_saveNewPassword()
+    {
+        if(isset($_POST['au_password']) && isset($_POST['au_confirm']))
+        {
+            $error = '';
+            $res = $this->room->newPassword();
+
+            if($res == 0)
+            {
+                $error = 'Не удалось сменить пароль';
+            }
+            elseif($res == -1)
+            {
+                $error = 'Пароли не совпадают';
+            }
+
+            $this->content = $this->Template(
+                "view/v_room_new_password_result.php", 
+                array(
+                    'error' => $error
+                )
+            );
+            return;
+        }
+        
+        $this->content = $this->Template(
+            "view/v_user_auth.php", 
+            array()
+        );
     }
 }
 

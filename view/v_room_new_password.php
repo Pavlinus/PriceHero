@@ -17,7 +17,7 @@
                             <span class="error"><?= $error ?></span>
                         <? else : ?>
                             <form method="post" 
-                                  action="index.php?c=room&act=restorePassword">
+                                  action="index.php?c=room&act=saveNewPassword">
                                 <div class="item">
                                     <span class="input_label">
                                         Новый пароль
@@ -31,6 +31,8 @@
 
                                 <div class="spacer_30"></div>
 
+                                <input type="hidden" name="token" value="<?=$_GET['token']?>">
+                                <input type="hidden" name="email" value="<?=$_GET['email']?>">
                                 <input type="submit" class="form_btn" value="Сохранить">
                             </form>
                         <? endif; ?>

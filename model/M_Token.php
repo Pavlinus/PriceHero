@@ -59,7 +59,7 @@ class M_Token
         $token = htmlspecialchars($userToken);
         $query = "SELECT * FROM t_token WHERE token='$token'";
         $rows = $this->msql->Select($query);
-        
+
         if(count($rows) > 0)
         {
             return true;
@@ -84,7 +84,7 @@ class M_Token
         $query = "SELECT * FROM t_token WHERE email='$email'";
         $rows = $this->msql->Select($query);
         $object = array(
-            'token_value' => $token,
+            'token' => $token,
             'email' => $email
         );
         
@@ -112,5 +112,48 @@ class M_Token
         $resultString = md5($secret_key . $date . $email);
         
         return substr($resultString, 5, 9);
+    }
+    
+    
+    /**
+     * Сброс токена из БД
+     * @param string $token токен
+     * @return boolean true - успех, иначе false
+     */
+    public function resetToken($token)
+    {
+        if(!$this->checkToken($token))
+        {
+            return false;
+        }
+        
+        if(!$this->delToken($token))
+        {
+            return false;
+        }
+        
+        return true;
+    }
+    
+    
+    /**
+     * Удаление токена из БД
+     * @param string $tokenVal токен
+     * @return boolean true - удален, иначе false
+     */
+    private function delToken($tokenVal)
+    {
+        $token = htmlspecialchars($tokenVal);
+        $where = "token='$token'";
+        $res = $this->msql->Delete('t_token', $where);
+        
+        if($res > 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

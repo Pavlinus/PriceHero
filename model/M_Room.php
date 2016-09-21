@@ -281,9 +281,49 @@ class M_Room
     }
     
 
+    /**
+     * Установка нового пароля пользователя
+     * @return int 1 - успех, 0 - не успех, -1 - не совпадают пароли
+     */
     public function newPassword()
     {
-        
+        if(isset($_POST['au_password']) && isset($_POST['au_confirm']))
+        {
+            $password = htmlspecialchars($_POST['au_password']);
+            $confirm = htmlspecialchars($_POST['au_confirm']);
+            $email = htmlspecialchars($_POST['email']);
+            
+            if($password != $confirm)
+            {
+                return -1;
+            }
+            
+            if(!isset($_POST['token']))
+            {
+                return 0;
+            }
+            
+            if(!$this->token->resetToken($_POST['token']))
+            {
+                return 0;
+            }
+            
+            $object = array(
+                'password' => md5($password)
+            );
+            $where = "email='$email'";
+            
+            $res = $this->msql->Update('t_user', $object, $where);
+            
+            if($res > 0)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
     }
     
     

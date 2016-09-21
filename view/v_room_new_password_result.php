@@ -12,9 +12,11 @@
             
             <div class="content">
                 <div class="wrapper">
-                    <p class="center_text">Мы отправили Вам ссылку для восстановления</p>
-                    <p class="center_text">Пожалуйста, проверьте почту</p>
+                    <p class="center_text">Ваш пароль успешно изменен</p>
                     <div class="spacer_30"></div>
+                    <div class="form">
+                        <a href="index.php?c=room" class="form_btn">Войти</a>
+                    </div>
                 </div>
             </div>
         </div>
