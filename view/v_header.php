@@ -18,7 +18,8 @@
         <div class="container">
             <div class="header_wrapper">
                 <div class="logo">
-                    <span>PriceHero</span>
+                    <span>Game2Buy</span>
+                    <img src="../images/robber_d.png">
                 </div>
                 <div class="search">
                     <input type="text" placeholder="Найти">

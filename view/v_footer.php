@@ -2,7 +2,10 @@
     <div class="container">
         <div class="wrapper">
             <div class="footer_menu">
-                <div></div>
+                <div>
+                    <span>Game2Buy</span>
+                    <img src="../images/robber_w.png">
+                </div>
                 <div>
                     <div>
                         <a href="/index.php">Главная</a>
