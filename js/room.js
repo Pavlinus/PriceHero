@@ -82,7 +82,7 @@ $(document).ready(function()
             {
                 unbindDelGameHandler();
                 $('.result_wrapper').remove();
-                $('.wrapper').append(res);
+                $('section .wrapper').append(res);
                 bindDelGameHandler();
             }
         });
@@ -114,7 +114,7 @@ $(document).ready(function()
                 unbindDelGameHandler();
                 $('.search input').val('');
                 $('.result_wrapper').remove();
-                $('.wrapper.white_back').append(res);
+                $('.wrapper').append(res);
                 bindDelGameHandler();
                 
                 $('.filter button.platform').each(function()
@@ -164,6 +164,7 @@ $(document).ready(function()
                  if(res === '1')
                  {
                      $('div#'+deleteObjectId).remove();
+                     playInfoWindow('Игра удалена из игровой комнаты');
                  }
                  else
                  {

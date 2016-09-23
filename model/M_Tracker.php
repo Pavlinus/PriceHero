@@ -50,9 +50,11 @@ class M_Tracker
         {
             $gameId = htmlspecialchars($_REQUEST['gameId']);
             $platformId = htmlspecialchars($_REQUEST['platformId']);
+            $userId = htmlspecialchars($_COOKIE['user_id']);
             
             $query  = "SELECT * FROM t_tracker ";
-            $query .= "WHERE game_id=$gameId AND platform_id=$platformId";
+            $query .= "WHERE game_id=$gameId AND platform_id=$platformId ";
+            $query .= "AND user_id=$userId";
             $rows = $this->msql->Select($query);
             
             if(!empty($rows))

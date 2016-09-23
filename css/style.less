@@ -108,17 +108,19 @@ header {
             color: #fafafa;
             
             &.enter {
-                background: #ff4a4a;
+                background: #5e945a;
             }
             
             &.out {
-                background: #1d293e;
+                background: #DDDBFA;
+                color: #636363;
             }
         }
         
         .room_btn {
             display: table-cell;
             vertical-align: middle;
+            width: 145px;
         }
 }
 
@@ -143,7 +145,7 @@ header {
 }
 
 .search {
-	width: 400px;
+	width: 450px;
 	position: relative;
 	margin: 0 0 0 auto;
 	display: table-cell;
@@ -151,12 +153,14 @@ header {
         
 	
 	input[type="text"] {
-		width: 285px;
+		width: 335px;
 		border: none;
 		background: @c_lgrey;
 		height: 34px;
 		padding: 5px 45px 5px 10px;
                 border: 1px solid transparent;
+                font-size: 14px;
+                font-family: "RobotoRegular";
                 
                 &:focus {
                     border: 1px solid #1d293e;
@@ -313,7 +317,7 @@ header {
 }
 
 .product_price {
-	font-family: @f_bold_italic;
+	font-family: @f_regular;
 	font-size: 1em;
         color: #3A394E;
         /*padding-top: 10px;*/
@@ -407,6 +411,13 @@ header {
                                                             padding: 5px 10px;
                                                             background: #5e945a;
                                                             color: #fafafa;
+                                                            font-size: 14px;
+                                                            
+                                                            &.platform {
+                                                                background: #fafafa;
+                                                                color: #5e945a;
+                                                                margin-right: -6px;
+                                                            }
                                                         }
 						}
 					}
@@ -440,6 +451,10 @@ header {
 	>.wrapper {
 		width: 100%;
 		padding: 30px 0px;
+                
+                &.pad_top_no {
+                    padding-top: 0px;
+                }
                 
                 &.white_back {
                                     
@@ -651,7 +666,7 @@ header {
                         }
                         
                         &.enter {
-                            background: #ff4a4a;
+                            background: #5e945a;
                             color: #fafafa;
                         }
 		}
@@ -721,7 +736,6 @@ section {
         &.room {
             
             .wrapper {
-                padding-top: 0px;
                 
                 .filter {
                     margin-top: 0;
@@ -741,6 +755,11 @@ section {
 
             .result_wrapper .row .action {
                 padding: 10px;
+                
+                &.delete {
+                    background: #fafafa;
+                    color: #1d293e;
+                }
             }
             
             a {
@@ -761,7 +780,7 @@ section {
             }
             
             .result_wrapper .row .col_3 .product_price {
-                font-family: @f_bold_italic;
+                font-family: @f_regular;
                 font-size: 1em;
                 color: #3A394E;
             }

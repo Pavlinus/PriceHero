@@ -12,7 +12,7 @@
             </div>
 
             <div class="content white">
-                <div class="wrapper">
+                <div class="wrapper pad_top_no">
                     <div class="filter">
                         <? foreach($platforms as $pl) : ?>
                             <button class="option platform" 

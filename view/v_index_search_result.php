@@ -14,6 +14,9 @@
                     <div class="product_details">
                         <!--span class="product_name"><?= $game['game'] ?></span-->
                         <span class="product_price">
+                            <span class="platform">
+                                <?=$game['platform']?>
+                            </span>
                             <span><?= $game['price'] ?> руб.</span>
                         </span>
                     </div>
