@@ -82,7 +82,7 @@ $(document).ready(function()
             {
                 unbindDelGameHandler();
                 $('.result_wrapper').remove();
-                $('.wrapper.white_back').append(res);
+                $('.wrapper').append(res);
                 bindDelGameHandler();
             }
         });

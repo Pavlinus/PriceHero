@@ -5,7 +5,8 @@
         <group>
             <file>file:/C:/OpenServer/domains/PriceHero/view/v_header.php</file>
             <file>file:/C:/OpenServer/domains/PriceHero/controller/C_Room.php</file>
-            <file>file:/C:/OpenServer/domains/PriceHero/view/v_user_auth.php</file>
+            <file>file:/C:/OpenServer/domains/PriceHero/view/v_game_room.php</file>
+            <file>file:/C:/OpenServer/domains/PriceHero/js/room.js</file>
             <file>file:/C:/OpenServer/domains/PriceHero/css/style.less</file>
             <file>file:/C:/OpenServer/domains/PriceHero/view/v_footer.php</file>
         </group>

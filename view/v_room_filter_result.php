@@ -1,7 +1,11 @@
 <div class="result_wrapper">
+    
+    <? if(empty($gameList)) : ?>
+        <p class="info_msg">Вы пока не добавили ни одной игры</p>
+    <? endif; ?>
 
     <? foreach($gameList as $game) : ?>
-
+    
     <div class="row" id="row_<?=$game['game_id']?>">
         <span class="name col_3">
             <a target="_blank" href="<?=$game['link'] ?>">

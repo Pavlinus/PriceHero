@@ -101,6 +101,25 @@ header {
 			width: 100%;
 		}
 	}
+        
+        .form_btn {
+            text-align: center;
+            margin-right: 20px;
+            color: #fafafa;
+            
+            &.enter {
+                background: #ff4a4a;
+            }
+            
+            &.out {
+                background: #1d293e;
+            }
+        }
+        
+        .room_btn {
+            display: table-cell;
+            vertical-align: middle;
+        }
 }
 
 .logo {
@@ -132,23 +151,26 @@ header {
         
 	
 	input[type="text"] {
-		width: 300px;
+		width: 285px;
 		border: none;
 		background: @c_lgrey;
 		height: 34px;
-		padding: 0 30px 0 10px;
-                position: absolute;
-                top: 0;
+		padding: 5px 45px 5px 10px;
+                border: 1px solid transparent;
+                
+                &:focus {
+                    border: 1px solid #1d293e;
+                }
 	}
 	
 	.search_button {
-		position: absolute;
-		right: 30px;
-		top: 0;
+                position: absolute;
+		right: 70px;
+		top: 8px;
 		bottom: 0;
-		width: 34px;
-		height: 34px;
-		.bg_image('btn_search.png', no-repeat, center, contain);
+		width: 25px;
+		height: 35px;
+		.bg_image('search.png', no-repeat, center, contain);
 		
 		&:hover {
 			opacity: 0.8;
@@ -160,7 +182,7 @@ header {
 .search_reset {
 	position: absolute;
 	right: 70px;
-	top: -3px;
+	top: 0px;
 	bottom: 0;
 	margin: auto;
 	width: 13px;
@@ -697,6 +719,16 @@ section {
     &.main {
 
         &.room {
+            
+            .wrapper {
+                padding-top: 0px;
+                
+                .filter {
+                    margin-top: 0;
+                    padding-top: 20px;
+                    padding-bottom: 6px;
+                }
+            }
 
             img {
                 max-width: 70%;
