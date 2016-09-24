@@ -340,6 +340,7 @@ header {
 	max-width: 870px;
 	padding: 0 0 0 15px;
         background: #1d293e;
+        position: relative;
         
         &.white {
             padding: 0;
@@ -351,6 +352,35 @@ header {
                 margin-left: 0.6em;
                 /*background: #25caf3;*/
 	}
+        
+        .lastUpdates {
+            position: relative;
+            padding-bottom: 25px;
+        }
+        
+        .pagination {
+            position: absolute;
+            right: 20px;
+            bottom: 0;
+            
+            div {
+                display: inline-block;
+                background: #fafafa;
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                font-family: "RobotoRegular";
+                font-size: 18px;
+                color: #1d293e;
+                margin-left: 5px;
+                
+                &:hover {
+                    opacity: .8;
+                    transition-duration: .2s;
+                    cursor: pointer;
+                }
+            }
+        }
 	
 	.products {
             padding-top: 15px;
@@ -743,6 +773,10 @@ section {
                     padding-bottom: 6px;
                 }
             }
+            
+            .info_msg {
+                color: #fafafa;
+            }
 
             img {
                 max-width: 70%;
@@ -882,6 +916,7 @@ div, span {
     background: #DDDBFA;
     padding: 15px;
     width: 250px;
+    z-index: 5;
     
     span {
         color: #1d293e;

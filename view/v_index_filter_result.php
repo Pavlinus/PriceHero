@@ -1,7 +1,7 @@
 <div class="products">
 
     <? foreach($gamesList as $game) : ?>
-    <a target="_blank" href="<?= $game['link'] ?>">
+    <a target="_blank" href="<?= $game['link'] ?>" class="productItem">
         <div class="item" id="<?=$game['game_id']?>">
             <div class="wrapper">
                 <img src="<?= $game['image'] ?>" alt="">

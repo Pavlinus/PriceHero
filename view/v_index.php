@@ -30,38 +30,47 @@
                 </div>
             </div>
 
+            
             <div class="content">
-                <h2>Последние обновления</h2>
+                
+                <div class="lastUpdates">
+                    <h2>Последние обновления</h2>
 
-                <div class="products">
-                    
-                    <? foreach($gamesList as $game) : ?>
-                        <a target="_blank" href="<?=$game['link']?>">
-                            <div class="item" id="<?=$game['game_id']?>">
-                                <div class="wrapper">
-                                    <img src="<?=$game['image']?>" alt="">
-                                    <div class="product_details">
-                                        <!--span class="product_name"><?=$game['game']?></span-->
-                                        <span class="product_price">
-                                            <span class="platform">
-                                                <?=$game['platform']?>
+                    <div class="products">
+
+                        <? foreach($gamesList as $game) : ?>
+                            <a target="_blank" href="<?=$game['link']?>" class="productItem">
+                                <div class="item" id="<?=$game['game_id']?>">
+                                    <div class="wrapper">
+                                        <img src="<?=$game['image']?>" alt="">
+                                        <div class="product_details">
+                                            <!--span class="product_name"><?=$game['game']?></span-->
+                                            <span class="product_price">
+                                                <span class="platform">
+                                                    <?=$game['platform']?>
+                                                </span>
+                                                <span>
+                                                    <?=$game['price']?> руб.
+                                                </span>
                                             </span>
-                                            <span>
-                                                <?=$game['price']?> руб.
-                                            </span>
-                                        </span>
+                                        </div>
+                                        <? if($game['tracker_id'] != '') : ?>
+                                            <div class="tracker active" title="Не отслеживать игру"></div>
+                                        <? else : ?>
+                                            <div class="tracker" title="Отслеживать игру"></div>
+                                         <? endif; ?>
                                     </div>
-                                    <? if($game['tracker_id'] != '') : ?>
-                                        <div class="tracker active" title="Не отслеживать игру"></div>
-                                    <? else : ?>
-                                        <div class="tracker" title="Отслеживать игру"></div>
-                                     <? endif; ?>
+                                    <div class="hidden" name="platform_id"><?=$game['platform_id']?></div>
                                 </div>
-                                <div class="hidden" name="platform_id"><?=$game['platform_id']?></div>
-                            </div>
-                        </a>
-                    <? endforeach; ?>
-                    
+                            </a>
+                        <? endforeach; ?>
+
+                    </div>
+
+                    <div class="pagination">
+                        <div id="prev_update">&lt;</div>
+                        <div id="next_update">&gt;</div>
+                    </div>
                 </div>
                 
             </div>

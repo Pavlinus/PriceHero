@@ -427,4 +427,70 @@ $(document).ready(function() {
         
         return false;
     }
+    
+    
+    /* обработка пагинации раздела ПОСЛЕДНИЕ ОБНОВЛЕНИЯ */
+    
+    /* текущий номер страницы */
+    var last_updates_page = 0;
+    /* следующая, либо предыдущая страница */
+    var page_direction = '';
+    
+    $('#prev_update').click(function()
+    {
+        if(last_updates_page === 0)
+        {
+            return;
+        }
+        
+        page_direction = 'prev';
+        updatesPageAjax(last_updates_page - 1);
+    });
+    
+     /* обработка пагинации раздела ПОСЛЕДНИЕ ОБНОВЛЕНИЯ */
+    var last_updates_page = 0;
+    $('#next_update').click(function()
+    {
+        page_direction = 'next';
+        updatesPageAjax(last_updates_page + 1);
+    });
+    
+    
+    /**
+     * Получение данных после применения пагинации
+     * @param {int} page номер страницы
+     * @returns {undefined}
+     */
+    function updatesPageAjax(page)
+    {
+        var data = { offset: page };
+        
+        $.ajax({
+            type: 'POST',
+            url: 'index.php?c=admin&act=pageGamesListAjax',
+            data: data,
+            cache: false,
+            success: function(res)
+            {
+                if(res === '')
+                {
+                    return;
+                }
+                
+                unbindTrackerHandler();
+                $('.products').remove();
+                $('.content .lastUpdates').append(res);
+                bindTrackerHandler();
+                
+                if(page_direction === 'prev')
+                {
+                    last_updates_page -= 1;
+                }
+                else
+                {
+                    last_updates_page += 1;
+                }
+            }
+        });
+    }
 });

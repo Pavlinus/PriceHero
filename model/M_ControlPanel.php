@@ -57,6 +57,26 @@ class M_ControlPanel {
     
     
     /**
+     * Получаем фильтрованный по платформе список игр
+     * @param type $where
+     * @return type
+     */
+    public function getFilteredGamesList($where = '')
+    {
+        $itemsPerPage = 15;
+
+        $query =  "SELECT DISTINCT Game.game_id, Game.name as game "
+                . "FROM t_total Total "
+                . "LEFT JOIN t_game Game ON (Game.game_id = total.game_id) "
+                . "LEFT JOIN t_platform Platform ON (Platform.platform_id = total.platform_id) "
+                . "$where"
+                . "ORDER BY Game.name LIMIT $itemsPerPage";
+        
+        return $this->msql->Select($query);
+    }
+    
+    
+    /**
     * Получение данных о игре для редактирования
     * @param int $id ID игры
     * @return array Массив данных игры

@@ -155,4 +155,33 @@ class C_Index extends C_Base
             exit();
         }
     }
+    
+    
+    /**
+     * Обработка пагинации
+     */
+    public function action_pageUpdatesAjax()
+    {
+        $offset = 0;
+        if(isset($_POST['offset']))
+        {
+            $offset = $_POST['offset'];
+        }
+        
+        $arGames = $this->mCatalog->getLastUpdates($offset);
+        
+        if(empty($arGames))
+        {
+            echo '';
+            exit();
+        }
+        
+        echo $this->Template(
+                'view/v_index_filter_result.php', 
+                array(
+                    'gamesList' => $arGames
+                )
+        );
+        exit();
+    }
 }

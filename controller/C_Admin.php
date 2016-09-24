@@ -323,22 +323,17 @@ class C_Admin extends C_Base
     {
         $platforms = $this->fields->getFields('t_platform');
         $arPlatform = array(1);    // выбираем PC по умолчанию
-        $and = array();
+        $where = '';
         
         if(isset($_POST['platformId']) && !empty($_POST['platformId']))
         {
             $arPlatform = $_POST['platformId'];
+            
+            $platformStr = "(" . implode(",", $arPlatform) . ")";
+            $where = 'WHERE Total.platform_id IN '.$platformStr;
         }
         
-        $priceList = $this->mCatalog->getPriceUpdates();
-        $and['Price.price_id'] = $priceList;
-        
-        $gamesList = $this->mCatalog->getGames(
-                $arPlatform, 
-                'Platform.platform_id',
-                $and,
-                "ORDER BY Game.name"
-        );
+        $gamesList = $this->cPanel->getFilteredGamesList($where);
         
         echo $this->Template('view/v_admin_filter_result.php', 
                 array(
