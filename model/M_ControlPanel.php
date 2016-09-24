@@ -67,8 +67,8 @@ class M_ControlPanel {
 
         $query =  "SELECT DISTINCT Game.game_id, Game.name as game "
                 . "FROM t_total Total "
-                . "LEFT JOIN t_game Game ON (Game.game_id = total.game_id) "
-                . "LEFT JOIN t_platform Platform ON (Platform.platform_id = total.platform_id) "
+                . "LEFT JOIN t_game Game ON (Game.game_id = Total.game_id) "
+                . "LEFT JOIN t_platform Platform ON (Platform.platform_id = Total.platform_id) "
                 . "$where"
                 . "ORDER BY Game.name LIMIT $itemsPerPage";
         
@@ -166,6 +166,11 @@ class M_ControlPanel {
         
         // Обновление таблицы `t_game`
         $this->mGame->updateTblGame();
+        
+        if(!isset($_POST['links']) || empty($_POST['links']))
+        {
+            return array('ok');
+        }
         
         // Добавление новых данных
         $linksId = $this->addLink();

@@ -7,7 +7,7 @@
         <meta name="description" content="" />
         <meta name="keywords" content="" />
         <link rel="stylesheet/less" href="css/style.less" type="text/css" />
-        <title>Pricer</title>
+        <title>Game2Buy</title>
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.min.js" type="text/javascript"></script>
         <script src="js/less.js" type="text/javascript"></script>

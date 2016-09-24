@@ -10,6 +10,9 @@ class M_PriceParser
     
     const STEAMBUY_ID = 1;
     const STEAM_ID = 2;
+    const GAMERAY_ID = 3;
+    const LOZMAN_ID = 4;
+    const ROXEN_ID = 5;
 
     public function __construct()
     {
@@ -76,10 +79,133 @@ class M_PriceParser
                         $this->logger->addLog($item['link_id']);
                     }
                     break;
+                    
+                case self::GAMERAY_ID:
+                    $price = $this->parseGameRay($item);
+                    
+                    if(count($price) > 0)
+                    {
+                        $priceList[] = $price;
+                    }
+                    else
+                    {
+                        $this->logger->addLog($item['link_id']);
+                    }
+                    break;
+                    
+                case self::LOZMAN_ID:
+                    $price = $this->parseLozman($item);
+                    
+                    if(count($price) > 0)
+                    {
+                        $priceList[] = $price;
+                    }
+                    else
+                    {
+                        $this->logger->addLog($item['link_id']);
+                    }
+                    break;
+                    
+                case self::ROXEN_ID:
+                    $price = $this->parseRoxen($item);
+                    
+                    if(count($price) > 0)
+                    {
+                        $priceList[] = $price;
+                    }
+                    else
+                    {
+                        $this->logger->addLog($item['link_id']);
+                    }
+                    break;
             }
         }
         
         return $priceList;
+    }
+    
+    
+    /**
+     * Извлекает цены с Roxen
+     * @param $linkItem Элемент ссылки
+     * @return 
+     */
+    private function parseRoxen($linkItem)
+    {
+        $link = $linkItem['link'];
+        $html = file_get_html($link);
+        $matches = null;
+        
+        foreach($html->find('span.r-curr-price') as $span)
+        {
+            preg_match('/(\d)+/', $span->outertext, $matches);
+        }
+
+        // цена не найдена
+        if(empty($matches) || $matches == null)
+        {
+            return array();
+        }
+
+        return array(
+            'linkId' => $linkItem['link_id'],
+            'price' => $matches[0]);
+    }
+    
+    
+    /**
+     * Извлекает цены с Lozman
+     * @param $linkItem Элемент ссылки
+     * @return 
+     */
+    private function parseLozman($linkItem)
+    {
+        $link = $linkItem['link'];
+        $html = file_get_html($link);
+        $matches = null;
+        
+        foreach($html->find('div.price') as $span)
+        {
+            preg_match('/(\d)+/', $span->outertext, $matches);
+        }
+
+        // цена не найдена
+        if(empty($matches) || $matches == null)
+        {
+            return array();
+        }
+
+        return array(
+            'linkId' => $linkItem['link_id'],
+            'price' => $matches[0]);
+    }
+    
+    
+    /**
+     * Извлекает цены с GameRay
+     * @param $linkItem Элемент ссылки
+     * @return 
+     */
+    private function parseGameRay($linkItem)
+    {
+        $link = $linkItem['link'];
+        $html = file_get_html($link);
+        $matches = null;
+        
+        foreach($html->find('span[itemprop="price"]') as $span)
+        {
+            preg_match('/(\d)+/', $span->outertext, $matches);
+        }
+
+        // цена не найдена
+        if(empty($matches) || $matches == null)
+        {
+            return array();
+        }
+
+        return array(
+            'linkId' => $linkItem['link_id'],
+            'price' => $matches[0]);
     }
     
     

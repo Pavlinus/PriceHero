@@ -254,7 +254,7 @@ class C_Admin extends C_Base
     
     
     /**
-    * <p>Обработка запроса на изменение данных игры</p>
+    * Обработка запроса на изменение данных игры
     * @return
     */
     public function action_editGameAjax()
@@ -263,7 +263,7 @@ class C_Admin extends C_Base
         {
            $saveResult = $this->cPanel->saveGameData();
            
-           if($saveResult || $saveResult == array())
+           if($saveResult && !empty($saveResult))
            {
                echo "Супер! Игра успешно сохранена";
                exit();

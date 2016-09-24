@@ -140,7 +140,6 @@ $(document).ready(function()
    {
        var products = $('.productItem').length;
        $('div.pagination').fadeOut(100);
-       last_updates_page = 0;
        
        if(products === 9)
        {

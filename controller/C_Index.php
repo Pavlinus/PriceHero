@@ -76,7 +76,15 @@ class C_Index extends C_Base
         }
         
         $priceList = $this->mCatalog->getPriceUpdates();
-        $and['Price.price_id'] = $priceList;
+        
+        if(empty($priceList))
+        {
+            $and['Price.price_id'] = array(0);
+        }
+        else
+        {
+            $and['Price.price_id'] = $priceList;
+        }
         
         $gamesList = $this->mCatalog->getGames(
                 $arPlatform, 

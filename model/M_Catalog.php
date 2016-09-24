@@ -15,6 +15,7 @@ class M_Catalog
     
     /* количество выводимых обновлений на странице */
     const UPDATES_ON_PAGE = 9;
+    const ROWS_LIMIT = 100;
 
     public function __construct()
     {
@@ -78,17 +79,15 @@ class M_Catalog
             $offset = 0;
         }
         
-        $range = $this->getDateRange();
         $offset *= self::UPDATES_ON_PAGE;
         
         $query  = "SELECT Price.new_price as price, Game.game_id as gameId, ";
-        $query .= "Price.price_id, Price.lastUpdate FROM t_total Total ";
+        $query .= "Price.price_id, Price.lastUpdate, Total.platform_id as platformId "
+                . "FROM t_total Total ";
         $query .= "LEFT JOIN t_game Game USING(game_id) ";
         $query .= "LEFT JOIN t_price Price USING(price_id) ";
-        $query .= "WHERE Price.lastUpdate BETWEEN "
-                  ."'".$range['leftDate']."' AND '".$range['curDate']."' ";
-        $query .= "ORDER BY price ASC LIMIT ".$offset.",".self::UPDATES_ON_PAGE;
-        
+        $query .= "ORDER BY platformId, price ASC LIMIT ".$offset.",".self::ROWS_LIMIT;
+
         $rows = $this->msql->Select($query);
         $priceAssoc = array();
         $priceId = array();
@@ -100,20 +99,29 @@ class M_Catalog
         
         foreach($rows as $row)
         {
-            /* если игры нет в итоговом списке */
-            if(!isset($priceAssoc[ $row['gameId'] ]))
+            /* если игры нет в итоговом списке, либо другая платформа */
+            if(!isset($priceAssoc[ $row['gameId'] ]) ||
+                $priceAssoc[ $row['gameId'] ] != $row['platformId'])
             {
-                $priceAssoc[ $row['gameId'] ] = 1;
-                $priceId[] = $row['price_id'];
+                $priceAssoc[ $row['gameId'] ] = $row['platformId'];
+                
+                if(count($priceId) < self::UPDATES_ON_PAGE)
+                {
+                    $priceId[] = $row['price_id'];
+                }
+                else
+                {
+                    break;
+                }
             }
         }
-        
+
         return $priceId;
     }
     
     
     /**
-     * Формируем временной диапазон
+     * Формируем временной диапазон (не используется)
      * @return array массив граничных значений дат
      */
     private function getDateRange()
@@ -175,7 +183,7 @@ class M_Catalog
         $query .= "LEFT JOIN t_link Link ON (Link.link_id = total.link_id) ";
         $query .= "LEFT JOIN t_tracker Tracker ON (Tracker.game_id = total.game_id AND Tracker.user_id = $userId) ";
         
-        if($and)
+        if($and && !empty($and))
         {
             foreach($and as $key => $cond)
             {
@@ -184,7 +192,6 @@ class M_Catalog
         }
         
         $query .= "WHERE $where IN $arrStr $andStr $additional";
-
         $rows = $this->msql->Select($query);
         
         if(!$rows)
