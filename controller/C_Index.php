@@ -76,7 +76,7 @@ class C_Index extends C_Base
         }
         
         $priceList = $this->mCatalog->getPriceUpdates();
-        
+
         if(empty($priceList))
         {
             $and['Price.price_id'] = array(0);

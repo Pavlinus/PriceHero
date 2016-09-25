@@ -26,6 +26,7 @@
                         <div class="tracker" title="Отслеживать игру"></div>
                     <? endif; ?>
                 </div>
+                <div class="hidden" name="platform_id"><?=$game['platform_id']?></div>
             </div>
         </a>
         <? endforeach; ?>

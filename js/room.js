@@ -94,6 +94,21 @@ $(document).ready(function()
    });
    
    /**
+    * Запуск поиска при нажатии Enter
+    */
+   $('div.search input[type="text"]').keypress(function(event)
+   {
+      if(event.which === 13)
+      {
+          var value = $(this).val();
+          if(value !== '')
+          {
+              $('#search').click();
+          }
+      }
+   });
+   
+   /**
      * Обработчик нажатия на кнопку поиска
      */
     $('#search').click(function()
@@ -152,7 +167,7 @@ $(document).ready(function()
             platformId: platformId
         };
 
-        deleteObjectId = $(this).parents('div.row').attr('id');
+        deleteObjectId = $(this).parents('div.row');
 
         $.ajax({
              type: 'POST',
@@ -163,7 +178,7 @@ $(document).ready(function()
              {
                  if(res === '1')
                  {
-                     $('div#'+deleteObjectId).remove();
+                     deleteObjectId.remove();
                      playInfoWindow('Игра удалена из игровой комнаты');
                  }
                  else

@@ -5,7 +5,7 @@
                 <nav class="menu">
                     <ul>
                         <li><a href="index.php?c=index">Главная</a></li>
-                        <li><a href="index.php?c=room&act=settings">Настройки</a></li>
+                        <!--li><a href="index.php?c=room&act=settings">Настройки</a></li-->
                         <li><a href="index.php?c=room&act=logout">Выход</a></li>
                     </ul>
                 </nav>

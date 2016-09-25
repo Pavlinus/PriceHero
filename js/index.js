@@ -139,12 +139,12 @@ $(document).ready(function()
    function togglePaginationUpdates()
    {
        var products = $('.productItem').length;
-       $('div.pagination').fadeOut(100);
+       $('div.pagination').fadeOut(0);
        last_updates_page = 0;
        
        if(products === 9)
        {
-           $('div.pagination').fadeIn(100);
+           $('div.pagination').fadeIn(0);
        }
    }
    
@@ -247,6 +247,7 @@ $(document).ready(function()
                    $(this).removeClass('active');
                 });
                 
+                togglePaginationUpdates();
             }
         });
     });
@@ -269,8 +270,9 @@ $(document).ready(function()
         });
     }
     
-    var trackerClicked = 0;
     
+    /* объект трекера */
+    var trackerClicked = null;
     
     /**
      * Обработчик нажатия на трекер
@@ -281,7 +283,7 @@ $(document).ready(function()
         var gameId = $(this).parents('div.item').attr('id');
         var platformId = $(this).parents('div.item')
                 .children('div[name="platform_id"]').text();
-        trackerClicked = gameId;
+        trackerClicked = $(this);
         
         var dataArray = {
                 gameId: gameId,
@@ -295,8 +297,6 @@ $(document).ready(function()
             cache: false,
             success: function(res)
             {
-                $tracker = $('div[id="' + trackerClicked + '"] div.tracker');
-                
                 if(res === '3')
                 {
                     playInfoWindow('Для отслеживания игры необходима авторизация');
@@ -304,12 +304,12 @@ $(document).ready(function()
                 else if(res === '2')
                 {
                     playInfoWindow('Игра добавлена в игровую комнату');
-                    $tracker.addClass('active');
+                    trackerClicked.addClass('active');
                 }
                 else if(res === '1')
                 {
                     playInfoWindow('Игра удалена из игровой комнаты');
-                    $tracker.removeClass('active');
+                    trackerClicked.removeClass('active');
                 }
                 else
                 {

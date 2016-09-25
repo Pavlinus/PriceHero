@@ -74,6 +74,7 @@ class M_Catalog
     {
         $start = $offset * self::UPDATES_ON_PAGE;
         $where = '';
+        $trackerJoin = '';
         
         /* определяем платформу  */
         if(isset($_POST['platformId']))
@@ -86,11 +87,42 @@ class M_Catalog
             $where = "WHERE Total.platform_id=1 ";
         }
         
+        /* определяем жанр  */
+        if(isset($_POST['genreId']))
+        {
+            $where .= "AND Game.genre_id IN ("
+                    . implode(",", $_POST['genreId']) . ") ";
+        }
+        
+        /* если пользователь авторизован, исключаем из выборки 
+         * отслеживаемые им игры */
+        if(isset($_COOKIE['user_id']))
+        {
+            $userId = htmlspecialchars($_COOKIE['user_id']);
+            $trackerJoin = 
+                      "LEFT JOIN t_tracker Tracker "
+                    . "ON (Tracker.game_id = Total.game_id "
+                    . "AND Tracker.user_id = $userId "
+                    . "AND Tracker.platform_id = Total.platform_id) ";
+            
+            if($where != '')
+            {
+                $where .= 'AND Tracker.user_id IS NULL ';
+            }
+            else
+            {
+                $where .= 'WHERE Tracker.user_id IS NULL ';
+            }
+        }
+        
+        
         $query =  "SELECT DISTINCT Game.game_id, Total.platform_id FROM t_game Game "
                 . "LEFT JOIN t_total Total ON (Total.game_id=Game.game_id) "
+                . $trackerJoin . ' '
                 . $where
                 . "ORDER BY Game.game_id DESC "
                 . "LIMIT " . $start . "," . self::UPDATES_ON_PAGE . " ";
+
         $rows = $this->msql->Select($query);
         $arGamesId = array();
         
@@ -232,7 +264,8 @@ class M_Catalog
         $query .= "LEFT JOIN t_platform Platform ON (Platform.platform_id = total.platform_id) ";
         $query .= "LEFT JOIN t_price Price ON (Price.price_id = total.price_id) ";
         $query .= "LEFT JOIN t_link Link ON (Link.link_id = total.link_id) ";
-        $query .= "LEFT JOIN t_tracker Tracker ON (Tracker.game_id = total.game_id AND Tracker.user_id = $userId) ";
+        $query .= "LEFT JOIN t_tracker Tracker ON (Tracker.game_id = total.game_id AND Tracker.user_id = $userId "
+                . "AND Tracker.platform_id = total.platform_id) ";
         
         if($and && !empty($and))
         {
