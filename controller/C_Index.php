@@ -149,9 +149,17 @@ class C_Index extends C_Base
                 $gamesId = array();
             }
             
+            $arPriceId = $this->mCatalog->getLowestPriceId($gamesId);
+            $and = '';
+            if(!empty($arPriceId))
+            {
+                $and['total.price_id'] = $arPriceId;
+            }
+            
             $arResult = $this->mCatalog->getGames(
                     $gamesId, 
-                    'Game.game_id'
+                    'Game.game_id',
+                    $and
             );
 
             echo $this->Template(

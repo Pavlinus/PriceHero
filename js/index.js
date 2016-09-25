@@ -187,6 +187,20 @@ $(document).ready(function()
        $('.search input').val('');
    });
    
+   /**
+    * Запуск поиска при нажатии Enter
+    */
+   $('div.search input[type="text"]').keypress(function(event)
+   {
+      if(event.which === 13)
+      {
+          var value = $(this).val();
+          if(value !== '')
+          {
+              $('#search').click();
+          }
+      }
+   });
    
    /**
      * Обработчик нажатия на кнопку поиска
@@ -195,8 +209,16 @@ $(document).ready(function()
     {
        var searchStr = $('div.search input[type="text"]').val();
        
+       var platforms = [];
+       $('button.option.platform').each(function()
+       {
+           var value = $(this).attr('value');
+           platforms.push(value);
+       });
+       
        var dataArray = {
-           name: searchStr
+           name: searchStr,
+           platformId: platforms
        };
        
        $.ajax({
@@ -334,7 +356,14 @@ $(document).ready(function()
      */
     function updatesPageAjax(page)
     {
-        var data = { offset: page };
+        var activePlatform = getActiveFilters(filterPlatformArray);
+        var activeGenre = getActiveFilters(filterGenreArray);
+        
+        var data = { 
+            offset: page,
+            platformId: activePlatform,
+            genreId: activeGenre
+        };
         
         $.ajax({
             type: 'POST',

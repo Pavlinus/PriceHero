@@ -162,22 +162,24 @@ class M_PriceParser
     {
         $link = $linkItem['link'];
         $html = file_get_html($link);
-        $matches = null;
+        $price = '';
         
         foreach($html->find('div.price') as $span)
         {
-            preg_match('/(\d)+/', $span->outertext, $matches);
+            $price = str_replace(" ", "", $span->outertext);
+            $price = str_replace("руб.", "", $price);
+            break;
         }
 
         // цена не найдена
-        if(empty($matches) || $matches == null)
+        if($price == '')
         {
             return array();
         }
 
         return array(
             'linkId' => $linkItem['link_id'],
-            'price' => $matches[0]);
+            'price' => $price);
     }
     
     

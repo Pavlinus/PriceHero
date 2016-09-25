@@ -39,7 +39,7 @@ class M_Catalog
 
     
     /**
-     * Извлекает данные игр, цены которых были недавно обновлены
+     * Извлекает данные недавно добавленных игр
      * @param int $offset смещение для начала выборки
      * @return array массив данных игр
      */
@@ -47,13 +47,13 @@ class M_Catalog
     {
         $priceId = $this->getPriceUpdates($offset);
         $and = array(
-            'Platform.platform_id' => array(1)
+            'total.platform_id' => array(1)
         );
         
         /* Учитываем установленные фильтры */
         if(isset($_POST['platformId']) && !empty($_POST['platformId']))
         {
-            $and['Platform.platform_id'] = $_POST['platformId'];
+            $and['total.platform_id'] = $_POST['platformId'];
         }
         
         if(isset($_POST['genreId']) && !empty($_POST['genreId']))
@@ -62,6 +62,44 @@ class M_Catalog
         }
         
         return $this->getGames($priceId, 'total.price_id', $and);
+    }
+    
+    
+    /**
+     * Получаем ID последних добавленных игр
+     * @param int $offset начало выборки
+     * @return array массив ID игр
+     */
+    public function getLastAddedGamesId($offset)
+    {
+        $start = $offset * self::UPDATES_ON_PAGE;
+        $where = '';
+        
+        /* определяем платформу  */
+        if(isset($_POST['platformId']))
+        {
+            $where = "WHERE Total.platform_id IN ("
+                    . implode(",", $_POST['platformId']) . ") ";
+        }
+        else
+        {
+            $where = "WHERE Total.platform_id=1 ";
+        }
+        
+        $query =  "SELECT DISTINCT Game.game_id, Total.platform_id FROM t_game Game "
+                . "LEFT JOIN t_total Total ON (Total.game_id=Game.game_id) "
+                . $where
+                . "ORDER BY Game.game_id DESC "
+                . "LIMIT " . $start . "," . self::UPDATES_ON_PAGE . " ";
+        $rows = $this->msql->Select($query);
+        $arGamesId = array();
+        
+        foreach($rows as $row)
+        {
+            $arGamesId[] = $row['game_id'];
+        }
+
+        return $arGamesId;
     }
     
     
@@ -79,31 +117,74 @@ class M_Catalog
             $offset = 0;
         }
         
-        $offset *= self::UPDATES_ON_PAGE;
-        
-        $query  = "SELECT Price.new_price as price, Game.game_id as gameId, ";
-        $query .= "Price.price_id, Price.lastUpdate, Total.platform_id as platformId "
-                . "FROM t_total Total ";
-        $query .= "LEFT JOIN t_game Game USING(game_id) ";
-        $query .= "LEFT JOIN t_price Price USING(price_id) ";
-        $query .= "ORDER BY platformId, price ASC LIMIT ".$offset.",".self::ROWS_LIMIT;
+        /* получаем ID последних добавленных игр */
+        $arGamesId = $this->getLastAddedGamesId($offset);
+        if(empty($arGamesId))
+        {
+            return array();
+        }
 
-        $rows = $this->msql->Select($query);
-        $priceAssoc = array();
-        $priceId = array();
-        
-        if(!$rows)
+        return $this->getLowestPriceId($arGamesId);
+    }
+    
+    
+    /**
+     * Извлекаем минимальную цену набора игр
+     * @param array $arGamesId массив ID игр
+     * @return array массив ID цен
+     */
+    public function getLowestPriceId($arGamesId)
+    {
+        if(empty($arGamesId))
         {
             return array();
         }
         
+        $inGamesId = "(". implode(",", $arGamesId) .")";
+        
+        $query  = "SELECT Price.new_price as price, Game.game_id as gameId, "
+                . "Price.price_id, Price.lastUpdate, Total.platform_id as platformId "
+                . "FROM t_total Total "
+                . "LEFT JOIN t_game Game USING(game_id) "
+                . "LEFT JOIN t_price Price USING(price_id) "
+                . "WHERE Total.game_id IN $inGamesId "
+                . "ORDER BY price ASC ";
+        
+        $rows = $this->msql->Select($query);
+        
+        return $this->getPriceId($rows);
+    }
+    
+    
+    /**
+     * Формируем массив ID цен
+     * @param array $rows выборка цен из БД
+     */
+    private function getPriceId($rows)
+    {
+        $priceAssoc = array();
+        $priceId = array();
+        $arPlatform = array(1);
+        
+        if(isset($_POST['platformId']))
+        {
+            $arPlatform = $_POST['platformId'];
+        }
+        
+        /* сохраняем ID цен в зависимости от игры и платформы */
         foreach($rows as $row)
         {
             /* если игры нет в итоговом списке, либо другая платформа */
             if(!isset($priceAssoc[ $row['gameId'] ]) ||
-                $priceAssoc[ $row['gameId'] ] != $row['platformId'])
+                !isset($priceAssoc[ $row['gameId'] ][ $row['platformId'] ]))
             {
-                $priceAssoc[ $row['gameId'] ] = $row['platformId'];
+                $priceAssoc[ $row['gameId'] ][ $row['platformId'] ] = 1;
+                
+                /* если не соответствует платформа */
+                if(!in_array($row['platformId'], $arPlatform))
+                {
+                    continue;
+                }
                 
                 if(count($priceId) < self::UPDATES_ON_PAGE)
                 {
@@ -115,38 +196,8 @@ class M_Catalog
                 }
             }
         }
-
+        
         return $priceId;
-    }
-    
-    
-    /**
-     * Формируем временной диапазон (не используется)
-     * @return array массив граничных значений дат
-     */
-    private function getDateRange()
-    {
-        $leftDate = new DateTime();
-        $currentDate = new DateTime();
-        $year = $currentDate->format('Y');
-        $month = $currentDate->format('m');
-        $day = $currentDate->format('d');
-        $dayOffset = 1;
-        $format = 'Y-m-d H:i:s';
-        
-        if($day != 1)
-        {
-            $day -= $dayOffset;
-        }
-        
-        $leftDate->setDate($year, $month, $day);
-        
-        $cDate = $currentDate->format($format);
-        $lDate = $leftDate->format($format);
-        
-        return array(
-            'curDate' => $cDate,
-            'leftDate' => $lDate);
     }
     
     
