@@ -139,6 +139,7 @@ class M_PriceParser
         foreach($html->find('span.r-curr-price') as $span)
         {
             preg_match('/(\d)+/', $span->outertext, $matches);
+            break;
         }
 
         // цена не найдена
@@ -162,24 +163,24 @@ class M_PriceParser
     {
         $link = $linkItem['link'];
         $html = file_get_html($link);
-        $price = '';
+        $matches = array();
         
         foreach($html->find('div.price') as $span)
         {
-            $price = str_replace(" ", "", $span->outertext);
-            $price = str_replace("руб.", "", $price);
+            $outerText = str_replace(" ", "", $span->outertext);
+            preg_match('/(\d)+/', $outerText, $matches);
             break;
         }
 
         // цена не найдена
-        if($price == '')
+        if(empty($matches) || $matches == null)
         {
             return array();
         }
 
         return array(
             'linkId' => $linkItem['link_id'],
-            'price' => $price);
+            'price' => $matches[0]);
     }
     
     
@@ -259,6 +260,7 @@ class M_PriceParser
         foreach($arResult as $span)
         {
             preg_match('/(\d)+/', $span->outertext, $matches);
+            break;
         }
         
         // цена не найдена
