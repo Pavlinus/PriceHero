@@ -74,7 +74,6 @@ class M_Catalog
     {
         $start = $offset * self::UPDATES_ON_PAGE;
         $where = '';
-        $trackerJoin = '';
         
         /* определяем платформу  */
         if(isset($_POST['platformId']))
@@ -96,29 +95,16 @@ class M_Catalog
         
         /* если пользователь авторизован, исключаем из выборки 
          * отслеживаемые им игры */
-        if(isset($_COOKIE['user_id']))
-        {
-            $userId = htmlspecialchars($_COOKIE['user_id']);
-            $trackerJoin = 
-                      "LEFT JOIN t_tracker Tracker "
-                    . "ON (Tracker.game_id = Total.game_id "
-                    . "AND Tracker.user_id = $userId "
-                    . "AND Tracker.platform_id = Total.platform_id) ";
-            
-            if($where != '')
-            {
-                $where .= 'AND Tracker.user_id IS NULL ';
-            }
-            else
-            {
-                $where .= 'WHERE Tracker.user_id IS NULL ';
-            }
-        }
+        $authCond = $this->getAuthorizedUserCondition();
         
+        if($where != '' && $authCond['where'] != '')
+        {
+            $where .= ' AND ' . $authCond['where'];
+        }
         
         $query =  "SELECT DISTINCT Game.game_id, Total.platform_id FROM t_game Game "
                 . "LEFT JOIN t_total Total ON (Total.game_id=Game.game_id) "
-                . $trackerJoin . ' '
+                . $authCond['leftJoin']
                 . $where
                 . "ORDER BY Game.game_id DESC "
                 . "LIMIT " . $start . "," . self::UPDATES_ON_PAGE . " ";
@@ -132,6 +118,50 @@ class M_Catalog
         }
 
         return $arGamesId;
+    }
+    
+    
+    /**
+     * Формирование условия выборки, где вхождения отслеживаемых
+     * игр исключаются
+     * @return array массив данных с условиями
+     */
+    private function getAuthorizedUserCondition()
+    {
+        $trackerJoin = '';
+        $where = '';
+        
+        if(isset($_POST['platformId']) || isset($_POST['genreId']))
+        {
+            $filter = true;
+        }
+        else
+        {
+            $filter = false;
+        }
+        
+        if(isset($_COOKIE['user_id']))
+        {
+            $userId = htmlspecialchars($_COOKIE['user_id']);
+            $trackerJoin = 
+                      "LEFT JOIN t_tracker Tracker "
+                    . "ON (Tracker.game_id = Total.game_id "
+                    . "AND Tracker.user_id = $userId ";
+            
+            if(!$filter)
+            {
+                $trackerJoin .= " AND Tracker.platform_id = Total.platform_id ";
+            }
+            
+            $trackerJoin .= ")";
+            
+            $where .= ' Tracker.user_id IS NULL ';
+        }
+        
+        return array(
+            'leftJoin' => $trackerJoin,
+            'where' => $where
+        );
     }
     
     

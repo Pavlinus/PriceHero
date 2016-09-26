@@ -3,10 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/OpenServer/domains/PriceHero/controller/C_Index.php</file>
             <file>file:/C:/OpenServer/domains/PriceHero/model/M_Catalog.php</file>
             <file>file:/C:/OpenServer/domains/PriceHero/model/M_Search.php</file>
             <file>file:/C:/OpenServer/domains/PriceHero/css/style.less</file>
+            <file>file:/C:/OpenServer/domains/PriceHero/js/index.js</file>
         </group>
     </open-files>
 </project-private>
