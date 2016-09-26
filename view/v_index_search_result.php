@@ -25,8 +25,15 @@
                     <? else : ?>
                         <div class="tracker" title="Отслеживать игру"></div>
                     <? endif; ?>
+                    
+                    <div class="more">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
                 </div>
                 <div class="hidden" name="platform_id"><?=$game['platform_id']?></div>
+                <div class="hidden" name="site_id"><?=$game['site_id']?></div>
             </div>
         </a>
         <? endforeach; ?>

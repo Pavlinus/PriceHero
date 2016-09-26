@@ -200,4 +200,20 @@ class C_Index extends C_Base
         );
         exit();
     }
+    
+    
+    /**
+     * Обработка запроса похожих предложений
+     */
+    public function action_getSimilarOfferAjax()
+    {
+        $arResult = $this->mCatalog->getSimilarOffer();
+        echo $this->Template(
+                'view/v_index_offer.php', 
+                array(
+                    'offers' => $arResult
+                )
+        );
+        exit();
+    }
 }

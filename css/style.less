@@ -407,13 +407,94 @@ header {
                                         
                                         img {
                                             opacity: .9;
+                                            transition-duration: .2s;
+                                        }
+                                        
+                                        .more {
+                                            opacity: 1;
+                                            transition-duration: .2s;
+                                        }
+                                        
+                                        .tracker {
+                                            opacity: 1;
+                                            transition-duration: .2s;
                                         }
 				}
+                                
+                                .more {
+                                    position: absolute;
+                                    top: 85px;
+                                    left: 55px;
+                                    padding: 5px 10px;
+                                    transition-duration: .2s;
+                                    opacity: 0;
+                                    
+                                    div.similar_offer {
+                                        position: absolute;
+                                        left: 0;
+                                        width: auto;
+                                        height: auto;
+                                        margin-bottom: 0px;
+                                        background: #fafafa;
+                                        padding: 5px;
+                                        z-index: 2;
+                                        
+                                        p {
+                                            font-size: 14px;
+                                            color: #1d293e;
+                                        }
+                                        
+                                        >div {
+                                            display: table;
+                                            margin-bottom: 0px;
+                                            
+                                            span.offer_price {
+                                                display: table-cell;
+                                                padding: 5px 10px;
+                                                color: #fafafa;
+                                                background: #5e945a;
+                                            }
+                                            
+                                            span.site_offer {
+                                                display: table-cell;
+                                                color: #636363;
+                                                padding: 5px
+                                            }
+                                        }
+                                    }
+                                    
+                                    &:hover {
+                                        
+                                        div {
+                                            background: #5e945a;
+                                            transition-duration: .2s;
+                                        }
+                                        
+                                        div.similar_offer {
+                                            background: #fafafa;
+                                            
+                                            div {
+                                                background: #fafafa;
+                                            }
+                                        }
+                                    }
+                                    
+                                    div {
+                                        width: 5px;
+                                        height: 5px;
+                                        background: #fafafa;
+                                        border-radius: 1px;
+                                        margin-bottom: 3px;
+                                        transform: scale(1);
+                                        transition-duration: .2s;
+                                    }
+                                }
 				
 				img {
 					display: block;
 					/*margin-bottom: 5px;*/
 					width: 100%;
+                                        transition-duration: .2s;
 				}
 				
 				.product_details {
@@ -464,6 +545,7 @@ header {
                                     background-repeat: no-repeat;
                                     background-size: contain;
                                     transition-duration: .2s;
+                                    opacity: 0;
                                     
                                     &.active {
                                         background-image: url(../images/favorite_active.png);

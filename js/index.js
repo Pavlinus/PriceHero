@@ -1,8 +1,11 @@
 $(document).ready(function()
 {
    bindTrackerHandler();
+   bindMoreHandler();
+   
    var filterPlatformArray = [];
    var filterGenreArray = [];
+   
    togglePaginationUpdates();
    
    // Массив фильтра платформ
@@ -123,9 +126,11 @@ $(document).ready(function()
             success: function(res)
             {
                 unbindTrackerHandler();
+                unbindMoreHandler();
                 $('.products').remove();
                 $('.content .lastUpdates').append(res);
                 bindTrackerHandler();
+                bindMoreHandler();
                 togglePaginationUpdates();
             }
         });
@@ -229,9 +234,11 @@ $(document).ready(function()
             success: function(res)
             {
                 unbindTrackerHandler();
+                unbindMoreHandler();
                 $('div.content .products').remove();
                 $('div.content .lastUpdates').append(res);
                 bindTrackerHandler();
+                bindMoreHandler();
                 
                 $('.search input').val('');
                 
@@ -378,9 +385,11 @@ $(document).ready(function()
                 }
                 
                 unbindTrackerHandler();
+                unbindMoreHandler();
                 $('.products').remove();
                 $('.content .lastUpdates').append(res);
                 bindTrackerHandler();
+                bindMoreHandler();
                 
                 if(page_direction === 'prev')
                 {
@@ -392,5 +401,74 @@ $(document).ready(function()
                 }
             }
         });
+    }
+ 
+ 
+    function bindMoreHandler()
+    {
+        $('div.more').each(function()
+        {
+           $(this).bind('click', moreClickHandler);
+        });
+    }
+    
+    
+    function unbindMoreHandler()
+    {
+        $('div.more').each(function()
+        {
+           $(this).unbind();
+        });
+    }
+    
+    var moreObject = null;
+    
+    /**
+     * Обработчик нажатия кнопки `схожие предложения`
+     * @returns {Boolean}
+     */
+    function moreClickHandler()
+    {
+        var child = $(this).children('div.similar_offer');
+        
+        if(child.length > 0)
+        {
+            if(child.css('display') === 'none')
+            {
+                child.fadeIn(200);
+            }
+            else
+            {
+                child.fadeOut(200);
+            }
+            return false;
+        }
+        
+        var gameId = $(this).parents('div.item').attr('id');
+        var platformId = $(this).parents('div.item')
+                .children('div[name="platform_id"]').text();
+        var siteId = $(this).parents('div.item')
+                .children('div[name="site_id"]').text();
+        
+        moreObject = $(this);
+        
+        var data = { 
+            game_id: gameId,
+            platform_id: platformId,
+            site_id: siteId
+        };
+        
+        $.ajax({
+            type: 'POST',
+            url: 'index.php?c=index&act=getSimilarOfferAjax',
+            data: data,
+            cache: false,
+            success: function(res)
+            {
+                moreObject.append(res);
+            }
+        });
+        
+        return false;
     }
 });

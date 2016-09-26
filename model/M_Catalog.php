@@ -287,8 +287,9 @@ class M_Catalog
         
         $andStr = "";
         $arrStr = "(" . implode(",", $arrId) . ")";
-        $query  = "SELECT Game.name as game, Genre.name as genre, Platform.name as platform, Platform.platform_id, ";
-        $query .= "Price.new_price as price, Link.link, Game.image, Game.game_id, Tracker.tracker_id FROM t_total total ";
+        $query  = "SELECT Game.name as game, Genre.name as genre, Platform.name as platform, Platform.platform_id, "
+                . "Link.site_id as site_id, Price.new_price as price, Link.link, Game.image, ";
+        $query .= "Game.game_id, Tracker.tracker_id FROM t_total total ";
         $query .= "LEFT JOIN t_game Game ON (Game.game_id = total.game_id) ";
         $query .= "LEFT JOIN t_genre Genre ON (Genre.genre_id = Game.genre_id) ";
         $query .= "LEFT JOIN t_platform Platform ON (Platform.platform_id = total.platform_id) ";
@@ -314,6 +315,37 @@ class M_Catalog
         }
         else
         {
+            return $rows;
+        }
+    }
+    
+    
+    /**
+     * Получаем список схожих предложений
+     * @return array массив предложений
+     */
+    public function getSimilarOffer()
+    {
+        if(isset($_POST['game_id']) &&
+           isset($_POST['platform_id']) &&
+           isset($_POST['site_id']))
+        {
+            $gameId = htmlspecialchars($_POST['game_id']);
+            $platformId = htmlspecialchars($_POST['platform_id']);
+            $siteId = htmlspecialchars($_POST['site_id']);
+            
+            $query =  "SELECT Link.link as link, Site.name as site, "
+                    . "Price.new_price as price "
+                    . "FROM t_total Total "
+                    . "LEFT JOIN t_link Link ON(Link.link_id=Total.link_id) "
+                    . "LEFT JOIN t_site Site ON(Site.site_id=Link.site_id) "
+                    . "LEFT JOIN t_price Price ON(Price.price_id=Total.price_id) "
+                    . "WHERE Total.game_id=$gameId AND "
+                    . "Total.platform_id=$platformId AND "
+                    . "Site.site_id<>$siteId";
+            
+            $rows = $this->msql->Select($query);
+            
             return $rows;
         }
     }
