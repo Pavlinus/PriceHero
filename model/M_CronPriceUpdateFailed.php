@@ -3,6 +3,7 @@
 include_once "M_MSQL.php";
 include_once "M_PriceParser.php";
 include_once "M_Price.php";
+include_once "M_CronUpdateLogger.php";
 
 
 /* лимит выборки ссылок */
@@ -16,7 +17,7 @@ define(LIMIT, 5);
  */
 function getLinks($msql, $offset)
 {
-    $query = "SELECT link_id as linkId FROM t_link LIMIT $offset, " . LIMIT;
+    $query = "SELECT link_id as linkId FROM t_cronLogger LIMIT $offset, " . LIMIT;
     return $msql->Select($query);
 }
 
@@ -61,9 +62,14 @@ function getOldPrice($msql)
 }
 
 
+/**
+ * Подсчет общего количества ссылок
+ * @param type $msql
+ * @return type
+ */
 function countLinks($msql)
 {
-    $query = "SELECT COUNT(link_id) as links FROM t_link";
+    $query = "SELECT COUNT(link_id) as links FROM t_cronLogger";
     return $msql->Select($query);
 }
 
@@ -73,6 +79,8 @@ $msql = M_MSQL::Instance();
 $res = countLinks($msql);
 $totalLinks = (int)$res[0]['links'];
 $offset = 0;
+
+$parsedLinkId = array();
 
 $time_start = time();
 
@@ -100,6 +108,7 @@ for($i = 0; $offset < $totalLinks; $i++)
     foreach($arLinks as $link)
     {
         $arLinksId[] = $link['linkId'];
+        $parsedLinkId[] = $link['linkId'];
     }
 
 
@@ -124,6 +133,17 @@ for($i = 0; $offset < $totalLinks; $i++)
     $loop_end = time();
     $time = $loop_end - $loop_start;
     echo "Loop " . $i . ": " . $time . " sec.\n ";
+}
+
+/* удаляем обновленные записи из логов */
+$cronLogger = M_CronUpdateLogger::Instance();
+$cronLogger->deleteLog($parsedLinkId);
+
+/* оповещение на email если остались фейлы */
+$countLogs = $cronLogger->countLogs();
+if($countLogs > 0)
+{
+    $cronLogger->sendNotification();
 }
 
 $time_end = time();

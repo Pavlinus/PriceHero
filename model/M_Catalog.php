@@ -342,7 +342,8 @@ class M_Catalog
                     . "LEFT JOIN t_price Price ON(Price.price_id=Total.price_id) "
                     . "WHERE Total.game_id=$gameId AND "
                     . "Total.platform_id=$platformId AND "
-                    . "Site.site_id<>$siteId";
+                    . "Site.site_id<>$siteId "
+                    . "ORDER BY price ASC";
             
             $rows = $this->msql->Select($query);
             

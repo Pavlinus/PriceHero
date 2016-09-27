@@ -68,4 +68,50 @@ class M_CronUpdateLogger
             return 1;
         }
     }
+    
+    
+    /**
+     * Удаление записей
+     * @param array $arLogId массив ID ссылок
+     */
+    public function deleteLog($arLogId)
+    {
+        foreach($arLogId as $log)
+        {
+            $where = "link_id = " . $log;
+            $this->msql->Delete('t_cronLogger', $where);
+        }
+    }
+    
+    
+    /**
+     * Отсылает уведомление об оставшихся ошибках парсинга
+     */
+    public function sendNotification()
+    {
+        $headers  = "MIME-Version: 1.0\r\n";
+        $headers .= "Content-type: text/html; charset=utf-8\r\n";
+        $headers .= "From: info@games2buy.ru\r\n";
+        
+        $subject = "Games2Buy уведомление";
+        $to = "pavlin.kov@mail.ru";
+        
+        $msg  = "Походу тебе придется запустить парсинг вручную.\n";
+        $msg .= "Я сделал все что смог.\n";
+        
+        mail($to, $subject, $msg, $headers);
+    }
+    
+    
+    /**
+     * Подсчет общего числа логов
+     * @return type
+     */
+    public function countLogs()
+    {
+        $query = "SELECT COUNT(log_id) as logs FROM t_cronLogger";
+        $res = $this->msql->Select($query);
+        
+        return $res[0]['logs'];
+    }
 }
