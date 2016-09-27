@@ -432,12 +432,13 @@ header {
                                     div.similar_offer {
                                         position: absolute;
                                         left: 0;
-                                        width: auto;
                                         height: auto;
                                         margin-bottom: 0px;
                                         background: #fafafa;
                                         padding: 5px;
                                         z-index: 2;
+                                        width: 230px;
+                                        top: 40px;
                                         
                                         p {
                                             font-size: 14px;
@@ -447,18 +448,27 @@ header {
                                         >div {
                                             display: table;
                                             margin-bottom: 0px;
+                                            width: 100%;
+                                            margin-bottom: 1px;
+                                            background: #fafafa;
+                                            
+                                            &:hover {
+                                                background: #DDDBFA;
+                                            }
                                             
                                             span.offer_price {
                                                 display: table-cell;
                                                 padding: 5px 10px;
                                                 color: #fafafa;
                                                 background: #5e945a;
+                                                width: 65px;
                                             }
                                             
                                             span.site_offer {
                                                 display: table-cell;
                                                 color: #636363;
-                                                padding: 5px
+                                                padding: 5px;
+                                                width: 135px;
                                             }
                                         }
                                     }
@@ -472,10 +482,6 @@ header {
                                         
                                         div.similar_offer {
                                             background: #fafafa;
-                                            
-                                            div {
-                                                background: #fafafa;
-                                            }
                                         }
                                     }
                                     

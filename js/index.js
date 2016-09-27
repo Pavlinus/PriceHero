@@ -466,9 +466,22 @@ $(document).ready(function()
             success: function(res)
             {
                 moreObject.append(res);
+                var sim_offer = $(moreObject).children('div.similar_offer');
+                bindSimilarHandler(sim_offer);
             }
         });
         
         return false;
+    }
+    
+    function bindSimilarHandler(obj)
+    {
+        $(obj).bind('click', similarClickHandler);
+    }
+    
+    function similarClickHandler(event)
+    {
+        event.stopPropagation();
+        return true;
     }
 });

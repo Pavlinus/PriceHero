@@ -8,7 +8,7 @@
     
         <? foreach($offers as $offer) : ?>
             <div>
-                <a href="<?=$offer['link']?>">
+                <a target="_blank" href="<?=$offer['link']?>">
                     <span class="site_offer"><?=$offer['site']?></span>
                     <span class="offer_price"><?=$offer['price']?>&nbsp;руб.</span>
                 </a>
