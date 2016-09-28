@@ -257,6 +257,12 @@ class M_PriceParser
             $arResult = $html->find('div.price');
         }
         
+        if(empty($arResult) || $arResult == null)
+        {
+            $arResult = $html->find('div.game_purchase_price');
+        }
+        
+        
         foreach($arResult as $span)
         {
             preg_match('/(\d)+/', $span->outertext, $matches);

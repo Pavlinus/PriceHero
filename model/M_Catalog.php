@@ -307,6 +307,7 @@ class M_Catalog
         }
         
         $query .= "WHERE $where IN $arrStr $andStr $additional";
+        $query = htmlspecialchars($query);
         $rows = $this->msql->Select($query);
         
         if(!$rows)

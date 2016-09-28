@@ -36,7 +36,7 @@
 	
 	switch ($ctrl)
 	{
-		case 'admin':
+		case 'suckmyadmincock':
 			$controller = new C_Admin();
 			break;
                     

@@ -7,7 +7,7 @@
                         <span class="error"><?= $error ?></span>
                     <? endif; ?>
                     <form method="post" 
-                          action="index.php?c=admin&act=auth">
+                          action="index.php?c=suckmyadmincock&act=auth">
                         <div class="item">
                             <span class="input_label">
                                 Логин

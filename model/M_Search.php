@@ -76,7 +76,8 @@ class M_Search
                 }
             }
 
-            $rows = $this->msql->Select($query);
+            $sql = htmlspecialchars($query);
+            $rows = $this->msql->Select($sql);
             $ids = array();
             
             if(empty($rows))

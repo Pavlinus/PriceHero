@@ -15,7 +15,7 @@ $(document).ready(function() {
 
     $.each($("input.require"), function() 
 	{  
-	  if($(this).val() == '')
+	  if($(this).val() === '')
       {
 		//alert("here");
         $(this).animate({backgroundColor:'#636363'}, {duration: 200})

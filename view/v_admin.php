@@ -90,11 +90,11 @@
                                     
                                 </span>
                                 <span class="col_3">
-                                    <a href="index.php?c=admin&act=editGame&id=<?=$game['game_id']?>" 
+                                    <a href="index.php?c=suckmyadmincock&act=editGame&id=<?=$game['game_id']?>" 
                                        class="action edit">
                                         Изменить
                                     </a>
-                                    <a href="index.php?c=admin&act=removeGame&id=<?=$game['game_id']?>" 
+                                    <a href="index.php?c=suckmyadmincock&act=removeGame&id=<?=$game['game_id']?>" 
                                        class="action delGame" id="<?=$game['game_id']?>">
                                         Удалить
                                     </a>

@@ -53,7 +53,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: 'index.php?c=admin&act=addGameAjax',
+            url: 'index.php?c=suckmyadmincock&act=addGameAjax',
             data: dataArray,
             cache: false,
             success: function(res)
@@ -64,7 +64,7 @@ $(document).ready(function() {
         
         $.ajax({
             type: 'POST',
-            url: 'index.php?c=admin&act=uploadImageAjax',
+            url: 'index.php?c=suckmyadmincock&act=uploadImageAjax',
             data: formData,
             processData: false,
             contentType: false
@@ -240,7 +240,7 @@ $(document).ready(function() {
 
         $.ajax({
             type: 'POST',
-            url: 'index.php?c=admin&act=editGameAjax',
+            url: 'index.php?c=suckmyadmincock&act=editGameAjax',
             data: dataArray,
             cache: false,
             success: function(res)
@@ -251,7 +251,7 @@ $(document).ready(function() {
         
         $.ajax({
             type: 'POST',
-            url: 'index.php?c=admin&act=uploadImageAjax',
+            url: 'index.php?c=suckmyadmincock&act=uploadImageAjax',
             data: formData,
             processData: false,
             contentType: false
@@ -272,7 +272,7 @@ $(document).ready(function() {
        
        $.ajax({
             type: 'POST',
-            url: 'index.php?c=admin&act=findGameAjax',
+            url: 'index.php?c=suckmyadmincock&act=findGameAjax',
             data: dataArray,
             cache: false,
             success: function(res)
@@ -357,7 +357,7 @@ $(document).ready(function() {
        
        $.ajax({
             type: 'POST',
-            url: 'index.php?c=admin&act=filter',
+            url: 'index.php?c=suckmyadmincock&act=filter',
             data: dataArray,
             cache: false,
             success: function(res)
@@ -406,7 +406,7 @@ $(document).ready(function() {
         
         $.ajax({
             type: 'POST',
-            url: 'index.php?c=admin&act=removeGame',
+            url: 'index.php?c=suckmyadmincock&act=removeGame',
             data: dataArray,
             cache: false,
             success: function(res)
@@ -467,7 +467,7 @@ $(document).ready(function() {
         
         $.ajax({
             type: 'POST',
-            url: 'index.php?c=admin&act=pageGamesListAjax',
+            url: 'index.php?c=suckmyadmincock&act=pageGamesListAjax',
             data: data,
             cache: false,
             success: function(res)

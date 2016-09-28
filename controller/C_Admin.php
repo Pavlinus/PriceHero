@@ -108,7 +108,7 @@ class C_Admin extends C_Base
 
             if($authRes && $this->isAdmin($authRes[0]['priority']))
             {
-                header("Location: index.php?c=admin");
+                header("Location: index.php?c=suckmyadmincock");
             }
             else
             {
@@ -247,7 +247,7 @@ class C_Admin extends C_Base
             }
             else
             {
-                header("Location: index.php?c=admin");
+                header("Location: index.php?c=suckmyadmincock");
             }
         }
     }
@@ -312,7 +312,7 @@ class C_Admin extends C_Base
     public function action_logout()
     {
         $this->auth->logout();
-        header("Location: index.php?c=admin");
+        header("Location: index.php?c=suckmyadmincock");
     }
 
     

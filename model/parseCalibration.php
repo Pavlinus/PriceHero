@@ -1,16 +1,31 @@
 <?php
 include_once('simple_html_dom.php');
 
-$link = 'http://roxen.ru/games/tom_clancys_splinter_cell/tom-clancy-s-rainbow-six-siege/';
+$link = 'http://store.steampowered.com/app/443810/';
 $html = file_get_html($link);
 $matches = null;
 $price = '';
 
-foreach($html->find('span.r-curr-price') as $span)
+echo "<pre>" . $html . "</pre>";
+
+$arResult = $html->find('div.discount_final_price');
+        
+if(empty($arResult) || $arResult == null)
+{
+    $arResult = $html->find('div.price');
+}
+
+if(empty($arResult) || $arResult == null)
+{
+    $arResult = $html->find('div.game_purchase_price');
+}
+
+
+foreach($arResult as $span)
 {
     preg_match('/(\d)+/', $span->outertext, $matches);
     break;
 }
 
-print_r($matches);
+//print_r($matches);
 

@@ -214,6 +214,11 @@ $(document).ready(function()
     {
        var searchStr = $('div.search input[type="text"]').val();
        
+       if(searchStr.length === 0)
+       {
+           return false;
+       }
+       
        var platforms = [];
        $('button.option.platform').each(function()
        {
