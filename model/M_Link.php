@@ -47,6 +47,11 @@ class M_Link
         {
             foreach ($_POST['links'] as $item) 
             {
+                if($item['link'] == '')
+                {
+                    return false;
+                }
+                
                 $object = array(
                     'site_id' => htmlspecialchars($item['service']),
                     'link' => htmlspecialchars($item['link']),

@@ -174,6 +174,12 @@ class M_ControlPanel {
         
         // Добавление новых данных
         $linksId = $this->addLink();
+        
+        if(!$linksId)
+        {
+            return array();
+        }
+        
         $priceList = $this->parser->parse($linksId);
         $priceId = $this->addPrice($priceList);
         $totalId = $this->addTotal($_REQUEST['gameId'], $linksId, $priceId);

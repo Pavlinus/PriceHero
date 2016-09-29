@@ -53,6 +53,11 @@ class M_PriceParser
         
         foreach($linksData as $item)
         {
+            if($item['link'] == '')
+            {
+                continue;
+            }
+            
             switch ($item['site_id']) 
             {
                 case self::STEAMBUY_ID:
@@ -136,6 +141,11 @@ class M_PriceParser
         $html = file_get_html($link);
         $matches = null;
         
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
         foreach($html->find('span.r-curr-price') as $span)
         {
             preg_match('/(\d)+/', $span->outertext, $matches);
@@ -164,6 +174,11 @@ class M_PriceParser
         $link = $linkItem['link'];
         $html = file_get_html($link);
         $matches = array();
+        
+        if($html == null || !$html)
+        {
+            return array();
+        }
         
         foreach($html->find('div.price') as $span)
         {
@@ -195,6 +210,11 @@ class M_PriceParser
         $html = file_get_html($link);
         $matches = null;
         
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
         foreach($html->find('span[itemprop="price"]') as $span)
         {
             preg_match('/(\d)+/', $span->outertext, $matches);
@@ -223,6 +243,11 @@ class M_PriceParser
         $html = file_get_html($link);
         $matches = null;
         
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
         foreach($html->find('span.tovar-price') as $span)
         {
             preg_match('/(\d)+/', $span->outertext, $matches);
@@ -250,6 +275,12 @@ class M_PriceParser
         $link = $linkItem['link'];
         $html = file_get_html($link);
         $matches = null;
+        
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
         $arResult = $html->find('div.discount_final_price');
         
         if(empty($arResult) || $arResult == null)

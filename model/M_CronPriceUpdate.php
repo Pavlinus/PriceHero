@@ -5,39 +5,29 @@ include_once "M_PriceParser.php";
 include_once "M_Price.php";
 
 
-/* лимит выборки ссылок */
-define(LIMIT, 5);
+/* лимит выборки цен */
+define(LIMIT, 15);
 
 
 /**
- * Извлекаем все ID ссылок
+ * Извлекаем ID ссылок
  * @param object $msql экземпляр класса M_MSQL
  * @return array массив всех ссылок
  */
-function getLinks($msql, $offset)
+function getLinksId($msql, $arPriceId)
 {
-    $query = "SELECT link_id as linkId FROM t_link LIMIT $offset, " . LIMIT;
-    return $msql->Select($query);
-}
-
-
-/**
- * Извлекаем ID всех цен
- * @param object $msql экземпляр класса M_MSQL
- * @return array массив ID цен
- */
-function getPriceId($msql)
-{
-    $query = "SELECT price_id, link_id FROM t_total";
-    $rows = $msql->Select($query);
-    $arResult = array();
+    $in = "(" . implode(",", $arPriceId) . ")";
+    $query =  "SELECT link_id, price_id FROM t_total "
+            . "WHERE price_id IN $in";
+    $res = $msql->Select($query);
+    $arLinks = array();
     
-    foreach($rows as $row)
+    foreach($res as $item)
     {
-        $arResult[ $row['link_id'] ] = $row['price_id'];
+        $arLinks[ $item['price_id'] ] = $item['link_id'];
     }
     
-    return $arResult;
+    return $arLinks;
 }
 
 
@@ -61,75 +51,66 @@ function getOldPrice($msql)
 }
 
 
-function countLinks($msql)
+function getPrice($msql)
 {
-    $query = "SELECT COUNT(link_id) as links FROM t_link";
+    $query =  "SELECT * FROM t_price "
+            . "ORDER BY lastUpdate ASC LIMIT " . LIMIT;
     return $msql->Select($query);
 }
 
-
 $msql = M_MSQL::Instance();
 
-$res = countLinks($msql);
-$totalLinks = (int)$res[0]['links'];
-$offset = 0;
+$updatedItems = 0;
 
-$time_start = time();
-
-for($i = 0; $offset < $totalLinks; $i++)
+// ID цен для обновления
+$arPrice = getPrice($msql);
+$arPriceId = array();    
+foreach($arPrice as $item)
 {
-    $loop_start = time();
-    
-    $arLinks = getLinks($msql, $offset);
-    
-    // Парсим цены
-    $priceParser = M_PriceParser::Instance();
-    $priceParsed = $priceParser->parse($arLinks);
-
-    
-    // Формируем прайс лист
-    $priceList = array();
-    foreach($priceParsed as $price)
-    {
-        $priceList[ $price['linkId'] ] = $price['price'];
-    }
-
-
-    // Формируем массив ID ссылок
-    $arLinksId = array();
-    foreach($arLinks as $link)
-    {
-        $arLinksId[] = $link['linkId'];
-    }
-
-
-    $arPriceId = getPriceId($msql, $arLinksId);
-    $arNewPrice = array();
-
-    // Создаем массив array( id цены => новая цена )
-    foreach($arPriceId as $linkId => $priceId)
-    {
-        $arNewPrice[ $priceId ] = $priceList[ $linkId ];
-    }
-
-    // Получаем старые цены
-    $arOldPrice = getOldPrice($msql);
-
-    // Обновляем цены
-    $mPrice = M_Price::Instance();
-    $mPrice->updatePrice($arNewPrice, $arOldPrice);
-    
-    $offset = ($i + 1) * LIMIT;
-    
-    $loop_end = time();
-    $time = $loop_end - $loop_start;
-    echo "Loop " . $i . ": " . $time . " sec.\n ";
+    $arPriceId[] = $item['price_id'];
 }
 
-$time_end = time();
+// Сопоставленный массив ID ссылок и ID цен
+$arUnion = getLinksId($msql, $arPriceId);
+$arLinksId = array();
 
-$time = $time_end - $time_start;
+foreach($arUnion as $item)
+{
+    $arLinksId[]['linkId'] = $item;
+}
 
-echo "-- Total time: " . $time . " sec. --";
+
+// Парсим цены
+$priceParser = M_PriceParser::Instance();
+$priceParsed = $priceParser->parse($arLinksId);
 
 
+// Формируем прайс лист
+$priceList = array();
+foreach($priceParsed as $price)
+{
+    $priceList[ $price['linkId'] ] = $price['price'];
+}
+
+$arNewPrice = array();
+
+// Создаем массив array( id цены => новая цена )
+foreach($arUnion as $priceId => $linkId)
+{
+    $arNewPrice[ $priceId ] = $priceList[ $linkId ];
+    $updatedItems += 1;
+}
+
+
+// формируем старые `new_price`
+foreach($arPrice as $item)
+{
+    $arOldPrice[ $item['price_id'] ] = $item['new_price'];
+}
+
+
+// Обновляем цены
+$mPrice = M_Price::Instance();
+$mPrice->updatePrice($arNewPrice, $arOldPrice);
+
+echo "-- Updated items: " . $updatedItems . " --";

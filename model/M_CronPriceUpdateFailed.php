@@ -79,6 +79,7 @@ $msql = M_MSQL::Instance();
 $res = countLinks($msql);
 $totalLinks = (int)$res[0]['links'];
 $offset = 0;
+$updatedItems = 0;
 
 $parsedLinkId = array();
 
@@ -119,6 +120,7 @@ for($i = 0; $offset < $totalLinks; $i++)
     foreach($arPriceId as $linkId => $priceId)
     {
         $arNewPrice[ $priceId ] = $priceList[ $linkId ];
+        $updatedItems += 1;
     }
 
     // Получаем старые цены
@@ -132,7 +134,7 @@ for($i = 0; $offset < $totalLinks; $i++)
     
     $loop_end = time();
     $time = $loop_end - $loop_start;
-    echo "Loop " . $i . ": " . $time . " sec.\n ";
+    //echo "Loop " . $i . ": " . $time . " sec.\n ";
 }
 
 /* удаляем обновленные записи из логов */
@@ -152,4 +154,4 @@ $time = $time_end - $time_start;
 
 echo "-- Total time: " . $time . " sec. --";
 
-
+echo "-- Updated items: " . $updatedItems . " --";
