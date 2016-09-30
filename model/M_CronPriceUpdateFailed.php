@@ -79,11 +79,8 @@ $msql = M_MSQL::Instance();
 $res = countLinks($msql);
 $totalLinks = (int)$res[0]['links'];
 $offset = 0;
-$updatedItems = 0;
 
 $parsedLinkId = array();
-
-$time_start = time();
 
 for($i = 0; $offset < $totalLinks; $i++)
 {
@@ -131,10 +128,6 @@ for($i = 0; $offset < $totalLinks; $i++)
     $mPrice->updatePrice($arNewPrice, $arOldPrice);
     
     $offset = ($i + 1) * LIMIT;
-    
-    $loop_end = time();
-    $time = $loop_end - $loop_start;
-    //echo "Loop " . $i . ": " . $time . " sec.\n ";
 }
 
 /* удаляем обновленные записи из логов */
@@ -148,10 +141,3 @@ if($countLogs > 0)
     $cronLogger->sendNotification();
 }
 
-$time_end = time();
-
-$time = $time_end - $time_start;
-
-echo "-- Total time: " . $time . " sec. --";
-
-echo "-- Updated items: " . $updatedItems . " --";

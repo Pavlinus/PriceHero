@@ -19,7 +19,7 @@ li {
   list-style: none;
 }
 
-h2 {
+h2, h3 {
 	text-transform: uppercase;
 	font-family: "RobotoBold";
 }
@@ -55,6 +55,11 @@ body {
 
 
 /* ================ FONTS ================ */
+
+@font-face {
+    font-family: BungeeLayers-Regular;
+    src: url("../fonts/BungeeLayers-Regular.otf") format("opentype");
+}
 
 @font-face {
 	font-family: "RobotoBold";
@@ -130,7 +135,7 @@ header {
         
         span {
             padding-left: 30px;
-            font-family: "RobotoBold";
+            font-family: "BungeeLayers-Regular";
             color: #1d293e;
             font-size: 28px;
             display: inline-block;
@@ -170,7 +175,7 @@ header {
 	.search_button {
                 position: absolute;
 		right: 70px;
-		top: 8px;
+		top: 20px;
 		bottom: 0;
 		width: 25px;
 		height: 35px;
@@ -356,6 +361,19 @@ header {
         .lastUpdates {
             position: relative;
             padding-bottom: 25px;
+        }
+        
+        .about_service {
+            
+            a {
+                display: inline-block;
+                
+                &.form_btn {
+                    background: #5e945a;
+                    padding: 10px;
+                    color: #fafafa;
+                }
+            }
         }
         
         .pagination {
@@ -977,6 +995,7 @@ footer {
                                         font-size: 24px;
                                         display: inline-block;
                                         vertical-align: middle;
+                                        font-family: BungeeLayers-Regular;
                                     }
                                     
                                     img {

@@ -163,7 +163,8 @@ class M_Room
     
     /**
      * Регистрация нового пользователя
-     * @return int -1 - логин существует, 0 - ошибка записи, > 0 - успех
+     * @return int -2 - email существует, -1 - логин существует, 
+     * 0 - ошибка записи, > 0 - успех
      */
     public function saveNewUser()
     {
@@ -178,6 +179,11 @@ class M_Room
             if(!$this->checkLogin($login))
             {
                 return -1;
+            }
+            
+            if($this->checkEmail($email))
+            {
+                return -2;
             }
             
             $object = array(
@@ -265,17 +271,17 @@ class M_Room
     {
         $to  = "<$email>"; 
         
-        $subject = "Запрос на смену пароля | sitename";
+        $subject = "Запрос на смену пароля / Game2Buy.ru";
         
-        $link =   "http://sitename.ru/index.php?"
+        $link =   "http://Game2Buy.ru/index.php?"
                 . "c=room&act=newPassword&token=$token&email=$email";
         
-        $message = " <p>Привет, пользователь!</p> </br>";
+        $message = " <p>Привет, пользователь!</p>";
         $message .= " <p>Для смены пароля своей учетной записи перейди по ссылке ниже:</p> </br>";
-        $message .= " <a href='$link'>$link</a> </br>";
+        $message .= " <a href='$link'>$link</a>";
 
         $headers  = "Content-type: text/html; charset=utf-8 \r\n"; 
-        $headers .= "From: От кого письмо <sitename@somemail.com>\r\n"; 
+        $headers .= "From: <info@game2buy.ru>\r\n"; 
 
         mail($to, $subject, $message, $headers); 
     }

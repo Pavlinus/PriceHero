@@ -94,7 +94,7 @@ class C_Room extends C_Base
 
             if($authRes)
             {
-                header("Location: index.php?c=room");
+                header("Location: index.php?c=index");
             }
             else
             {
@@ -239,18 +239,38 @@ class C_Room extends C_Base
         if($this->IsPost())
         {
             $loginErr = 'Логин уже используется';
+            $emailErr = 'Email уже используется';
+            $connectionErr = 'Ошибка соединения';
             $result = $this->room->saveNewUser();
             if($result > 0)
             {
                 $this->auth->authorize($_POST['au_login'], $_POST['au_password']);
-                header("Location: index.php?c=room");
+                header("Location: index.php?c=index");
             }
-            elseif($result < 0)
+            elseif($result == -1)
             {
                 $this->content = $this->Template(
                     "view/v_user_registration.php", 
                     array(
                         'error' => $loginErr
+                    )
+                );
+            }
+            elseif($result == -2)
+            {
+                $this->content = $this->Template(
+                    "view/v_user_registration.php", 
+                    array(
+                        'error' => $emailErr
+                    )
+                );
+            }
+            else
+            {
+                $this->content = $this->Template(
+                    "view/v_user_registration.php", 
+                    array(
+                        'error' => $connectionErr
                     )
                 );
             }

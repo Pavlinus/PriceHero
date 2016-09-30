@@ -43,6 +43,10 @@
                 case 'room':
 			$controller = new C_Room();
 			break;
+                    
+                case 'about':
+			$controller = new C_About();
+			break;
 			
 		case 'index':
 		default:

@@ -60,8 +60,6 @@ function getPrice($msql)
 
 $msql = M_MSQL::Instance();
 
-$updatedItems = 0;
-
 // ID цен для обновления
 $arPrice = getPrice($msql);
 $arPriceId = array();    
@@ -98,7 +96,6 @@ $arNewPrice = array();
 foreach($arUnion as $priceId => $linkId)
 {
     $arNewPrice[ $priceId ] = $priceList[ $linkId ];
-    $updatedItems += 1;
 }
 
 
@@ -112,5 +109,3 @@ foreach($arPrice as $item)
 // Обновляем цены
 $mPrice = M_Price::Instance();
 $mPrice->updatePrice($arNewPrice, $arOldPrice);
-
-echo "-- Updated items: " . $updatedItems . " --";
