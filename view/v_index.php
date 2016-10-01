@@ -82,4 +82,12 @@
     </div>
 </section>
 
+<? if($search != '') : ?>
+    
+<script>
+    $('.search input').val('<?=$search?>');
+</script>
+
+<? endif; ?>
+
 <script src="/js/index.js"></script>

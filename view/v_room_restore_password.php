@@ -31,3 +31,5 @@
         </div>
     </div>
 </section>
+
+<script src="/js/search_inner.js.js"></script>

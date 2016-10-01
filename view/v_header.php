@@ -28,9 +28,13 @@
                 </div>
                 <div class="search">
                     <div class="inner_search">
-                        <input type="text" placeholder="Найти">
-                        <!--div class="search_reset"></div-->
-                        <div class="search_button" id="search"></div>
+                            <input type="text" placeholder="Найти">
+                            <!--div class="search_reset"></div-->
+                            <div class="search_button" id="search"></div>
+                            
+                            <form method="post" action="index.php" id="h_form">
+                                <input type="hidden" name="search" value="">
+                            </form>
                     </div>
                 </div>
                 <div class="room_btn">

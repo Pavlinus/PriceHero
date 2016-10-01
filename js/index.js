@@ -210,8 +210,10 @@ $(document).ready(function()
    /**
      * Обработчик нажатия на кнопку поиска
      */
-    $('#search').click(function()
+    $('#search').click(function(event)
     {
+       event.preventDefault();
+       
        var searchStr = $('div.search input[type="text"]').val();
        
        if(searchStr.length === 0)
@@ -262,8 +264,15 @@ $(document).ready(function()
                 togglePaginationUpdates();
             }
         });
+        
+        return false;
     });
     
+    if($('.search input').val() !== '')
+    {
+        $('#search').click();
+        
+    }
     
     function bindTrackerHandler()
     {

@@ -25,4 +25,4 @@
     </div>
 </section>
 
-<script src="/js/index.js"></script>
+<script src="/js/search_inner.js.js"></script>

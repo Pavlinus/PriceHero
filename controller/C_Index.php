@@ -38,10 +38,17 @@ class C_Index extends C_Base
         $err_msg = '';
         $error = false;
         $login = '';
+        $search = '';
         
         $gamesList = $this->mCatalog->getLastUpdates();
         $platforms = $this->fields->getFields('t_platform');
         $genres = $this->fields->getFields('t_genre');
+        
+        /* был запрос поиска с другой страницы */
+        if(isset($_POST['search']))
+        {
+            $search = $_POST['search'];
+        }
 
         $this->content = $this->Template('view/v_index.php', 
                 array(
@@ -50,7 +57,8 @@ class C_Index extends C_Base
                     'err_msg' => $err_msg,
                     'gamesList' => $gamesList,
                     'platforms' => $platforms,
-                    'genres' => $genres
+                    'genres' => $genres,
+                    'search' => $search
                 )
         );
     }
