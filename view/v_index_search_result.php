@@ -1,10 +1,10 @@
 <? if(empty($gamesList)) : ?>
-<div class="products">
+<div class="products transp">
     <p>По Вашему запросу ничего не найдено</p>
 </div>
 <? else : ?>
 
-    <div class="products">
+    <div class="products transp">
 
         <? foreach($gamesList as $game) : ?>
         <a target="_blank" href="<?= $game['link'] ?>" class="productItem">

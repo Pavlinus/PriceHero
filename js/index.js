@@ -127,8 +127,9 @@ $(document).ready(function()
             {
                 unbindTrackerHandler();
                 unbindMoreHandler();
-                $('.products').remove();
+                $('.products').fadeOut(0, function(){$(this).remove();});
                 $('.content .lastUpdates').append(res);
+                $('.products').fadeIn(200);
                 bindTrackerHandler();
                 bindMoreHandler();
                 togglePaginationUpdates();
@@ -242,8 +243,9 @@ $(document).ready(function()
             {
                 unbindTrackerHandler();
                 unbindMoreHandler();
-                $('div.content .products').remove();
+                $('.products').fadeOut(0, function(){$(this).remove();});
                 $('div.content .lastUpdates').append(res);
+                $('.products').fadeIn(300);
                 bindTrackerHandler();
                 bindMoreHandler();
                 
@@ -400,8 +402,9 @@ $(document).ready(function()
                 
                 unbindTrackerHandler();
                 unbindMoreHandler();
-                $('.products').remove();
+                $('.products').fadeOut(0, function(){$(this).remove();});
                 $('.content .lastUpdates').append(res);
+                $('.products').fadeIn(300);
                 bindTrackerHandler();
                 bindMoreHandler();
                 
