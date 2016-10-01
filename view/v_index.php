@@ -1,15 +1,10 @@
 <section class="main">
     <div class="container">
+        
+        <? include "h_menu.php"; ?>
+        
         <div class="main_container_wrapper">
             <div class="side_left">
-                <nav class="menu">
-                    <ul>
-                        <!--li class="head">Меню</li-->
-                        <li><a href="index.php">Главная</a></li>
-                        <li><a href="index.php?c=room">Игровая комната</a></li>
-                        <li><a href="index.php?c=about">О сервисе</a></li>
-                    </ul>
-                </nav>
 
                 <div class="filter">
                     <h2>Платформа</h2>

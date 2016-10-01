@@ -1,16 +1,9 @@
 ﻿<section class="main room">
     <div class="container">
+        
+        <? include "h_menu.php"; ?>
+        
         <div class="main_container_wrapper">
-            <div class="side_left background">
-                <nav class="menu">
-                    <ul>
-                        <li><a href="index.php?c=index">Главная</a></li>
-                        <!--li><a href="index.php?c=room&act=settings">Настройки</a></li-->
-                        <li><a href="index.php?c=room&act=logout">Выход</a></li>
-                    </ul>
-                </nav>
-            </div>
-
             <div class="content white">
                 <div class="wrapper pad_top_no">
                     <div class="filter">

@@ -97,13 +97,13 @@ body {
 header {
 	
 	.container {
-		padding: 1.5em 0;
                 background: #fafafa;
                 margin-bottom: 70px;
 		
 		.header_wrapper {
 			display: table;
 			width: 100%;
+                        min-width: 950px;
 		}
 	}
         
@@ -132,15 +132,28 @@ header {
 .logo {
 	display: table-cell;
 	vertical-align: middle;
+        width: 270px;
         
-        span {
+        div {
             padding-left: 30px;
-            font-family: "BungeeLayers-Regular";
-            color: #1d293e;
-            font-size: 28px;
-            display: inline-block;
-            vertical-align: middle;
+            width: 240px;
+            background: #DDDBFA;
+            
+            span {
+                font-family: "BungeeLayers-Regular";
+                color: #1d293e;
+                font-size: 35px;
+                display: inline-block;
+                vertical-align: middle;
+                
+                &.two_rot {
+                    color: #fafafa;
+                    margin-top: -10px;
+                    text-shadow: 0 0 3px #636363;
+                }
+            }
         }
+        
         
         img {
             width: 50px;
@@ -150,17 +163,22 @@ header {
 }
 
 .search {
-	width: 450px;
 	position: relative;
 	margin: 0 0 0 auto;
 	display: table-cell;
 	vertical-align: middle;
         
+        .inner_search {
+            width: 390px;
+            width: 390px;
+            margin-left: 130px;
+            position: relative;
+        }
 	
 	input[type="text"] {
 		width: 335px;
 		border: none;
-		background: @c_lgrey;
+		background: #DDDBFA;
 		height: 34px;
 		padding: 5px 45px 5px 10px;
                 border: 1px solid transparent;
@@ -174,8 +192,8 @@ header {
 	
 	.search_button {
                 position: absolute;
-		right: 70px;
-		top: 20px;
+		right: 10px;
+		top: 5px;
 		bottom: 0;
 		width: 25px;
 		height: 35px;
@@ -216,15 +234,6 @@ header {
 	.menu {
 		display: block;
 		font-family: @f_bold;
-                /*border-bottom: 1px solid #1d293e;*/
-		
-		.head {
-			background: @c_lgrey;
-			color: #fff;
-			font-size: 1em;
-			text-transform: uppercase;
-			padding: 1em 11.11%;
-		}
 		
 		ul {
 			list-style: none;
@@ -233,18 +242,7 @@ header {
 				display: block;
 				background: #fafafa;
 				
-				&:hover {
-					background: #1d293e;
-					
-					a {
-                                            color: #fafafa;
-					}
-					
-					.head {
-						background: @c_lgrey;
-						color: #fff;
-					}
-				}
+				
 				
 				a {
 					display: block;
@@ -261,7 +259,6 @@ header {
 .filter, .settings {
 	background: #fafafa;
 	padding: 35px 30px;
-        margin-top: 5px;
 	
 	h2 {
 		color: #1d293e;
@@ -360,10 +357,11 @@ header {
         
         .lastUpdates {
             position: relative;
-            padding-bottom: 25px;
+            padding-bottom: 40px;
         }
         
         .about_service {
+            padding: 20px;
             
             a {
                 display: inline-block;
@@ -379,11 +377,11 @@ header {
         .pagination {
             position: absolute;
             right: 20px;
-            bottom: 0;
+            bottom: 15px;
             
             div {
                 display: inline-block;
-                background: #fafafa;
+                background: #DDDBFA;
                 width: 30px;
                 height: 30px;
                 text-align: center;
@@ -868,6 +866,41 @@ header {
 section {
 
     &.main {
+        
+        .container {
+            
+            .menu {
+                padding: 0 20px;
+                background: #DDDBFA;
+                
+                li {
+                    list-style: none;
+                    display: inline-block;
+                    
+                    a {
+                        font-family: @f_bold;
+                        font-size: 0.875em;
+                        text-transform: uppercase;
+                        color: #1d293e;
+                        padding: 15px;
+                        display: block;
+                        
+                        &.active {
+                            color: #fafafa;
+                            text-shadow: 0 0 3px #636363;
+                        }
+                    }
+                    
+                    &:hover {
+                        cursor: pointer;
+                        a {
+                            color: #fafafa;
+                            text-shadow: 0 0 3px #636363;
+                        }
+                    }
+                }
+            }
+        }
 
         &.room {
             
@@ -955,31 +988,16 @@ footer {
 		padding: 0;
 		
 		.wrapper {
-			width: 100%;
 			max-width: 1170px;
 			padding: 20px 40px;
 			margin: 0 auto;
 			
 			.footer_menu {
-				display: table;
-				width: 100%;
 				
                                 h3 {
                                     color: #fff;
                                     font-family: @f_bold;
                                     padding-bottom: 20px;
-                                }
-
-                                a {
-                                    display: inline-block;
-                                    color: #fff;
-                                    font-size: 0.875em;
-                                    font-family: @f_regular;
-                                    margin: 5px 20px 5px 0;
-
-                                    &:hover {
-                                        text-decoration: underline;
-                                    }
                                 }
                                 
                                 span {
@@ -989,10 +1007,30 @@ footer {
                                 }
                                 
                                 >div {
-                                    display: table-cell;
+                                    
+                                    &.links {
+                                        text-align: center;
+                                        
+                                        a {
+                                            display: inline-block;
+                                            color: #fff;
+                                            font-size: 0.875em;
+                                            font-family: @f_regular;
+                                            margin: 5px 20px 5px 0;
+
+                                            &:hover {
+                                                text-decoration: underline;
+                                            }
+                                        }
+                                        
+                                        a:last-of-type {
+                                            margin: 5px 0px 5px 0;
+                                        }
+                                    }
+                                    
                                     
                                     span {
-                                        font-size: 24px;
+                                        font-size: 28px;
                                         display: inline-block;
                                         vertical-align: middle;
                                         font-family: BungeeLayers-Regular;

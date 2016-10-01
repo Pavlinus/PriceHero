@@ -3,15 +3,12 @@
         <div class="wrapper">
             <div class="footer_menu">
                 <div>
-                    <span>Game2Buy</span>
-                    <img src="../images/robber_w.png">
+                    <!--span>Game2Buy</span-->
                 </div>
-                <div>
-                    <div>
-                        <a href="/index.php">Главная</a>
-                        <a href="/index.php?c=about">О сервисе</a>
-                        <a href="mailto:info@game2buy.ru">Напишите нам</a>
-                    </div>
+                <div class="links">
+                    <a href="/index.php">Главная</a>
+                    <a href="/index.php?c=about">О сервисе</a>
+                    <a href="mailto:info@game2buy.ru">Напишите нам</a>
                     <!--div><span>&copy;&nbsp;2016</span></div-->
                 </div>
             </div>

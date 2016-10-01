@@ -18,13 +18,20 @@
         <div class="container">
             <div class="header_wrapper">
                 <div class="logo">
-                    <span>Game2Buy</span>
-                    <img src="../images/robber_d.png">
+                    <div>
+                        <a href="/">
+                            <span>Game</span>
+                            <span class="two_rot">2</span>
+                            <span>Buy</span>
+                        </a>
+                    </div>
                 </div>
                 <div class="search">
-                    <input type="text" placeholder="Найти">
-                    <!--div class="search_reset"></div-->
-                    <div class="search_button" id="search"></div>
+                    <div class="inner_search">
+                        <input type="text" placeholder="Найти">
+                        <!--div class="search_reset"></div-->
+                        <div class="search_button" id="search"></div>
+                    </div>
                 </div>
                 <div class="room_btn">
                     <? if(!isset($_COOKIE['user_id'])) : ?>
