@@ -41,6 +41,16 @@
                                         <div class="product_details">
                                             <!--span class="product_name"><?=$game['game']?></span-->
                                             <span class="product_price">
+                                                <? if($game['tracker_id'] != '') : ?>
+                                                    <div class="tracker active" title="Не отслеживать игру"></div>
+                                                <? else : ?>
+                                                    <div class="tracker" title="Отслеживать игру"></div>
+                                                <? endif; ?>
+                                                <div class="more">
+                                                    <div></div>
+                                                    <div></div>
+                                                    <div></div>
+                                                </div>
                                                 <span class="platform">
                                                     <?=$game['platform']?>
                                                 </span>
@@ -49,19 +59,6 @@
                                                 </span>
                                             </span>
                                         </div>
-                                        
-                                        <? if($game['tracker_id'] != '') : ?>
-                                            <div class="tracker active" title="Не отслеживать игру"></div>
-                                        <? else : ?>
-                                            <div class="tracker" title="Отслеживать игру"></div>
-                                        <? endif; ?>
-                                        
-                                        <div class="more">
-                                            <div></div>
-                                            <div></div>
-                                            <div></div>
-                                        </div>
-                                        
                                     </div>
                                     <div class="hidden" name="platform_id"><?=$game['platform_id']?></div>
                                     <div class="hidden" name="site_id"><?=$game['site_id']?></div>
@@ -90,4 +87,5 @@
 
 <? endif; ?>
 
+<script src="/js/similar_offer.js"></script>
 <script src="/js/index.js"></script>

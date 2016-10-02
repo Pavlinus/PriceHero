@@ -4,8 +4,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
-        <meta name="description" content="" />
-        <meta name="keywords" content="" />
+        <meta name="description" content="Игровой каталог Game2Buy" />
+        <meta name="keywords" content="каталог, игровой, минимальные цены, низкие цены, найти" />
         <link rel="stylesheet/less" href="css/style.less" type="text/css" />
         <title>Game2Buy (local)</title>
         <script src="js/jquery.min.js" type="text/javascript"></script>
@@ -51,3 +51,32 @@
     <div class="info_window">
         <span>Сообщение</span>
     </div>
+        
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript">
+        (function (d, w, c) {
+            (w[c] = w[c] || []).push(function() {
+                try {
+                    w.yaCounter39946855 = new Ya.Metrika({
+                        id:39946855,
+                        clickmap:true,
+                        trackLinks:true,
+                        accurateTrackBounce:true
+                    });
+                } catch(e) { }
+            });
+
+            var n = d.getElementsByTagName("script")[0],
+                s = d.createElement("script"),
+                f = function () { n.parentNode.insertBefore(s, n); };
+            s.type = "text/javascript";
+            s.async = true;
+            s.src = "https://mc.yandex.ru/metrika/watch.js";
+
+            if (w.opera == "[object Opera]") {
+                d.addEventListener("DOMContentLoaded", f, false);
+            } else { f(); }
+        })(document, window, "yandex_metrika_callbacks");
+    </script>
+    <noscript><div><img src="https://mc.yandex.ru/watch/39946855" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    <!-- /Yandex.Metrika counter -->

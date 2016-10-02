@@ -195,12 +195,21 @@ class M_Catalog
      * @param array $arGamesId массив ID игр
      * @return array массив ID цен
      */
-    public function getLowestPriceId($arGamesId)
+    public function getLowestPriceId($arGamesId, $arPlatform = array())
     {
         if(empty($arGamesId))
         {
             return array();
         }
+        
+        $inPlatformId = '';
+        if(!empty($arPlatform))
+        {
+            $platformStr = "(" . implode(",", $arPlatform) . ")";
+            $platformSet = htmlspecialchars($platformStr);
+            $inPlatformId = "AND Total.platform_id IN $platformSet";
+        }
+        
         
         $inGamesId = "(". implode(",", $arGamesId) .")";
         
@@ -209,9 +218,9 @@ class M_Catalog
                 . "FROM t_total Total "
                 . "LEFT JOIN t_game Game USING(game_id) "
                 . "LEFT JOIN t_price Price USING(price_id) "
-                . "WHERE Total.game_id IN $inGamesId "
+                . "WHERE Total.game_id IN $inGamesId $inPlatformId"
                 . "ORDER BY price ASC ";
-        
+
         $rows = $this->msql->Select($query);
         
         return $this->getPriceId($rows);
@@ -226,7 +235,10 @@ class M_Catalog
     {
         $priceAssoc = array();
         $priceId = array();
-        $arPlatform = array(1);
+        
+        /* получаем все id платформ */
+        $mPlatform = M_Platform::Instance();
+        $arPlatform = $mPlatform->getPlatformId();
         
         if(isset($_POST['platformId']))
         {

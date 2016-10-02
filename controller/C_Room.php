@@ -180,23 +180,7 @@ class C_Room extends C_Base
             }
             
             $arUserGames = $this->room->getGamesById($arGamesId);
-            $arResult = array();
-            
-            foreach($arUserGames as $arItem)
-            {
-                $arId = array($arItem['game_id']);
-                $where = 'Game.game_id';
-                $and = array(
-                    'Platform.platform_id' => array($arItem['platform_id'])
-                );
-
-                $row = $this->catalog->getGames($arId, $where, $and);
-
-                if(!empty($row))
-                {
-                    $arResult[] = $row[0];
-                }
-            }
+            $arResult = $this->room->getGamesList($arUserGames);
 
             echo $this->Template(
                     'view/v_room_search_result.php', 

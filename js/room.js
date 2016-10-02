@@ -1,6 +1,7 @@
 $(document).ready(function()
 {
    bindDelGameHandler();
+   bindMoreHandler();
     
    var filterPlatformArray = [];
    
@@ -38,6 +39,13 @@ $(document).ready(function()
         
         filterPlatformArray[ filter_id ] = state;
         activePlatform = getActiveFilters(filterPlatformArray);
+
+        if(activePlatform.length === 0)
+        {
+            setDefaultFilterState();
+            setFiltersNotActive();
+        }
+        console.log(activePlatform);
         
         filter(activePlatform, activeGenre);
    }
@@ -81,10 +89,46 @@ $(document).ready(function()
             success: function(res)
             {
                 unbindDelGameHandler();
+                unbindMoreHandler();
                 $('.result_wrapper').remove();
                 $('section .wrapper').append(res);
+                bindMoreHandler();
                 bindDelGameHandler();
             }
+        });
+   }
+   
+   /**
+    * Установка фильтров по умолчанию
+    */
+   function setDefaultFilterState()
+   {
+       setFiltersActive();
+       var active = getActiveFilters(filterPlatformArray);
+       filter(active);
+   }
+   
+   /**
+    * Установка фильтров в активный режим
+    * @returns {undefined}
+    */
+   function setFiltersActive()
+   {
+        $('.filter button.platform').each(function()
+        {
+           filterPlatformArray[ $(this).attr('value') ] = true;
+        });
+   }
+   
+   /**
+    * Установка фильтров в активный режим
+    * @returns {undefined}
+    */
+   function setFiltersNotActive()
+   {
+        $('.filter button.platform').each(function()
+        {
+           filterPlatformArray[ $(this).attr('value') ] = false;
         });
    }
    
@@ -132,9 +176,11 @@ $(document).ready(function()
             success: function(res)
             {
                 unbindDelGameHandler();
+                unbindMoreHandler();
                 $('.search input').val('');
                 $('.result_wrapper').remove();
                 $('.wrapper').append(res);
+                bindMoreHandler();
                 bindDelGameHandler();
                 
                 $('.filter button.platform').each(function()
@@ -165,8 +211,8 @@ $(document).ready(function()
     
     function delTrackerHandler()
     {
-        var gameId = $(this).parents('div.row').children('#gameId').text();
-        var platformId = $(this).parents('div.row').children('#platformId').text();
+        var gameId = $(this).parents('div.row').children('div[name="game_id"]').text();
+        var platformId = $(this).parents('div.row').children('div[name="platform_id"]').text();
         var dataArray = {
             gameId: gameId,
             platformId: platformId

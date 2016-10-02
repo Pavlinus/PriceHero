@@ -66,4 +66,23 @@ class M_Platform
         
         return $result;
     }
+    
+    
+    /**
+     * Получение ID платформ
+     * @return array массив ID платформ
+     */
+    public function getPlatformId()
+    {
+        $query = "SELECT platform_id FROM t_platform";
+        $rows = $this->msql->Select($query);
+        $result = array();
+        
+        foreach($rows as $row)
+        {
+            $result[] = $row['platform_id'];
+        }
+        
+        return $result;
+    }
 }

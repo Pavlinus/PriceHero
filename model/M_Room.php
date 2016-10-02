@@ -92,29 +92,38 @@ class M_Room
     
     /**
      * Извлекает массив данных игр пользователя
+     * @param array $arGames массив игр пользователя
      * @return array массив данных игр
      */
-    public function getGamesList()
+    public function getGamesList($arGames = array())
     {
-        $arGames = $this->getUserGames();
+        if(empty($arGames))
+        {
+            $arUserGames = $this->getUserGames();
+        }
+        else
+        {
+            $arUserGames = $arGames;
+        }
+        
         $arResult = array();
         
-        foreach($arGames as $arItem)
+        foreach($arUserGames as $game)
         {
-            $arId = array($arItem['game_id']);
-            $where = 'Game.game_id';
-            $and = array(
-                'Platform.platform_id' => array($arItem['platform_id'])
-            );
+            $and['Platform.platform_id'] = array($game['platform_id']);
             
-            $row = $this->catalog->getGames($arId, $where, $and);
+            $arPriceId = $this->catalog->getLowestPriceId(
+                    array($game['game_id']), 
+                    array($game['platform_id']));
             
-            if(!empty($row))
-            {
-                $arResult[] = $row[0];
-            }
+            $res = $this->catalog->getGames(
+                    $arPriceId, 
+                    'total.price_id', 
+                    $and);
+            
+            $arResult[] = $res[0];
         }
-
+        
         return $arResult;
     }
     
