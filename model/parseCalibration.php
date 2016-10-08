@@ -1,16 +1,15 @@
 <?php
 include_once('simple_html_dom.php');
 
-$link = 'http://gamerepublic.ru/catalog.aspx/games/PC/42190';
+$link = 'http://steampay.com/game/mafia-3';
 $html = file_get_html($link);
 $matches = null;
 $price = '';
 
-foreach($html->find('span.catalog_price_big') as $span)
+foreach($html->find('span.price') as $span)
 {
-    preg_match('/(\d)+/', $span->outertext, $matches);
-    
+    preg_match('/\d+[\s]{0,1}\d*/', $span->outertext, $matches);
 }
-echo "--";
+
 print_r($matches);
 

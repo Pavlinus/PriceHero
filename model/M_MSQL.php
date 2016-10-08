@@ -126,13 +126,13 @@ class M_MSQL
 		$username = Config::DB_USER; 
 		$password = Config::DB_PASS;
 		$dbName = Config::DB_NAME;
-	
+                
 		setlocale(LC_ALL, 'ru_RU.UTF-8');
 		mb_internal_encoding('UTF-8');
 	
-		$this->connLink = mysqli_connect($hostname, $username, $password) or die(''); 
+		$this->connLink = mysqli_connect($hostname, $username, $password) or die('err'); 
 		mysqli_query($this->connLink, 'SET NAMES utf8');
-		mysqli_select_db($this->connLink, $dbName) or die('');
+		mysqli_select_db($this->connLink, $dbName) or die('err');
 	}
 	
 	public function GetConnectionLink()

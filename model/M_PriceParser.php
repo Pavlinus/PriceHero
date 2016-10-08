@@ -13,6 +13,9 @@ class M_PriceParser
     const GAMERAY_ID = 3;
     const LOZMAN_ID = 4;
     const ROXEN_ID = 5;
+    const GAMEPARK_ID = 6;
+    const GZONLINE_ID = 7;
+    const STEAMPAY_ID = 8;
 
     public function __construct()
     {
@@ -123,10 +126,153 @@ class M_PriceParser
                         $this->logger->addLog($item['link_id']);
                     }
                     break;
+                    
+                case self::GAMEPARK_ID:
+                    $price = $this->parseGamePark($item);
+                    
+                    if(count($price) > 0)
+                    {
+                        $priceList[] = $price;
+                    }
+                    else
+                    {
+                        $this->logger->addLog($item['link_id']);
+                    }
+                    break;
+                    
+                case self::GZONLINE_ID:
+                    $price = $this->parseGZOnline($item);
+                    
+                    if(count($price) > 0)
+                    {
+                        $priceList[] = $price;
+                    }
+                    else
+                    {
+                        $this->logger->addLog($item['link_id']);
+                    }
+                    break;
+                    
+                case self::STEAMPAY_ID:
+                    $price = $this->parseSteampay($item);
+                    
+                    if(count($price) > 0)
+                    {
+                        $priceList[] = $price;
+                    }
+                    else
+                    {
+                        $this->logger->addLog($item['link_id']);
+                    }
+                    break;
             }
         }
         
         return $priceList;
+    }
+    
+    
+    /**
+     * Извлекает цены с Steampay
+     * @param $linkItem Элемент ссылки
+     * @return 
+     */
+    private function parseSteampay($linkItem)
+    {
+        $link = $linkItem['link'];
+        $html = file_get_html($link);
+        $matches = null;
+        
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
+        foreach($html->find('span.price') as $span)
+        {
+            preg_match('/\d+[\s]{0,1}\d*/', $span->outertext, $matches);
+        }
+
+        // цена не найдена
+        if(empty($matches) || $matches == null)
+        {
+            return array();
+        }
+        
+        $price = str_replace(" ", "", $matches[0]);
+        
+        return array(
+            'linkId' => $linkItem['link_id'],
+            'price' => $price);
+    }
+    
+    
+    /**
+     * Извлекает цены с GZOnline
+     * @param $linkItem Элемент ссылки
+     * @return 
+     */
+    private function parseGZOnline($linkItem)
+    {
+        $link = $linkItem['link'];
+        $html = file_get_html($link);
+        $matches = null;
+        
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
+        foreach($html->find('div.list_price') as $span)
+        {
+            preg_match('/\d+[\s]{0,1}\d*/', $span->outertext, $matches);
+        }
+
+        // цена не найдена
+        if(empty($matches) || $matches == null)
+        {
+            return array();
+        }
+        
+        $price = str_replace(" ", "", $matches[0]);
+        
+        return array(
+            'linkId' => $linkItem['link_id'],
+            'price' => $price);
+    }
+    
+    
+    /**
+     * Извлекает цены с GamePark
+     * @param $linkItem Элемент ссылки
+     * @return 
+     */
+    private function parseGamePark($linkItem)
+    {
+        $link = $linkItem['link'];
+        $html = file_get_html($link);
+        $matches = null;
+        
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
+        foreach($html->find('div#eprice') as $span)
+        {
+            preg_match('/(\d)+/', $span->outertext, $matches);
+            break;
+        }
+
+        // цена не найдена
+        if(empty($matches) || $matches == null)
+        {
+            return array();
+        }
+
+        return array(
+            'linkId' => $linkItem['link_id'],
+            'price' => $matches[0]);
     }
     
     

@@ -6,10 +6,10 @@
 * @date 30.07.2016
 */
 
-include_once "/model/M_ControlPanel.php";
-include_once "/model/M_Auth.php";
-include_once "/model/M_Game.php";
-include_once "/model/M_Catalog.php";
+include_once "model/M_ControlPanel.php";
+include_once "model/M_Auth.php";
+include_once "model/M_Game.php";
+include_once "model/M_Catalog.php";
 
 class C_Admin extends C_Base
 {

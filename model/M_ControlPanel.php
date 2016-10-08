@@ -1,5 +1,6 @@
 <?php
 
+
 class M_ControlPanel {
 
     private static $instance;

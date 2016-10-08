@@ -35,7 +35,7 @@ abstract class C_Controller
 		}
 		
 		ob_start();
-		include "$fileName";
+		include $fileName;
 		return ob_get_clean();
 	}	
 	
@@ -46,4 +46,3 @@ abstract class C_Controller
 		return;
 	}
 }
-?>
