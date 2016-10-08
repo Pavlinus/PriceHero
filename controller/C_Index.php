@@ -43,7 +43,7 @@ class C_Index extends C_Base
         $gamesList = $this->mCatalog->getLastUpdates();
         $platforms = $this->fields->getFields('t_platform');
         $genres = $this->fields->getFields('t_genre');
-        
+
         /* был запрос поиска с другой страницы */
         if(isset($_POST['search']))
         {

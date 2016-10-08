@@ -7,7 +7,7 @@
         <meta name="description" content="Игровой каталог Game2Buy" />
         <meta name="keywords" content="каталог, игровой, минимальные цены, низкие цены, найти" />
         <link rel="stylesheet/less" href="css/style.less" type="text/css" />
-        <title>Game2Buy (local)</title>
+        <title>Game2Buy</title>
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.min.js" type="text/javascript"></script>
         <script src="js/less.js" type="text/javascript"></script>

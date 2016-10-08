@@ -49,7 +49,7 @@ class M_Catalog
         $and = array(
             'total.platform_id' => array(1)
         );
-        
+
         /* Учитываем установленные фильтры */
         if(isset($_POST['platformId']) && !empty($_POST['platformId']))
         {
@@ -209,6 +209,9 @@ class M_Catalog
             $platformSet = htmlspecialchars($platformStr);
             $inPlatformId = "AND Total.platform_id IN $platformSet";
         }
+	else
+	{
+	}
         
         
         $inGamesId = "(". implode(",", $arGamesId) .")";
@@ -222,7 +225,7 @@ class M_Catalog
                 . "ORDER BY price ASC ";
 
         $rows = $this->msql->Select($query);
-        
+
         return $this->getPriceId($rows);
     }
     
@@ -244,6 +247,10 @@ class M_Catalog
         {
             $arPlatform = $_POST['platformId'];
         }
+	else
+	{
+	    $arPlatform = array(1);
+	}
         
         /* сохраняем ID цен в зависимости от игры и платформы */
         foreach($rows as $row)
@@ -322,7 +329,7 @@ class M_Catalog
         $query = htmlspecialchars($query);
         $rows = $this->msql->Select($query);
         
-        if(!$rows)
+	if(!$rows)
         {
             return array();
         }

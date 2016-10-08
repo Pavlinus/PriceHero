@@ -121,9 +121,9 @@ class M_MSQL
 	private function connect_db() 
 	{
 		$hostname = 'localhost'; 
-		$username = 'admin'; 
-		$password = 'admin';
-		$dbName = 'pricehero';
+		$username = 'pavlingh_g2b'; 
+		$password = 'O5*Cz1F9';
+		$dbName = 'pavlingh_g2b';
 	
 		setlocale(LC_ALL, 'ru_RU.UTF-8');
 		mb_internal_encoding('UTF-8');
