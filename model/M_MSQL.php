@@ -1,5 +1,7 @@
 <?php
 
+require_once 'config/Config.php';
+
 class M_MSQL
 {
 	private static $instance;
@@ -120,10 +122,10 @@ class M_MSQL
 	
 	private function connect_db() 
 	{
-		$hostname = 'localhost'; 
-		$username = 'root'; 
-		$password = 'Toonae7b';
-		$dbName = 'g2b';
+		$hostname = Config::HOST; 
+		$username = Config::DB_USER; 
+		$password = Config::DB_PASS;
+		$dbName = Config::DB_NAME;
 	
 		setlocale(LC_ALL, 'ru_RU.UTF-8');
 		mb_internal_encoding('UTF-8');
