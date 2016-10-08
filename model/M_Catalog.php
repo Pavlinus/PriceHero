@@ -185,8 +185,10 @@ class M_Catalog
         {
             return array();
         }
-
-        return $this->getLowestPriceId($arGamesId);
+        
+        $lowestPrice = $this->getLowestPriceId($arGamesId);
+        
+        return array_slice($lowestPrice, 0, self::UPDATES_ON_PAGE);
     }
     
     
@@ -267,6 +269,9 @@ class M_Catalog
                     continue;
                 }
                 
+                $priceId[] = $row['price_id'];
+                
+                /*
                 if(count($priceId) < self::UPDATES_ON_PAGE)
                 {
                     $priceId[] = $row['price_id'];
@@ -275,6 +280,8 @@ class M_Catalog
                 {
                     break;
                 }
+                 * 
+                 */
             }
         }
         

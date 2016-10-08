@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /model
+Disallow: /controller
+Disallow: /config
+Disallow: /css
+Disallow: /fonts
+Disallow: /js
+Disallow: /upload
+Disallow: /view

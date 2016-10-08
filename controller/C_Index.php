@@ -151,13 +151,21 @@ class C_Index extends C_Base
         if($this->isPost())
         {
             $gamesId = $this->search->searchGame();
-            
+
             if(!$gamesId || empty($gamesId))
             {
                 $gamesId = array();
             }
             
-            $arPriceId = $this->mCatalog->getLowestPriceId($gamesId);
+            $platforms = $this->fields->getFields('t_platform');
+            $platformId = array(1);
+            foreach($platforms as $platform)
+            {
+                $platformId[] = $platform['platform_id'];
+            }
+            
+            $arPriceId = $this->mCatalog->getLowestPriceId($gamesId, $platformId);
+
             $and = '';
             if(!empty($arPriceId))
             {
