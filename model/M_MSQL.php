@@ -1,6 +1,6 @@
 <?php
 
-require_once 'config/Config.php';
+include dirname(__FILE__).'/../config/Config.php';
 
 class M_MSQL
 {

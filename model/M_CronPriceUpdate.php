@@ -6,7 +6,7 @@ include_once "M_Price.php";
 
 
 /* лимит выборки цен */
-define(LIMIT, 15);
+define(LIMIT, 5);
 
 
 /**

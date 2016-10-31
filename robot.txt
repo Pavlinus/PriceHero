@@ -7,3 +7,4 @@ Disallow: /fonts
 Disallow: /js
 Disallow: /upload
 Disallow: /view
+Host: game2buy.ru
