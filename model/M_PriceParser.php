@@ -16,6 +16,13 @@ class M_PriceParser
     const GAMEPARK_ID = 6;
     const GZONLINE_ID = 7;
     const STEAMPAY_ID = 8;
+    
+    const GAME_REPUBLIC_ID = 9;
+    const DANDYLAND_ID = 10;
+    const XPRESSGAMES_ID = 11;
+    const PLAYGAMES_ID = 12;
+    const NEXTGAME_ID = 13;
+
 
     public function __construct()
     {
@@ -165,10 +172,255 @@ class M_PriceParser
                         $this->logger->addLog($item['link_id']);
                     }
                     break;
+
+                case self::GAME_REPUBLIC_ID:
+                    $price = $this->parseGameRepublic($item);
+                    
+                    if(count($price) > 0)
+                    {
+                        $priceList[] = $price;
+                    }
+                    else
+                    {
+                        $this->logger->addLog($item['link_id']);
+                    }
+                    break;
+
+                case self::DANDYLAND_ID:
+                    $price = $this->parseDandyland($item);
+                    
+                    if(count($price) > 0)
+                    {
+                        $priceList[] = $price;
+                    }
+                    else
+                    {
+                        $this->logger->addLog($item['link_id']);
+                    }
+                    break;
+
+                case self::XPRESSGAMES_ID:
+                    $price = $this->parseXpressGames($item);
+                    
+                    if(count($price) > 0)
+                    {
+                        $priceList[] = $price;
+                    }
+                    else
+                    {
+                        $this->logger->addLog($item['link_id']);
+                    }
+                    break;
+
+                case self::PLAYGAMES_ID:
+                    $price = $this->parsePlayGames($item);
+                    
+                    if(count($price) > 0)
+                    {
+                        $priceList[] = $price;
+                    }
+                    else
+                    {
+                        $this->logger->addLog($item['link_id']);
+                    }
+                    break;
+
+                case self::NEXTGAME_ID:
+                    $price = $this->parseNextGame($item);
+                    
+                    if(count($price) > 0)
+                    {
+                        $priceList[] = $price;
+                    }
+                    else
+                    {
+                        $this->logger->addLog($item['link_id']);
+                    }
+                    break;
             }
         }
         
         return $priceList;
+    }
+
+
+    /**
+     * Извлекает цены с NextGame
+     * @param $linkItem Элемент ссылки
+     * @return 
+     */
+    private function parseNextGame($linkItem)
+    {
+        $link = $linkItem['link'];
+        $html = file_get_html($link);
+        $matches = null;
+        
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
+        foreach($html->find('span[id="price"]') as $span)
+        {
+            $val = str_replace(' ', '', $span->innertext);
+            preg_match('/\d+/', $val, $matches);
+        }
+
+        // цена не найдена
+        if(empty($matches) || $matches == null)
+        {
+            return array();
+        }
+        
+        $price = str_replace(" ", "", $matches[0]);
+        
+        return array(
+            'linkId' => $linkItem['link_id'],
+            'price' => $price);
+    }
+
+
+    /**
+     * Извлекает цены с PlayGames
+     * @param $linkItem Элемент ссылки
+     * @return 
+     */
+    private function parsePlayGames($linkItem)
+    {
+        $link = $linkItem['link'];
+        $html = file_get_html($link);
+        $matches = null;
+        
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
+        foreach($html->find('div.add2cart span.price') as $span)
+        {
+            $val = str_replace(' ', '', $span->innertext);
+            preg_match('/\d+/', $val, $matches);
+        }
+
+        // цена не найдена
+        if(empty($matches) || $matches == null)
+        {
+            return array();
+        }
+        
+        $price = str_replace(" ", "", $matches[0]);
+        
+        return array(
+            'linkId' => $linkItem['link_id'],
+            'price' => $price);
+    }
+
+
+    /**
+     * Извлекает цены с XpressGames
+     * @param $linkItem Элемент ссылки
+     * @return 
+     */
+    private function parseXpressGames($linkItem)
+    {
+        $link = $linkItem['link'];
+        $html = file_get_html($link);
+        $matches = null;
+        
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
+        foreach($html->find('span.price-new') as $span)
+        {
+            $val = str_replace(' ', '', $span->innertext);
+            preg_match('/\d+/', $val, $matches);
+        }
+
+        // цена не найдена
+        if(empty($matches) || $matches == null)
+        {
+            return array();
+        }
+        
+        $price = str_replace(" ", "", $matches[0]);
+        
+        return array(
+            'linkId' => $linkItem['link_id'],
+            'price' => $price);
+    }
+
+
+    /**
+     * Извлекает цены с Dandyland
+     * @param $linkItem Элемент ссылки
+     * @return 
+     */
+    private function parseDandyland($linkItem)
+    {
+        $link = $linkItem['link'];
+        $html = file_get_html($link);
+        $matches = null;
+        
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
+        foreach($html->find('span.inner_price_el') as $span)
+        {
+            $val = str_replace(' ', '', $span->innertext);
+            preg_match('/\d+/', $val, $matches);
+        }
+
+        // цена не найдена
+        if(empty($matches) || $matches == null)
+        {
+            return array();
+        }
+        
+        $price = str_replace(" ", "", $matches[0]);
+        
+        return array(
+            'linkId' => $linkItem['link_id'],
+            'price' => $price);
+    }
+
+
+    /**
+     * Извлекает цены с GameRepublic
+     * @param $linkItem Элемент ссылки
+     * @return 
+     */
+    private function parseGameRepublic($linkItem)
+    {
+        $link = $linkItem['link'];
+        $html = file_get_html($link);
+        $matches = null;
+        
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
+        foreach($html->find('span.catalog_price_big') as $span)
+        {
+            preg_match('/\d+/', $span->innertext, $matches);
+            break;
+        }
+
+        // цена не найдена
+        if(empty($matches) || $matches == null)
+        {
+            return array();
+        }
+        
+        $price = str_replace(" ", "", $matches[0]);
+        
+        return array(
+            'linkId' => $linkItem['link_id'],
+            'price' => $price);
     }
     
     
