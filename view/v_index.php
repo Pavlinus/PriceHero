@@ -76,6 +76,36 @@
                 
             </div>
         </div>
+
+        <div class="main_container_wrapper shadow">
+        	<div class="content stock">
+        		<h2>Акции</h2>
+	        	<div class="stock_list">
+	        		<div class="item">
+	        			<a href="http://steambuy.com/click.php?t=bn&i=14" target="_blank">
+	        				<img src="../images/stock/batman_stock.jpg">
+	        			</a>
+	        		</div>
+	        		<div class="item">
+	        			<a href="http://steambuy.com/click.php?t=bn&i=7" target="_blank">
+	        				<img src="../images/stock/siege_stock.jpg">
+	        			</a>
+	        		</div>
+	        		<div class="item">
+	        			<a href="http://steambuy.com/click.php?t=bn&i=12" target="_blank">
+	        				<img src="../images/stock/division_stock.jpg">
+	        			</a>
+	        		</div>
+	        		<div class="item">
+	        			<a href="http://steambuy.com/click.php?t=bn&i=9" target="_blank">
+	        				<img src="../images/stock/farcry_stock.jpg">
+	        			</a>
+	        		</div>
+	        	</div>
+        	</div>
+
+        </div>
+
     </div>
 </section>
 

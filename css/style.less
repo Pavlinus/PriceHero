@@ -103,7 +103,7 @@ header {
 		.header_wrapper {
 			display: table;
 			width: 100%;
-                        min-width: 950px;
+            min-width: 950px;
 		}
 	}
         
@@ -341,12 +341,12 @@ header {
 	width: 77%;
 	max-width: 870px;
 	padding: 0 0 0 15px;
-        background: #1d293e;
-        position: relative;
-        
-        &.white {
-            padding: 0;
-        }
+    background: #1d293e;
+    position: relative;
+    
+    &.white {
+        padding: 0;
+    }
 	
 	h2 {
 		padding: 0.5em 0 0.5em 0em;
@@ -355,55 +355,56 @@ header {
                 /*background: #25caf3;*/
 	}
         
-        .lastUpdates {
-            position: relative;
-            padding-bottom: 40px;
-        }
+    .lastUpdates {
+        position: relative;
+        padding-bottom: 40px;
+        min-height: 510px;
+    }
+    
+    .about_service {
+        padding: 20px;
         
-        .about_service {
-            padding: 20px;
+        a {
+            display: inline-block;
             
-            a {
-                display: inline-block;
-                
-                &.form_btn {
-                    background: #5e945a;
-                    padding: 10px;
-                    color: #fafafa;
-                }
+            &.form_btn {
+                background: #5e945a;
+                padding: 10px;
+                color: #fafafa;
             }
         }
+    }
+    
+    .pagination {
+        position: absolute;
+        right: 20px;
+        bottom: 15px;
         
-        .pagination {
-            position: absolute;
-            right: 20px;
-            bottom: 15px;
+        div {
+            display: inline-block;
+            background: #DDDBFA;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            font-family: "RobotoRegular";
+            font-size: 18px;
+            color: #1d293e;
+            margin-left: 5px;
             
-            div {
-                display: inline-block;
-                background: #DDDBFA;
-                width: 30px;
-                height: 30px;
-                text-align: center;
-                font-family: "RobotoRegular";
-                font-size: 18px;
-                color: #1d293e;
-                margin-left: 5px;
-                
-                &:hover {
-                    opacity: .8;
-                    transition-duration: .2s;
-                    cursor: pointer;
-                }
+            &:hover {
+                opacity: .8;
+                transition-duration: .2s;
+                cursor: pointer;
             }
         }
+    }
 	
 	.products {
             padding-top: 15px;
             
-            &.transp {
-                display: none;
-            }
+        &.transp {
+            display: none;
+        }
 		
 		.item {
 			width: 270px;
@@ -425,20 +426,20 @@ header {
 						/*color: #fff;*/
 					}
                                         
-                                        img {
-                                            opacity: .9;
-                                            transition-duration: .2s;
-                                        }
-                                        
-                                        .more {
-                                            opacity: 1;
-                                            transition-duration: .2s;
-                                        }
-                                        
-                                        .tracker {
-                                            opacity: 1;
-                                            transition-duration: .2s;
-                                        }
+                    img {
+                        opacity: .9;
+                        transition-duration: .2s;
+                    }
+                    
+                    .more {
+                        opacity: 1;
+                        transition-duration: .2s;
+                    }
+                    
+                    .tracker {
+                        opacity: 1;
+                        transition-duration: .2s;
+                    }
 				}
                                 
                                 
@@ -447,137 +448,137 @@ header {
 					display: block;
 					/*margin-bottom: 5px;*/
 					width: 100%;
-                                        transition-duration: .2s;
+                    transition-duration: .2s;
 				}
 				
 				.product_details {
 					width: 100%;
-                                        position: absolute;
-                                        bottom: 0;
+                    position: absolute;
+                    bottom: 0;
 					
 					span {
 						display: block;
 						vertical-align: bottom;
 						
 						&.product_name {
-							padding-left: 5px;
-                                                        text-align: center;
-                                                        color: #3A394E;
+    						padding-left: 5px;
+                            text-align: center;
+                            color: #3A394E;
 						}
 						
 						&.product_price {
 							text-align: right;
-                                                        color: #3A394E;
-                                                        /*padding-top: 10px;*/
-                                                        
-                                                        span {
-                                                            display: inline-block;
-                                                            padding: 5px 10px;
-                                                            background: #5e945a;
-                                                            color: #fafafa;
-                                                            font-size: 14px;
-                                                            
-                                                            &.platform {
-                                                                background: #fafafa;
-                                                                color: #5e945a;
-                                                                margin-right: -6px;
-                                                            }
-                                                        }
-                                                        
-                                                        div {
-                                                            vertical-align: bottom;
-                                                            
-                                                            &.more {
-                                                                display: inline-block;
-                                                                margin-right: -4px;
-                                                                padding: 7px 10px;
-                                                                
-                                                                div {
-                                                                    height: 2px;
-                                                                }
-                                                                
-                                                                div.similar_offer {
-                                                                    height: auto;
-                                                                    top: 25px;
-                                                                    
-                                                                    div:hover {
-                                                                        background: #DDDBFA;
-                                                                    }
-                                                                    
-                                                                    div {
-                                                                        min-width: 185px;
-                                                                    }
-                                                                    
-                                                                    .site_offer:hover {
-                                                                        background: #DDDBFA;
-                                                                    }
-                                                                }
-                                                                
-                                                                &.active {
-                                                                    background: #5e945a;
+                            color: #3A394E;
+                            /*padding-top: 10px;*/
+                            
+                            span {
+                                display: inline-block;
+                                padding: 5px 10px;
+                                background: #5e945a;
+                                color: #fafafa;
+                                font-size: 14px;
+                                
+                                &.platform {
+                                    background: #fafafa;
+                                    color: #5e945a;
+                                    margin-right: -6px;
+                                }
+                            }
+                            
+                            div {
+                                vertical-align: bottom;
+                                
+                                &.more {
+                                    display: inline-block;
+                                    margin-right: -4px;
+                                    padding: 7px 10px;
+                                    
+                                    div {
+                                        height: 2px;
+                                    }
+                                    
+                                    div.similar_offer {
+                                        height: auto;
+                                        top: 25px;
+                                        
+                                        div:hover {
+                                            background: #DDDBFA;
+                                        }
+                                        
+                                        div {
+                                            min-width: 185px;
+                                        }
+                                        
+                                        .site_offer:hover {
+                                            background: #DDDBFA;
+                                        }
+                                    }
+                                    
+                                    &.active {
+                                        background: #5e945a;
 
-                                                                    div {
-                                                                        background: #fafafa;
-                                                                        transition-duration: .2s;
-                                                                    }
-                                                                    
-                                                                    div:last-of-type {
-                                                                        margin: 3px 0 0 0;
-                                                                    }
-                                                                }
-                                                                
-                                                                div.similar_offer {
-                                                                    background: #fafafa;
+                                        div {
+                                            background: #fafafa;
+                                            transition-duration: .2s;
+                                        }
+                                        
+                                        div:last-of-type {
+                                            margin: 3px 0 0 0;
+                                        }
+                                    }
+                                    
+                                    div.similar_offer {
+                                        background: #fafafa;
 
-                                                                    span.offer_price {
-                                                                        display: table-cell;
-                                                                        padding: 5px 10px;
-                                                                        color: #fafafa;
-                                                                        background: #5e945a;
-                                                                        width: 65px;
-                                                                    }
+                                        span.offer_price {
+                                            display: table-cell;
+                                            padding: 5px 10px;
+                                            color: #fafafa;
+                                            background: #5e945a;
+                                            width: 65px;
+                                        }
 
-                                                                    span.site_offer {
-                                                                        display: table-cell;
-                                                                        color: #636363;
-                                                                        padding: 5px;
-                                                                        width: 135px;
-                                                                        text-align: left;
-                                                                        background: #fafafa;
-                                                                    }
-                                                                }
-                                                            }
-                                                        }
+                                        span.site_offer {
+                                            display: table-cell;
+                                            color: #636363;
+                                            padding: 5px;
+                                            width: 135px;
+                                            text-align: left;
+                                            background: #fafafa;
+                                        }
+                                    }
+                                }
+                            }
 						}
 					}
 				}
                                 
-                                .tracker {
-                                    position: relative;
-                                    display: inline-block;
-                                    margin-right: -4px;
-                                    width: 35px;
-                                    height: 29px;
-                                    background-color: #fafafa;
-                                    background-image: url(../images/tracker_g.png);
-                                    background-position: center;
-                                    background-repeat: no-repeat;
-                                    background-size: contain;
-                                    transition-duration: .2s;
-                                    opacity: 0;
-                                    
-                                    &.active {
-                                        background-image: url(../images/tracker_w.png);
-                                        background-color: #5e945a;
-                                        transition-duration: .2s;
-                                    }
-                                    
-                                    &:hover {
-                                        background-image: url(../images/tracker_w.png);
-                                        background-color: #5e945a;
-                                        transition-duration: .2s;
-                                    }
-                                }
+                .tracker {
+                    position: relative;
+                    display: inline-block;
+                    margin-right: -4px;
+                    width: 35px;
+                    height: 29px;
+                    background-color: #fafafa;
+                    background-image: url(../images/tracker_g.png);
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: contain;
+                    transition-duration: .2s;
+                    opacity: 0;
+                    
+                    &.active {
+                        background-image: url(../images/tracker_w.png);
+                        background-color: #5e945a;
+                        transition-duration: .2s;
+                    }
+                    
+                    &:hover {
+                        background-image: url(../images/tracker_w.png);
+                        background-color: #5e945a;
+                        transition-duration: .2s;
+                    }
+                }
 			}
 		}
 	}
@@ -586,20 +587,20 @@ header {
 		width: 100%;
 		padding: 30px 0px;
                 
-                &.pad_top_no {
-                    padding-top: 0px;
-                }
-                
-                &.white_back {
-                                    
-                    .search_button {
-                        right: 0;
-                    }
+        &.pad_top_no {
+            padding-top: 0px;
+        }
+        
+        &.white_back {
+                            
+            .search_button {
+                right: 0;
+            }
 
-                    .search_reset {
-                        right: 45px;
-                    }
-                }
+            .search_reset {
+                right: 45px;
+            }
+        }
 		
 		.filter {
 			text-align: center;
@@ -692,14 +693,50 @@ header {
 						opacity: .9;
 					}
                                         
-                                        &.edit {
-                                           background: #5e945a;
-                                           margin-right: 15px;
-                                        }
+                    &.edit {
+                       background: #5e945a;
+                       margin-right: 15px;
+                    }
 				}
 			}			
 		}
-	}
+
+    }
+    
+    &.stock {
+        background: #636363;
+        padding: 0 35px;
+        box-shadow: #000 0px 2px 15px 1px;
+
+        h2 {
+            padding: 1em 0;
+            margin: 0;
+        }
+
+        .stock_list {
+            padding-bottom: 25px;
+
+            .item {
+                display: inline-block;
+                max-width: 230px;
+                text-align: center;
+                margin-right: 55px;
+
+                img {
+                    max-width: 230px;
+                }
+
+                &:hover {
+                    cursor: pointer;
+                    opacity: .9;
+                }
+            }
+
+            .item:last-of-type {
+                margin-right: 0px;
+            }
+        }
+    }
 	
 	.form {
 		width: 250px;
