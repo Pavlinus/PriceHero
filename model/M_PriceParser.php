@@ -16,12 +16,12 @@ class M_PriceParser
     const GAMEPARK_ID = 6;
     const GZONLINE_ID = 7;
     const STEAMPAY_ID = 8;
-    
     const GAME_REPUBLIC_ID = 9;
     const DANDYLAND_ID = 10;
     const XPRESSGAMES_ID = 11;
     const PLAYGAMES_ID = 12;
     const NEXTGAME_ID = 13;
+    const GAMEBUY_ID = 14;
 
 
     public function __construct()
@@ -237,10 +237,59 @@ class M_PriceParser
                         $this->logger->addLog($item['link_id']);
                     }
                     break;
+
+                case self::GAMEBUY_ID:
+                    $price = $this->parseGameBuy($item);
+                    
+                    if(count($price) > 0)
+                    {
+                        $priceList[] = $price;
+                    }
+                    else
+                    {
+                        $this->logger->addLog($item['link_id']);
+                    }
+                    break;
             }
         }
         
         return $priceList;
+    }
+
+
+    /**
+     * Извлекает цены с GameBuy
+     * @param $linkItem Элемент ссылки
+     * @return 
+     */
+    private function parseGameBuy($linkItem)
+    {
+        $link = $linkItem['link'];
+        $html = file_get_html($link);
+        $matches = null;
+        
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
+        foreach($html->find('div.panel-col-last span.uc-price') as $span)
+        {
+            $val = str_replace(' ', '', $span->outertext);
+            preg_match('/\d+/', $val, $matches);
+        }
+
+        // цена не найдена
+        if(empty($matches) || $matches == null)
+        {
+            return array();
+        }
+        
+        $price = str_replace(" ", "", $matches[0]);
+        
+        return array(
+            'linkId' => $linkItem['link_id'],
+            'price' => $price);
     }
 
 

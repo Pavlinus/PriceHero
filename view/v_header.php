@@ -4,10 +4,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
-        <meta name="description" content="Игровой каталог Game2Buy" />
-        <meta name="keywords" content="каталог, игровой, минимальные цены, низкие цены, найти" />
+        <meta name="description" content="Game2Buy | Каталог дешевых игр" />
+        <meta name="keywords" content="дешевые игры, купить игры дешево, каталог дешевых игр" />
         <link rel="stylesheet/less" href="css/style.less" type="text/css" />
-        <title>Game2Buy</title>
+        <title>Game2Buy | Каталог дешевых игр</title>
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.min.js" type="text/javascript"></script>
         <script src="js/less.js" type="text/javascript"></script>
@@ -19,7 +19,7 @@
             <div class="header_wrapper">
                 <div class="logo">
                     <div>
-                        <a href="/">
+                        <a href="/" title="Каталог дешевых игр">
                             <span>Game</span>
                             <span class="two_rot">2</span>
                             <span>Buy</span>
