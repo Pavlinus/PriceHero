@@ -369,7 +369,7 @@ img.hidden {
         }
     }
     
-    .about_service {
+    .about_service, .faq {
         padding: 20px;
         
         a {
@@ -379,6 +379,45 @@ img.hidden {
                 background: #5e945a;
                 padding: 10px;
                 color: #fafafa;
+            }
+        }
+    }
+
+    .faq {
+
+        div {
+            margin-bottom: 15px;
+
+            &.title {
+                border-left: 5px solid #5e945a;
+                padding-left: 10px;
+            }
+
+            &.subject_content {
+                max-width: 700px;
+                padding-left: 35px;
+
+                p {
+                    margin-bottom: 10px;
+                }
+            }
+
+            img {
+                display: inline-block;
+                margin: 10px 0;
+            }
+
+            a {
+
+                &.subject {
+                    font-size: 20px;
+                    color: #fafafa;
+                    font-family: "RobotoRegular";
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
             }
         }
     }

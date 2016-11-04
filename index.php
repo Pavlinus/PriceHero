@@ -14,7 +14,7 @@
 	}
 	
 	$action = 'action_';
-	$action .= (isset($_GET['act'])) ? $_GET['act'] : 'index';
+	$action .= (isset($_GET['act'])) ? strtolower($_GET['act']) : 'index';
 	
 	if(!isset($_GET['c']))
 	{
@@ -22,7 +22,7 @@
 	}
 	else
 	{
-		$ctrl = $_GET['c'];
+		$ctrl = strtolower($_GET['c']);
 	}
 	
 	if(!isset($_GET['act']))
@@ -40,12 +40,16 @@
 			$controller = new C_Admin();
 			break;
                     
-                case 'room':
+        case 'room':
 			$controller = new C_Room();
 			break;
                     
-                case 'about':
+        case 'about':
 			$controller = new C_About();
+			break;
+
+        case 'faq':
+			$controller = new C_Faq();
 			break;
 			
 		case 'index':
