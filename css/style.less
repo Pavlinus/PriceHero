@@ -162,6 +162,10 @@ header {
         }
 }
 
+img.hidden {
+    display: none;
+}
+
 .search {
 	position: relative;
 	margin: 0 0 0 auto;
@@ -815,7 +819,8 @@ header {
 		
 		input[type="text"],
                 input[type="password"],
-                input[type="email"] {
+                input[type="email"],
+                textarea {
 			display: block;
 			border: 1px solid @c_lgrey;
 			background-color: #fff;
@@ -1036,6 +1041,44 @@ section {
             .result_wrapper .row .col_3.sim_offer .more {
                 padding: 10px;
             }
+
+            .response {
+
+                .form {
+                    width: 450px;
+                    max-width: 450px;
+
+                    input[type="email"] {
+                        width: 430px;
+                    }
+
+                    textarea {
+                        max-width: 430px;
+                        min-width: 430px;
+                        max-height: 120px;
+                        min-height: 120px;
+                        margin: 0px;
+                        resize: none;
+                    }
+
+                    .captcha {
+
+                        img, input {
+                            display: inline-block;
+                            margin: 0px;
+                            vertical-align: top;
+                        }
+
+                        img {
+                            margin-right: -6px;
+                        }
+
+                        input {
+                            width: 300px !important;
+                        }
+                    }
+                }
+            }
         }
 
         .container {
@@ -1061,8 +1104,27 @@ footer {
 		
 		.wrapper {
 			max-width: 1170px;
-			padding: 20px 40px;
+			padding: 30px 40px;
 			margin: 0 auto;
+
+            .social {
+                margin: 0 auto;
+                width: 300px;
+                text-align: center;
+                margin-top: 10px;
+                border-top: 1px solid #DDDBFA;
+                padding-top: 15px;
+
+                img {
+                    max-height: 40px;
+                    display: inline-block;
+                    margin-right: 15px;
+                }
+
+                a:last-of-type img {
+                    margin-right: 0px;
+                }
+            }
 			
 			.footer_menu {
 				

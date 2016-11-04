@@ -3,9 +3,30 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link href="favicon.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
-        <meta name="description" content="Game2Buy | Каталог дешевых игр" />
+        <link href="../images/favicon.ico" rel="shortcut icon" 
+            type="image/vnd.microsoft.icon" />
+        <meta name="description" content="Выбираем лучшие цены среди множества интернет магазинов видео игр" />
         <meta name="keywords" content="дешевые игры, купить игры дешево, каталог дешевых игр" />
+
+        <!-- Google+ meta -->
+        <meta property = "og:image" content = "http://game2buy.ru/images/logo_small.png">
+        <meta property = "og:title" content = "Game2Buy | Каталог дешевых игр">
+        <meta property = "og:description" content = "Выбираем лучшие цены среди множества интернет магазинов видео игр">
+
+        <!-- Twitter meta -->
+        <meta name = "twitter:title" content = "Game2Buy | Каталог дешевых игр">
+        <meta name = "twitter:site" content = "Game2Buy.ru">
+        <meta name = "twitter:description" content = "Выбираем лучшие цены среди множества интернет магазинов видео игр">
+        <meta name = "twitter:domain" content = "game2buy.ru">
+        <meta name = "twitter:image:src" content = "http://game2buy.ru/images/logo_small.png">
+
+        <!-- Facebook meta -->
+        <meta property = "og:url" content = "http://game2buy.ru">
+        <meta property = "og:see_also" content = "http://game2buy.ru">
+        <meta property = "og:site_name" content = "Game2Buy.ru">
+
+        <meta name = "robots" content = "all">
+
         <link rel="stylesheet/less" href="css/style.less" type="text/css" />
         <title>Game2Buy | Каталог дешевых игр</title>
         <script src="js/jquery.min.js" type="text/javascript"></script>

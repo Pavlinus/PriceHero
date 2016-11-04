@@ -8,3 +8,4 @@ Disallow: /js
 Disallow: /upload
 Disallow: /view
 Host: game2buy.ru
+Sitemap: http://game2buy.ru/sitemap.xml

@@ -357,4 +357,30 @@ class M_Room
     {
         
     }
+
+
+    /**
+     * Отправка отзыва пользователя админу
+     */
+    public function sendUserResponse()
+    {
+        $from = 'info@game2buy.ru';
+        if(isset($_POST['au_email']) && $_POST['au_email'] !== '')
+        {
+            $from = $_POST['au_email'];
+        }
+
+        //$to  = "<info@game2buy.ru>";
+        $to  = "pavlin.kov@mail.ru, info@game2buy.ru";
+        
+        $subject = "Новый отзыв / Game2Buy.ru";
+        
+        $message = " <p>Email пользователя: $from</p>";
+        $message .= " <p>{$_POST['response']}</p>";
+
+        $headers  = "Content-type: text/html; charset=utf-8 \r\n";
+        $headers .= "From: <$from>\r\n"; 
+
+        mail($to, $subject, $message, $headers);
+    }
 }

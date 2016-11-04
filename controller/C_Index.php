@@ -1,5 +1,6 @@
 <?php
 
+
 class C_Index extends C_Base
 {
     private $mCatalog;

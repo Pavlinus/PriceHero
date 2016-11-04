@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 /**
 * <p>Контроллер панели администратора</p>
@@ -383,6 +384,40 @@ class C_Room extends C_Base
         $this->content = $this->Template(
             "view/v_user_auth.php", 
             array()
+        );
+    }
+
+    /**
+     * Обработчик отзывов пользователей
+     */
+    public function action_response()
+    {
+        $err_msg = '';
+
+        if(isset($_POST['response']))
+        {
+            if (md5($_POST['norobot']) == $_SESSION['randomnr2'])
+            { 
+                $this->content = $this->Template(
+                    'view/v_room_response_ok.php', 
+                    array(
+                        'error' => $err_msg
+                    )
+                );
+                $this->room->sendUserResponse();
+                return;
+            }
+            else
+            {  
+                $err_msg = 'Код с картинки введен неверно';
+            }
+        }
+        
+        $this->content = $this->Template(
+            'view/v_room_response.php', 
+            array(
+                'error' => $err_msg
+            )
         );
     }
 }

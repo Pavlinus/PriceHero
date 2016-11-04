@@ -27,11 +27,10 @@
 
             
             <div class="content">
-                
                 <div class="lastUpdates">
                     <h1>Каталог дешевых игр Game2Buy</h1>
                     <h2>Последние обновления</h2>
-
+                    
                     <div class="products">
 
                         <? foreach($gamesList as $game) : ?>
