@@ -28,6 +28,7 @@
         <meta name = "robots" content = "all">
 
         <link rel="stylesheet/less" href="css/style.less" type="text/css" />
+        <link rel="stylesheet" href="css/component.css" type="text/css" />
         <title>Game2Buy | Каталог дешевых игр</title>
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.min.js" type="text/javascript"></script>

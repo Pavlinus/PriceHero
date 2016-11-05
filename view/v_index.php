@@ -1,3 +1,58 @@
+<section class="slider">
+    <div class="container">
+        <article id="cc-slider">
+          <input checked="checked" name="cc-slider" id="slide1" type="radio">
+          <input name="cc-slider" id="slide2" type="radio">
+          <input name="cc-slider" id="slide3" type="radio">
+
+          <div id="cc-slides">
+            <div id="overflow">
+              <div class="inner">
+
+                <article>
+                    <div class="cctooltip">
+                        <h3>Dark souls 3</h3>
+                        <h3 class="price">1295 руб</h3>
+                    </div>
+                    <a href="index.php?c=index&act=game&name=darksouls3">
+                        <img src="../pages/darksouls3/darksouls3.jpg"> 
+                    </a>
+                </article>
+
+                <article>
+                    <div class="cctooltip">
+                        <h3>DOOM</h3>
+                        <h3 class="price">799 руб</h3>
+                    </div>
+                    <a href="index.php?c=index&act=game&name=doom">
+                        <img src="../pages/doom/doom.jpg"> 
+                    </a>
+                </article>
+
+                <article>
+                    <div class="cctooltip">
+                        <h3>Sid Meier's Civilization V</h3>
+                        <h3 class="price">149 руб</h3>
+                    </div>
+                    <a href="index.php?c=index&act=game&name=civilization5">
+                        <img src="../pages/civilization5/civilization5.jpg">
+                    </a>
+                </article>
+
+              </div>
+            </div>
+          </div>
+
+          <div id="controls">
+            <label for="slide1"></label>
+            <label for="slide2"></label>
+            <label for="slide3"></label>
+          </div>
+
+        </article>
+    </div>
+</section>
+
 <section class="main">
     <div class="container">
         

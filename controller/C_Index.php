@@ -225,4 +225,36 @@ class C_Index extends C_Base
         );
         exit();
     }
+
+
+    /**
+     * Загрузка статичного контента об игре
+     */
+    public function action_game()
+    {
+        if(isset($_GET['name']))
+        {
+            $filename = strtolower($_GET['name']);
+            $rootPath = '/pages/'.$filename.'/';
+            $filepath = $_SERVER['DOCUMENT_ROOT'].$rootPath;
+
+            if(file_exists($filepath.$filename.'.php'))
+            {
+                ob_start();
+                include_once($filepath.$filename.'.php');
+                $content = ob_get_clean();
+
+                $this->content = $this->Template(
+                    'view/v_game_page.php', 
+                    array(
+                        'content' => $content,
+                        'image' => $rootPath.$filename.'.jpg')
+                );
+                return;
+            }
+        }
+
+        //header("Location: index.php");
+        //exit();
+    }
 }

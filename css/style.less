@@ -97,8 +97,7 @@ body {
 header {
 	
 	.container {
-                background: #fafafa;
-                margin-bottom: 70px;
+        background: #fafafa;
 		
 		.header_wrapper {
 			display: table;
@@ -463,7 +462,7 @@ img.hidden {
 				width: 100%;
 				padding: 0px;
 				background: #DDDBFA;
-                                position: relative;
+                position: relative;
                                 
 				
 				&:hover {
@@ -634,6 +633,7 @@ img.hidden {
 	>.wrapper {
 		width: 100%;
 		padding: 30px 0px;
+        position: relative;
                 
         &.pad_top_no {
             padding-top: 0px;
@@ -989,6 +989,13 @@ section {
         }
 
         &.room {
+
+            .image_container {
+
+                img {
+                    max-width: 100%;
+                }
+            }
             
             .wrapper {
                 
@@ -1119,6 +1126,110 @@ section {
                     }
                 }
             }
+        }
+
+        &.gamepage {
+
+            h2 {
+                margin: 0;
+            }
+
+            article {
+                margin: 15px 0;
+                   
+                p {
+                    text-align: justify;
+                }
+            }
+
+            div {
+
+                &.video {
+                    margin: 25px 0 0px 0;
+
+                    iframe {
+                        margin: 0 auto;
+                        display: block;
+                    }
+                }
+
+                .buy_container {
+                    position: absolute;
+                    top: 40px;
+                    right: 0;
+                    max-width: 210px;
+
+                    .price {
+                        display: block;
+                        font-size: 22px;
+                        color: #5e945a;
+                        font-family: "RobotoBold";
+                        text-align: center;
+                        margin-bottom: 10px;
+                    }
+
+                    .buy_button {
+                        display: block;
+                        background: #5e945a;
+                        text-align: center;
+                        color: #fafafa;
+                        font-size: 16px;
+                        text-transform: uppercase;
+                        font-family: "RobotoBold";
+                        padding: 10px 70px;
+                        border: none;
+
+                        &:hover {
+                            cursor: pointer;
+                        }
+                    }
+
+                    .options {
+                        padding: 10px 15px 10px 30px;
+
+                        span {
+                            display: block;
+                            color: #636363;
+                            font-family: "RobotoRegular";
+                            font-size: 14px;
+                            position: relative;
+                            margin-bottom: 5px;
+
+                            &:before {
+                                content: '';
+                                background-image: url('../images/check_mark.png');
+                                width: 20px;
+                                height: 20px;
+                                position: absolute;
+                                top: -3px;
+                                left: -20px;
+                            }
+                        }
+                    }
+
+                }
+                
+                .partners {
+                    position: absolute;
+                    top: 45px;
+                    right: 260px;
+
+                    span {
+                        display: block;
+                        color: #636363;
+                        font-family: "RobotoBold";
+                        font-size: 16px;
+                        position: relative;
+                        margin-bottom: 10px;
+                    }
+
+                    img {
+                        display: block;
+                        max-width: 100%;
+                    }
+                }
+            }
+
         }
 
         .container {
