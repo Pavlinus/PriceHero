@@ -22,6 +22,8 @@ class M_PriceParser
     const PLAYGAMES_ID = 12;
     const NEXTGAME_ID = 13;
     const GAMEBUY_ID = 14;
+    const PLAYO_ID = 15;
+    const GAME93W_ID = 16;
 
 
     public function __construct()
@@ -250,10 +252,108 @@ class M_PriceParser
                         $this->logger->addLog($item['link_id']);
                     }
                     break;
+
+                case self::PLAYO_ID:
+                    $price = $this->parsePlayo($item);
+                    
+                    if(count($price) > 0)
+                    {
+                        $priceList[] = $price;
+                    }
+                    else
+                    {
+                        $this->logger->addLog($item['link_id']);
+                    }
+                    break;
+
+                case self::GAME93W_ID:
+                    $price = $this->parseGame93W($item);
+                    
+                    if(count($price) > 0)
+                    {
+                        $priceList[] = $price;
+                    }
+                    else
+                    {
+                        $this->logger->addLog($item['link_id']);
+                    }
+                    break;
             }
         }
         
         return $priceList;
+    }
+
+
+    /**
+     * Извлекает цены с Game93W
+     * @param $linkItem Элемент ссылки
+     * @return 
+     */
+    private function parseGame93W($linkItem)
+    {
+        $link = $linkItem['link'];
+        $html = file_get_html($link);
+        $matches = null;
+        
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
+        foreach($html->find('div.ribbon2 b') as $span)
+        {
+            $val = str_replace(' ', '', $span->outertext);
+            preg_match('/\d+/', $val, $matches);
+        }
+
+        // цена не найдена
+        if(empty($matches) || $matches == null)
+        {
+            return array();
+        }
+        
+        $price = str_replace(" ", "", $matches[0]);
+        
+        return array(
+            'linkId' => $linkItem['link_id'],
+            'price' => $price);
+    }
+
+
+    /**
+     * Извлекает цены с Playo
+     * @param $linkItem Элемент ссылки
+     * @return 
+     */
+    private function parsePlayo($linkItem)
+    {
+        $link = $linkItem['link'];
+        $html = file_get_html($link);
+        $matches = null;
+        
+        if($html == null || !$html)
+        {
+            return array();
+        }
+        
+        foreach($html->find('span.price') as $span)
+        {
+            $val = str_replace(' ', '', $span->outertext);
+            preg_match('/\d+/', $val, $matches);
+        }
+
+        // цена не найдена
+        if(empty($matches) || $matches == null)
+        {
+            return array();
+        }
+        
+        $price = str_replace(" ", "", $matches[0]);
+        
+        return array(
+            'linkId' => $linkItem['link_id'],
+            'price' => $price);
     }
 
 

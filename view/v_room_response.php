@@ -4,7 +4,7 @@
         <? include "h_menu.php"; ?>
         
         <div class="main_container_wrapper">
-            <div class="content response">
+            <div class="content response room">
                 <div class="wrapper">
                     <div class="form">
                         <? if($error != '') : ?>

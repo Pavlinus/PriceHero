@@ -4,7 +4,7 @@
         <? include "h_menu.php"; ?>
         
         <div class="main_container_wrapper">
-            <div class="content">
+            <div class="content room">
                 <div class="wrapper">
                     <p class="center_text">На Ваш email будет выслана ссылка для смены пароля</p>
                     <div class="spacer_30"></div>

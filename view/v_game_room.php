@@ -4,7 +4,7 @@
         <? include "h_menu.php"; ?>
         
         <div class="main_container_wrapper">
-            <div class="content white">
+            <div class="content room">
                 <div class="wrapper pad_top_no">
                     <div class="filter">
                         <? foreach($platforms as $pl) : ?>
