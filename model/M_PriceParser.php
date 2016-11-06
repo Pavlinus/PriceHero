@@ -298,7 +298,9 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         foreach($html->find('div.ribbon2 b') as $span)
@@ -310,7 +312,9 @@ class M_PriceParser
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         $price = str_replace(" ", "", $matches[0]);
@@ -334,7 +338,9 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         foreach($html->find('span.price') as $span)
@@ -346,7 +352,9 @@ class M_PriceParser
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         $price = str_replace(" ", "", $matches[0]);
@@ -370,19 +378,24 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         foreach($html->find('div.panel-col-last span.uc-price') as $span)
         {
             $val = str_replace(' ', '', $span->outertext);
             preg_match('/\d+/', $val, $matches);
+            break;
         }
 
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         $price = str_replace(" ", "", $matches[0]);
@@ -406,7 +419,9 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         foreach($html->find('span[id="price"]') as $span)
@@ -418,7 +433,9 @@ class M_PriceParser
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         $price = str_replace(" ", "", $matches[0]);
@@ -442,7 +459,9 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         foreach($html->find('div.add2cart span.price') as $span)
@@ -454,7 +473,9 @@ class M_PriceParser
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         $price = str_replace(" ", "", $matches[0]);
@@ -478,7 +499,9 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         foreach($html->find('span.price-new') as $span)
@@ -490,7 +513,9 @@ class M_PriceParser
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         $price = str_replace(" ", "", $matches[0]);
@@ -514,7 +539,9 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         foreach($html->find('span.inner_price_el') as $span)
@@ -526,7 +553,9 @@ class M_PriceParser
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         $price = str_replace(" ", "", $matches[0]);
@@ -550,7 +579,9 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         foreach($html->find('span.catalog_price_big') as $span)
@@ -562,7 +593,9 @@ class M_PriceParser
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         $price = str_replace(" ", "", $matches[0]);
@@ -586,7 +619,9 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         foreach($html->find('span.price') as $span)
@@ -597,7 +632,9 @@ class M_PriceParser
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         $price = str_replace(" ", "", $matches[0]);
@@ -621,7 +658,9 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         foreach($html->find('div.list_price') as $span)
@@ -632,7 +671,9 @@ class M_PriceParser
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         $price = str_replace(" ", "", $matches[0]);
@@ -656,7 +697,9 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         foreach($html->find('div#eprice') as $span)
@@ -668,7 +711,9 @@ class M_PriceParser
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
 
         return array(
@@ -690,7 +735,9 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         foreach($html->find('span.r-curr-price') as $span)
@@ -702,7 +749,9 @@ class M_PriceParser
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
 
         return array(
@@ -724,9 +773,18 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
+        foreach($html->find('div.not_order_price') as $span)
+        {
+            $outerText = str_replace(" ", "", $span->outertext);
+            preg_match('/(\d)+/', $outerText, $matches);
+            break;
+        }
+
         foreach($html->find('div.price') as $span)
         {
             $outerText = str_replace(" ", "", $span->outertext);
@@ -734,10 +792,13 @@ class M_PriceParser
             break;
         }
 
+
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
 
         return array(
@@ -759,7 +820,9 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         foreach($html->find('span[itemprop="price"]') as $span)
@@ -770,7 +833,9 @@ class M_PriceParser
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
 
         return array(
@@ -792,7 +857,9 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         foreach($html->find('span.tovar-price') as $span)
@@ -803,7 +870,9 @@ class M_PriceParser
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
 
         return array(
@@ -825,7 +894,9 @@ class M_PriceParser
         
         if($html == null || !$html)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         $arResult = $html->find('div.discount_final_price');
@@ -850,7 +921,9 @@ class M_PriceParser
         // цена не найдена
         if(empty($matches) || $matches == null)
         {
-            return array();
+            return array(
+                'linkId' => $linkItem['link_id'],
+                'price' => 0);
         }
         
         return array(

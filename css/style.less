@@ -445,12 +445,29 @@ img.hidden {
             }
         }
     }
+
+    .products:last-of-type {
+        .search_sep {
+            display: none;
+        }
+    }
 	
 	.products {
             padding-top: 15px;
             
         &.transp {
             display: none;
+        }
+
+        h3 {
+            color: #1d293e;
+            margin: 0 0 10px 0;
+        }
+
+        .search_sep {
+            height: 1px;
+            border-bottom: 1px;
+            border-bottom: 1px solid #DDDBFA;
         }
 		
 		.item {

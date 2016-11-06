@@ -223,7 +223,7 @@ class M_Catalog
                 . "FROM t_total Total "
                 . "LEFT JOIN t_game Game USING(game_id) "
                 . "LEFT JOIN t_price Price USING(price_id) "
-                . "WHERE Total.game_id IN $inGamesId $inPlatformId"
+                . "WHERE Price.new_price <> 0 AND Total.game_id IN $inGamesId $inPlatformId"
                 . "ORDER BY price ASC ";
 
         $rows = $this->msql->Select($query);
@@ -369,7 +369,8 @@ class M_Catalog
                     . "LEFT JOIN t_price Price ON(Price.price_id=Total.price_id) "
                     . "WHERE Total.game_id=$gameId AND "
                     . "Total.platform_id=$platformId AND "
-                    . "Site.site_id<>$siteId "
+                    . "Site.site_id<>$siteId AND "
+                    . "Price.new_price<>0 "
                     . "ORDER BY price ASC";
             
             $rows = $this->msql->Select($query);

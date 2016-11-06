@@ -168,14 +168,29 @@ class C_Index extends C_Base
             $arResult = $this->mCatalog->getGames(
                     $gamesId, 
                     'Game.game_id',
-                    $and
+                    $and,
+                    'ORDER BY game'
             );
 
+            $orderedResult = array();
+            $gameName = '';
+            $row = 0;
+            foreach($arResult as $result)
+            {
+                if($gameName != $result['game'])
+                {
+                    $row += 1;
+                    $gameName = $result['game'];
+                }
+
+                $orderedResult[$row][] = $result;
+            }
+
             echo $this->Template(
-                    'view/v_index_search_result.php', 
-                    array(
-                        'gamesList' => $arResult
-                    )
+                'view/v_index_search_result.php', 
+                array(
+                    'gamesList' => $orderedResult
+                )
             );
             exit();
         }

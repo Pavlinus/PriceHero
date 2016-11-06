@@ -54,7 +54,7 @@ function getOldPrice($msql)
 function getPrice($msql)
 {
     $query =  "SELECT * FROM t_price "
-            . "ORDER BY lastUpdate ASC LIMIT " . LIMIT;
+            . "WHERE new_price=0";
 
     return $msql->Select($query);
 }

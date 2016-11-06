@@ -263,7 +263,8 @@ $(document).ready(function()
                    $(this).removeClass('active');
                 });
                 
-                togglePaginationUpdates();
+                //togglePaginationUpdates();
+                $('div.pagination').fadeOut(0);
             }
         });
         

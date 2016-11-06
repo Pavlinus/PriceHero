@@ -41,17 +41,17 @@ class M_Search
          */
 	public function searchGame()
 	{
-            if(isset($_REQUEST['name']) && $_REQUEST['name'] != null)
-            {
-                $keywords = $this->getKeywordsArray($_REQUEST['name']);
-                
-                if(!empty($keywords))
-                {
-                    return $this->searchGameId($keywords);
-                }
-            }
+        if(isset($_REQUEST['name']) && $_REQUEST['name'] != null)
+        {
+            $keywords = $this->getKeywordsArray($_REQUEST['name']);
             
-            return false;
+            if(!empty($keywords))
+            {
+                return $this->searchGameId($keywords);
+            }
+        }
+        
+        return false;
 	}
         
         
@@ -68,7 +68,15 @@ class M_Search
 
             for($i = 1; $i <= $tblKeyNum && $i <= $tblKeyNum; $i++)
             {
-                $query .= "key_".$i." IN ".$keys;
+                //$query .= "key_".$i." IN ".$keys;
+                foreach ($keywords as $key => $value) 
+                {
+                    $query .= "key_".$i." LIKE '".$value."%'";
+                    if($key < count($keywords) - 1)
+                    {
+                        $query .= " OR ";
+                    }
+                }
 
                 if($i != $tblKeyNum)
                 {
@@ -89,7 +97,7 @@ class M_Search
             {
                 $ids[] = $value['game_id'];
             }
-            
+
             return $ids;
         }
         
@@ -106,7 +114,7 @@ class M_Search
             foreach($keywords as &$word)
             {
                 $val = strtolower($word);
-                $word = htmlspecialchars("'".$val."'");
+                $word = htmlspecialchars($val);
             }
             
             return $keywords;

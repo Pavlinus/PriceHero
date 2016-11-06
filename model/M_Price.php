@@ -86,10 +86,10 @@ class M_Price
     public function updatePrice($arNewPrice, $arOldPrice)
     {
         $date = date("Y-m-d");
-        
+
         foreach($arNewPrice as $priceId => $priceValue)
         {   
-            if($priceValue == '')
+            if(!is_numeric($priceValue))
             {
                 continue;
             }
