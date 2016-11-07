@@ -140,7 +140,7 @@
         <div class="block_body">
             <h2 class="title"><span>///</span> Акции</h2>
 
-            <div class="main_container_wrapper shadow">
+            <div class="main_container_wrapper">
                 <div class="content stock">
     	        	<div class="stock_list">
     	        		<div class="item">
@@ -164,6 +164,11 @@
     	        			</a>
     	        		</div>
     	        	</div>
+                    <div class="single">
+                        <a href="https://ad.admitad.com/g/af8ef42a17d9b214c029e8b31ead25/?ulp=http%3A%2F%2Fwww.gamepark.ru%2Fsearch%2F%3Fbynews%3D242166">
+                            <img src="../images/stock/gamepark07112016.png">
+                        </a>
+                    </div>
                 </div>
         	</div>
 

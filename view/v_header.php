@@ -27,6 +27,8 @@
 
         <meta name = "robots" content = "all">
 
+        <meta name="verify-admitad" content="d9b214c029" />
+
         <link rel="stylesheet/less" href="css/style.less" type="text/css" />
         <link rel="stylesheet" href="css/component.css" type="text/css" />
         <title>Game2Buy | Каталог дешевых игр</title>

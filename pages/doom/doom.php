@@ -34,7 +34,7 @@ DOOM — новейшая игра легендарной серии игр от
 	<span>
 		Наш партнер
 	</span>
-	<a href="http://steampay.com">
+	<a href="http://steampay.me/agent.php?id=672517">
 		<img src="../images/partners/steampay.png">
 	</a>
 </div>
