@@ -112,7 +112,7 @@ class M_MSQL
 	
 	public function Delete($table, $where)
 	{
-		$query = "DELETE FROM $table WHERE $where";		
+		$query = "DELETE FROM $table WHERE $where";
 		$result = mysqli_query($this->connLink, $query);
 						
 		if (!$result)

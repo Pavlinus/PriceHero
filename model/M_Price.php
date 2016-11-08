@@ -76,6 +76,23 @@ class M_Price
             $this->msql->Delete('t_price', "price_id=$price");
         }
     }
+
+
+    /**
+    * Удаляет данные цены из таблицы t_total
+    */
+    public function deleteTblTotalPrice($priceIdArray)
+    {
+        if(empty($priceIdArray))
+        {
+            return false;
+        }
+        
+        foreach($priceIdArray as $price)
+        {
+            $this->msql->Delete('t_total', "price_id=$price");
+        }
+    }
     
     
     /**

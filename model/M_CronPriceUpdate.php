@@ -16,15 +16,24 @@ define(LIMIT, 5);
  */
 function getLinksId($msql, $arPriceId)
 {
-    $in = "(" . implode(",", $arPriceId) . ")";
-    $query =  "SELECT link_id, price_id FROM t_total "
-            . "WHERE price_id IN $in";
-    $res = $msql->Select($query);
     $arLinks = array();
+    $mPrice = M_Price::Instance();
     
-    foreach($res as $item)
+    foreach($arPriceId as $priceId)
     {
-        $arLinks[ $item['price_id'] ] = $item['link_id'];
+        $query =  "SELECT link_id, price_id FROM t_total "
+            . "WHERE price_id=$priceId";
+        $res = $msql->Select($query);
+
+        // удаляем несуществующие цены
+        if(empty($res))
+        {
+            $mPrice->deleteTblPrice(array($priceId));
+        }
+        else
+        {
+            $arLinks[ $res[0]['price_id'] ] = $res[0]['link_id'];
+        }
     }
     
     return $arLinks;
@@ -69,6 +78,8 @@ foreach($arPrice as $item)
     $arPriceId[] = $item['price_id'];
 }
 
+//print_r($arPriceId);
+
 // Сопоставленный массив ID ссылок и ID цен
 $arUnion = getLinksId($msql, $arPriceId);
 $arLinksId = array();
@@ -77,7 +88,6 @@ foreach($arUnion as $item)
 {
     $arLinksId[]['linkId'] = $item;
 }
-
 
 // Парсим цены
 $priceParser = M_PriceParser::Instance();
@@ -105,7 +115,6 @@ foreach($arPrice as $item)
 {
     $arOldPrice[ $item['price_id'] ] = $item['new_price'];
 }
-
 
 // Обновляем цены
 $mPrice = M_Price::Instance();
