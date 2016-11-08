@@ -4,6 +4,9 @@
           <input checked="checked" name="cc-slider" id="slide1" type="radio">
           <input name="cc-slider" id="slide2" type="radio">
           <input name="cc-slider" id="slide3" type="radio">
+          <input name="cc-slider" id="slide4" type="radio">
+          <input name="cc-slider" id="slide5" type="radio">
+          <input name="cc-slider" id="slide6" type="radio">
 
           <div id="cc-slides">
             <div id="overflow">
@@ -11,8 +14,38 @@
 
                 <article>
                     <div class="cctooltip">
+                        <h3>Quantum Break</h3>
+                        <h3 class="price">595 руб</h3>
+                    </div>
+                    <a href="index.php?c=index&act=game&name=quantumbreak">
+                        <img src="../pages/quantumbreak/quantumbreak.jpg"> 
+                    </a>
+                </article>
+
+                <article>
+                    <div class="cctooltip">
+                        <h3>Stellaris</h3>
+                        <h3 class="price">599 руб</h3>
+                    </div>
+                    <a href="index.php?c=index&act=game&name=stellaris">
+                        <img src="../pages/stellaris/stellaris.jpg"> 
+                    </a>
+                </article>
+
+                <article>
+                    <div class="cctooltip">
+                        <h3>Battlefield 1</h3>
+                        <h3 class="price">1 999 руб</h3>
+                    </div>
+                    <a href="index.php?c=index&act=game&name=battlefield1">
+                        <img src="../pages/battlefield1/battlefield1.jpg"> 
+                    </a>
+                </article>
+
+                <article>
+                    <div class="cctooltip">
                         <h3>Dark souls 3</h3>
-                        <h3 class="price">1295 руб</h3>
+                        <h3 class="price">1 295 руб</h3>
                     </div>
                     <a href="index.php?c=index&act=game&name=darksouls3">
                         <img src="../pages/darksouls3/darksouls3.jpg"> 
@@ -29,16 +62,6 @@
                     </a>
                 </article>
 
-                <article>
-                    <div class="cctooltip">
-                        <h3>Sid Meier's Civilization V</h3>
-                        <h3 class="price">149 руб</h3>
-                    </div>
-                    <a href="index.php?c=index&act=game&name=civilization5">
-                        <img src="../pages/civilization5/civilization5.jpg">
-                    </a>
-                </article>
-
               </div>
             </div>
           </div>
@@ -47,6 +70,9 @@
             <label for="slide1"></label>
             <label for="slide2"></label>
             <label for="slide3"></label>
+            <label for="slide4"></label>
+            <label for="slide5"></label>
+            <label for="slide6"></label>
           </div>
 
         </article>
