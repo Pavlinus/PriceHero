@@ -6,17 +6,17 @@
         <link href="../images/favicon.ico" rel="shortcut icon" 
             type="image/vnd.microsoft.icon" />
         <meta name="description" content="Выбираем лучшие цены среди множества интернет магазинов, таких как Steam, SteamBuy, SteamPay и других. Большой выбор дешевых игр на ПК и приставки PS (PlayStation) и XBox." />
-        <meta name="keywords" content="дешевые игры, купить игры дешево, каталог дешевых игр, купить игры для ps дешево, купить игры для xbox дешево" />
+        <meta name="keywords" content="дешевые игры, купить игры дешево, каталог дешевых игр, купить игры для ps дешево, купить игры для xbox дешево, дешевые игры для приставок" />
 
         <!-- Google+ meta -->
         <meta property = "og:image" content = "http://game2buy.ru/images/logo_small.png">
-        <meta property = "og:title" content = "Game2Buy | Каталог дешевых игр">
-        <meta property = "og:description" content = "Выбираем лучшие цены среди множества интернет магазинов, таких как Steam, SteamBuy, SteamPay и других. Большой выбор дешевых игр на ПК и приставки PS (PlayStation) и XBox.">
+        <meta property = "og:title" content = "Game2Buy | Дешевые игры для приставок и ПК">
+        <meta property = "og:description" content = "Выбираем лучшие цены среди множества интернет магазинов. Большой выбор дешевых игр на ПК и приставки PS (PlayStation) и XBox.">
 
         <!-- Twitter meta -->
-        <meta name = "twitter:title" content = "Game2Buy | Каталог дешевых игр">
+        <meta name = "twitter:title" content = "Game2Buy | Дешевые игры для приставок и ПК">
         <meta name = "twitter:site" content = "Game2Buy.ru">
-        <meta name = "twitter:description" content = "Выбираем лучшие цены среди множества интернет магазинов, таких как Steam, SteamBuy, SteamPay и других. Большой выбор дешевых игр на ПК и приставки PS (PlayStation) и XBox.">
+        <meta name = "twitter:description" content = "Выбираем лучшие цены среди множества интернет магазинов. Большой выбор дешевых игр на ПК и приставки PS (PlayStation) и XBox.">
         <meta name = "twitter:domain" content = "game2buy.ru">
         <meta name = "twitter:image:src" content = "http://game2buy.ru/images/logo_small.png">
 
@@ -31,7 +31,7 @@
 
         <link rel="stylesheet/less" href="css/style.less" type="text/css" />
         <link rel="stylesheet" href="css/component.css" type="text/css" />
-        <title>Game2Buy | Каталог дешевых игр</title>
+        <title>Game2Buy | Дешевые игры для приставок и ПК</title>
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.min.js" type="text/javascript"></script>
         <script src="js/less.js" type="text/javascript"></script>

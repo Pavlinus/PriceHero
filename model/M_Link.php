@@ -76,6 +76,39 @@ class M_Link
 
         return $linksData;
     }
+
+
+    /**
+     * <p>Добавляет новую ссылку в БД</p>
+     * @return Id новой(ых) ссылки(ок), иначе false
+     */
+    public function addLinkExt($gameData) 
+    {
+        $linksData = array();
+
+        foreach ($gameData as $item) 
+        {   
+            $object = array(
+                'site_id' => htmlspecialchars($item['site_id']),
+                'link' => htmlspecialchars($item['link']),
+            );
+
+            $id = $this->msql->Insert('t_link', $object);
+
+            if ($id) 
+            {
+                $linksData[] = array(
+                    'linkId' => $id,
+                    'site_id' => htmlspecialchars($item['site_id']),
+                    'platform' => htmlspecialchars($item['platform_id'])
+                );
+            } else {
+                return false;
+            }
+        }
+
+        return $linksData;
+    }
     
     
     /**
@@ -129,28 +162,30 @@ class M_Link
     
     
     /**
-    * Удаляет данные ссылки
-    */
-    public function deleteTblLink()
+     * Удаляет данные ссылки
+     */
+    public function deleteTblLink($toDelete = array())
     {
         if(isset($_REQUEST['linksDelete']) && !empty($_REQUEST['linksDelete']))
         {
-            $priceIdArray = array();
-            
-            foreach($_REQUEST['linksDelete'] as $link)
-            {
-                $this->msql->Delete('t_link', "link_id=$link");
-                
-                $query = "SELECT price_id FROM t_total WHERE link_id=$link";
-                $row = $this->msql->Select($query);
+            $toDelete = $_REQUEST['linksDelete'];
+        }
 
-                if($row)
-                {
-                    $priceIdArray[] = $row[0]['price_id'];
-                }
-                
-                $this->msql->Delete('t_total', "link_id=$link");
+        $priceIdArray = array();
+        
+        foreach($toDelete as $link)
+        {
+            $this->msql->Delete('t_link', "link_id=$link");
+            
+            $query = "SELECT price_id FROM t_total WHERE link_id=$link";
+            $row = $this->msql->Select($query);
+
+            if($row)
+            {
+                $priceIdArray[] = $row[0]['price_id'];
             }
+            
+            $this->msql->Delete('t_total', "link_id=$link");
         }
         
         return $priceIdArray;

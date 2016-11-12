@@ -84,7 +84,7 @@
         
         <? include "h_menu.php"; ?>
         
-        <h1 class="hidden">Каталог дешевых игр Game2Buy</h1>
+        <h1 class="hidden">Game2Buy | Дешевые игры для приставок и ПК</h1>
 
         <div class="block_body">
             <h2 class="title"><span>///</span> Последние обновления</h2>

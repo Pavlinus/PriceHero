@@ -39,16 +39,18 @@ class M_Search
          * Поиск ID игр, соответствующих ключевым словам
          * @return boolean
          */
-	public function searchGame()
+	public function searchGame($gameName = '', $strict = false)
 	{
         if(isset($_REQUEST['name']) && $_REQUEST['name'] != null)
         {
-            $keywords = $this->getKeywordsArray($_REQUEST['name']);
-            
-            if(!empty($keywords))
-            {
-                return $this->searchGameId($keywords);
-            }
+            $gameName = $_REQUEST['name'];
+        }
+        
+        $keywords = $this->getKeywordsArray($gameName);
+        
+        if(!empty($keywords))
+        {
+            return $this->searchGameId($keywords, $strict);
         }
         
         return false;
@@ -60,18 +62,24 @@ class M_Search
          * @param array $keywords ключевые слова названия игры
          * @return array массив id игр
          */
-        private function searchGameId($keywords)
+        private function searchGameId($keywords, $strict = false)
         {
             $tblKeyNum = 5;     // 5 ключей в таблице `t_keywords`
             $keys = "(" . implode(",", $keywords) . ")";
             $query = "SELECT game_id FROM t_keywords WHERE ";
+            $mode = "%";
+            
+            if($strict)
+            {
+                $mode = "";
+            }
 
             for($i = 1; $i <= $tblKeyNum && $i <= $tblKeyNum; $i++)
             {
                 //$query .= "key_".$i." IN ".$keys;
                 foreach ($keywords as $key => $value) 
                 {
-                    $query .= "key_".$i." LIKE '".$value."%'";
+                    $query .= "key_".$i." LIKE '".$value."$mode'";
                     if($key < count($keywords) - 1)
                     {
                         $query .= " OR ";

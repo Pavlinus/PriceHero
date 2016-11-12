@@ -692,6 +692,17 @@ class M_PriceParser
     private function parseGamePark($linkItem)
     {
         $link = $linkItem['link'];
+
+        // Делаем из партнерки обычную ссылку
+        if(preg_match('/.*ad\.admitad\.com.*/i', $link))
+        {
+            $link = preg_replace('/.*ulp=/i', '', $link);
+            $link = str_replace('%3A', ':', $link);
+            $link = str_replace('%2F', '/', $link);
+            $link = str_replace('%3F', '?', $link);
+            $link = str_replace('%3D', '=', $link);
+        }
+
         $html = file_get_html($link);
         $matches = null;
         
@@ -937,7 +948,7 @@ class M_PriceParser
      * @param $links Массив идентификаторов ссылок
      * @return Массив значений ссылок
      */
-    private function getLinksData($links)
+    public function getLinksData($links)
     {
         if(empty($links))
         {

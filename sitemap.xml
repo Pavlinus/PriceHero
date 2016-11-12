@@ -71,4 +71,22 @@
   <changefreq>monthly</changefreq>
   <priority>0.7</priority>
  </url>
+ <url>
+  <loc>http://game2buy.ru/index.php?c=index&amp;act=game&amp;name=battlefield1</loc>
+  <lastmod>2016-11-08T18:54:13+04:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
+ </url>
+ <url>
+  <loc>http://game2buy.ru/index.php?c=index&amp;act=game&amp;name=stellaris</loc>
+  <lastmod>2016-11-08T18:54:13+04:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
+ </url>
+ <url>
+  <loc>http://game2buy.ru/index.php?c=index&amp;act=game&amp;name=quantumbreak</loc>
+  <lastmod>2016-11-08T18:54:13+04:00</lastmod>
+  <changefreq>monthly</changefreq>
+  <priority>0.7</priority>
+ </url>
 </urlset>

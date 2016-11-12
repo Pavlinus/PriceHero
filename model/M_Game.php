@@ -39,11 +39,14 @@ class M_Game
      * <p>Добавляет данные игры в БД</p>
      * @return Id новой игры в БД
      */
-    public function addGame()
+    public function addGame($name = '', $genre = 1, $image = '')
     {
-        $name = htmlspecialchars($_POST['name']);
-        $genre = htmlspecialchars($_POST['genre']);
-        $image = htmlspecialchars($_POST['image']);
+        if(!empty($_POST))
+        {
+            $name = htmlspecialchars($_POST['name']);
+            $genre = htmlspecialchars($_POST['genre']);
+            $image = htmlspecialchars($_POST['image']);
+        }
 
         $object = array(
             'name' => $name,
@@ -57,9 +60,12 @@ class M_Game
     /**
      * <p>Добавляет ключевые слова из названия игры</p>
      */
-    public function addGameKeywords($gameId)
+    public function addGameKeywords($gameId, $name = '')
     {
-        $name = htmlspecialchars($_POST['name']);
+        if(!empty($_POST))
+        {
+            $name = htmlspecialchars($_POST['name']);
+        }
         
         $gameWords = explode(" ", $name);
         $offset = 5;    // 5 столбцов таблицы `t_keywords`

@@ -3,6 +3,7 @@
 include_once "M_MSQL.php";
 include_once "M_PriceParser.php";
 include_once "M_Price.php";
+include_once "M_Link.php";
 
 
 /* лимит выборки цен */
@@ -54,9 +55,35 @@ function getOldPrice($msql)
 function getPrice($msql)
 {
     $query =  "SELECT * FROM t_price "
-            . "WHERE new_price=0";
+            . "WHERE new_price=0 LIMIT ".LIMIT;
 
     return $msql->Select($query);
+}
+
+function checkLink404($arLink)
+{
+    $arGoodLink = array();
+    foreach($arLink as $link)
+    {
+        
+        $handle = curl_init($link);
+        curl_setopt($handle,  CURLOPT_RETURNTRANSFER, TRUE);
+        $response = curl_exec($handle);
+
+        $httpCode = curl_getinfo($handle, CURLINFO_HTTP_CODE);
+        if($httpCode == 404) 
+        {
+            
+            continue;
+        }
+
+        $arGoodLink[] = $link;
+
+        curl_close($handle);
+        
+    }
+
+    return $arGoodLink;
 }
 
 $msql = M_MSQL::Instance();
@@ -72,8 +99,13 @@ foreach($arPrice as $item)
 // Сопоставленный массив ID ссылок и ID цен
 $arUnion = getLinksId($msql, $arPriceId);
 $arLinksId = array();
+$linkArray = array();
 
-foreach($arUnion as $item)
+print_r($arUnion);
+exit();
+$goodLinks = checkLink404($arUnion);
+
+foreach($goodLinks as $item)
 {
     $arLinksId[]['linkId'] = $item;
 }
