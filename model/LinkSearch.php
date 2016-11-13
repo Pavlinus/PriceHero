@@ -330,17 +330,21 @@ function steambuy($gameName, $siteId)
 {
   global $arLinks;
   $host = 'http://steambuy.com/steam/';
+  $partner = '?partner=672517';
   $hostGameName = str_replace(' ', '-', $gameName);
   $linkBase = $host . $hostGameName;
 
   $link = $linkBase . $name . '/';
-  if(checkLink($link, $siteId))
+  if(check404($link . $partner))
   {
-    $arLinks[ $gameName ][] = array(
-      'link' => $link,
-      'site_id' => $siteId,
-      'platform_id' => 1
-    );
+    if(checkLink($link, $siteId))
+    {
+      $arLinks[ $gameName ][] = array(
+        'link' => $link . $partner,
+        'site_id' => $siteId,
+        'platform_id' => 1
+      );
+    }
   }
 
   return $arLinks;
@@ -433,22 +437,14 @@ function checkLink($link, $siteId)
 }
 
 // ------------------------ Игры для поиска и добавления ----------------------
-$games = array('The Secret World');
+$games = array(
+  ''
+);
 
 
 $arLinks = array();
 $linkParser = LinkSearchParser::Instance();
 $mSearch = M_Search::Instance();
-
-// foreach($games as $index => $game)
-// {
-//   // Если игра уже есть в БД
-//   if($mSearch->searchGame($game, true))
-//   {
-//     echo $game . " : already exists in database | SKIPPED<br>";
-//     unset($games[$index]);
-//   }
-// }
 
 foreach($arSite as $siteName => $siteId)
 {
@@ -466,8 +462,6 @@ $mPrice = M_Price::Instance();
 $mTotal = M_Total::Instance();
 $mPriceParser = M_PriceParser::Instance();
 
-print_r($arLinks);
-
 echo "<br>Adding games ...<br>";
 
 foreach($arLinks as $gameName => $game)
@@ -479,10 +473,13 @@ foreach($arLinks as $gameName => $game)
   $gameId = $mGame->addGame($gameName, $genreId, $image);
   $mGame->addGameKeywords($gameId, $gameName);
 
-  $linksId = $mLink->addLinkExt($game);
-  $priceList = $mPriceParser->parse($linksId);
-  $priceId = $mPrice->addPrice($priceList);
-  $totalId = $mTotal->addTotal($gameId, $linksId, $priceId);
+  if($gameId)
+  {
+    $linksId = $mLink->addLinkExt($game);
+    $priceList = $mPriceParser->parse($linksId);
+    $priceId = $mPrice->addPrice($priceList);
+    $totalId = $mTotal->addTotal($gameId, $linksId, $priceId);
+  }
 
   if($totalId)
   {
@@ -493,5 +490,9 @@ foreach($arLinks as $gameName => $game)
     echo $gameName . " : FAILED<br>";
   }
 }
+
+echo "<br><pre>";
+print_r($arLinks);
+echo "</pre>";
 
 //sleep(STANDBY);
