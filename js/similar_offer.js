@@ -58,13 +58,15 @@ function moreClickHandler()
             .find('div[name="platform_id"]').text();
     var siteId = $(this).parents('div.item')
             .find('div[name="site_id"]').text();
+    var price_from = $('input[name="price_from"]').val();
 
     moreObject = $(this);
 
     var data = { 
         game_id: gameId,
         platform_id: platformId,
-        site_id: siteId
+        site_id: siteId,
+        price_from: price_from
     };
 
     $.ajax({

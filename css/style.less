@@ -184,13 +184,14 @@ img.hidden {
 		background: #DDDBFA;
 		height: 34px;
 		padding: 5px 45px 5px 10px;
-                border: 1px solid transparent;
-                font-size: 14px;
-                font-family: "RobotoRegular";
-                
-                &:focus {
-                    border: 1px solid #1d293e;
-                }
+        border: 1px solid transparent;
+        font-size: 14px;
+        font-family: "RobotoRegular";
+        outline-color: #1d293e;
+        
+        &:focus {
+            border: 1px solid #1d293e;
+        }
 	}
 	
 	.search_button {
@@ -301,6 +302,34 @@ img.hidden {
                         color: #fafafa;
 		}
 	}
+
+    .price_filter {
+
+        span {
+            display: inline-block;
+            font-size: 14px;
+            font-family: "RobotoRegular";
+
+            &.second {
+                margin-left: 10px;
+            }
+        }
+
+        input {
+            display: inline-block;
+            border: none;
+            background: #DDDBFA;
+            height: 34px;
+            padding: 5px 5px 5px 10px;
+            border: 1px solid transparent;
+            font-size: 14px;
+            font-family: "RobotoRegular";
+            margin-left: 5px;
+            max-width: 50px;
+            outline-color: #1d293e;
+        }
+    }
+
 }
 
 .settings {

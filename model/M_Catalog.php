@@ -43,12 +43,13 @@ class M_Catalog
      * @param int $offset смещение для начала выборки
      * @return array массив данных игр
      */
-    public function getLastUpdates($offset = 0)
+    public function getLastUpdates($offset = 0, $priceFrom = 1, $priceTo = 10000)
     {
-        $priceId = $this->getPriceUpdates($offset);
+        $priceId = $this->getPriceUpdates($offset, $priceFrom, $priceTo);
         $and = array(
-            'total.platform_id' => array(1)
+            'total.platform_id' => array(1),
         );
+        $additional = " AND Price.new_price >= $priceFrom AND Price.new_price <= $priceTo";
 
         /* Учитываем установленные фильтры */
         if(isset($_POST['platformId']) && !empty($_POST['platformId']))
@@ -61,7 +62,7 @@ class M_Catalog
             $and['Genre.genre_id'] = $_POST['genreId'];
         }
         
-        return $this->getGames($priceId, 'total.price_id', $and);
+        return $this->getGames($priceId, 'total.price_id', $and, $additional);
     }
     
     
@@ -70,7 +71,7 @@ class M_Catalog
      * @param int $offset начало выборки
      * @return array массив ID игр
      */
-    public function getLastAddedGamesId($offset)
+    public function getLastAddedGamesId($offset, $priceFrom, $priceTo)
     {
         $start = $offset * self::UPDATES_ON_PAGE;
         $where = '';
@@ -101,9 +102,12 @@ class M_Catalog
         {
             $where .= ' AND ' . $authCond['where'];
         }
+
+        $where .= " AND Price.new_price >= $priceFrom AND Price.new_price <= $priceTo ";
         
         $query =  "SELECT DISTINCT Game.game_id, Total.platform_id FROM t_game Game "
                 . "LEFT JOIN t_total Total ON (Total.game_id=Game.game_id) "
+                . "LEFT JOIN t_price Price ON (Price.price_id=Total.price_id) "
                 . $authCond['leftJoin']
                 . $where
                 . "ORDER BY Game.game_id DESC "
@@ -170,7 +174,7 @@ class M_Catalog
      * @param int $offsetVal смещение для начала выборки
      * @return array массив ID обновленных цен
      */
-    public function getPriceUpdates($offsetVal = 0)
+    public function getPriceUpdates($offsetVal = 0, $priceFrom = 1, $priceTo = 10000)
     {
         $offset = htmlspecialchars($offsetVal);
         
@@ -180,13 +184,13 @@ class M_Catalog
         }
         
         /* получаем ID последних добавленных игр */
-        $arGamesId = $this->getLastAddedGamesId($offset);
+        $arGamesId = $this->getLastAddedGamesId($offset, $priceFrom, $priceTo);
         if(empty($arGamesId))
         {
             return array();
         }
         
-        $lowestPrice = $this->getLowestPriceId($arGamesId);
+        $lowestPrice = $this->getLowestPriceId($arGamesId, array(), $priceFrom, $priceTo);
         
         return array_slice($lowestPrice, 0, self::UPDATES_ON_PAGE);
     }
@@ -197,7 +201,8 @@ class M_Catalog
      * @param array $arGamesId массив ID игр
      * @return array массив ID цен
      */
-    public function getLowestPriceId($arGamesId, $arPlatform = array())
+    public function getLowestPriceId($arGamesId, $arPlatform = array(),
+        $priceFrom = 1, $priceTo = 10000)
     {
         if(empty($arGamesId))
         {
@@ -211,10 +216,6 @@ class M_Catalog
             $platformSet = htmlspecialchars($platformStr);
             $inPlatformId = "AND Total.platform_id IN $platformSet";
         }
-	else
-	{
-	}
-        
         
         $inGamesId = "(". implode(",", $arGamesId) .")";
         
@@ -223,7 +224,8 @@ class M_Catalog
                 . "FROM t_total Total "
                 . "LEFT JOIN t_game Game USING(game_id) "
                 . "LEFT JOIN t_price Price USING(price_id) "
-                . "WHERE Price.new_price <> 0 AND Total.game_id IN $inGamesId $inPlatformId"
+                . "WHERE Price.new_price <> 0 AND Total.game_id IN $inGamesId $inPlatformId "
+                . "AND Price.new_price >= $priceFrom AND Price.new_price <= $priceTo "
                 . "ORDER BY price ASC ";
 
         $rows = $this->msql->Select($query);
@@ -328,12 +330,13 @@ class M_Catalog
         {
             foreach($and as $key => $cond)
             {
-                $andStr .= "AND $key IN (" . implode(",", $cond) . ") ";
+                $andStr .= htmlspecialchars("AND $key IN (" . implode(",", $cond) . ") ");
             }
         }
         
         $query .= "WHERE $where IN $arrStr $andStr $additional";
-        $query = htmlspecialchars($query);
+        //$query = htmlspecialchars($query);
+        //echo $query;
         $rows = $this->msql->Select($query);
         
 	if(!$rows)
@@ -355,11 +358,13 @@ class M_Catalog
     {
         if(isset($_POST['game_id']) &&
            isset($_POST['platform_id']) &&
-           isset($_POST['site_id']))
+           isset($_POST['site_id']) &&
+           isset($_POST['price_from']))
         {
             $gameId = htmlspecialchars($_POST['game_id']);
             $platformId = htmlspecialchars($_POST['platform_id']);
             $siteId = htmlspecialchars($_POST['site_id']);
+            $priceFrom = htmlspecialchars($_POST['price_from']);
             
             $query =  "SELECT Link.link as link, Site.name as site, "
                     . "Price.new_price as price "
@@ -370,7 +375,7 @@ class M_Catalog
                     . "WHERE Total.game_id=$gameId AND "
                     . "Total.platform_id=$platformId AND "
                     . "Site.site_id<>$siteId AND "
-                    . "Price.new_price<>0 "
+                    . "Price.new_price<>0 AND Price.new_price >= $priceFrom "
                     . "ORDER BY price ASC";
             
             $rows = $this->msql->Select($query);

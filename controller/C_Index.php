@@ -73,6 +73,20 @@ class C_Index extends C_Base
         $platforms = $this->fields->getFields('t_platform');
         $arPlatform = array(1);    // выбираем PC по умолчанию
         $and = array();
+        $priceFrom = 1;
+        $priceTo = 10000;
+
+        if( isset($_POST['price_from']) && 
+            is_numeric($_POST['price_from']) && $_POST['price_from'] > 0)
+        {
+            $priceFrom = htmlspecialchars($_POST['price_from']);
+        }
+
+        if( isset($_POST['price_to']) && 
+            is_numeric($_POST['price_to']) && $_POST['price_to'] > 0)
+        {
+            $priceTo = htmlspecialchars($_POST['price_to']);
+        }
         
         if(isset($_POST['platformId']) && !empty($_POST['platformId']))
         {
@@ -84,7 +98,8 @@ class C_Index extends C_Base
             $and['Genre.genre_id'] = $_POST['genreId'];
         }
         
-        $priceList = $this->mCatalog->getPriceUpdates();
+        $offset = 0;
+        $priceList = $this->mCatalog->getPriceUpdates($offset, $priceFrom, $priceTo);
 
         if(empty($priceList))
         {
@@ -202,13 +217,28 @@ class C_Index extends C_Base
      */
     public function action_pageUpdatesAjax()
     {
+        $priceFrom = 1;
+        $priceTo = 10000;
+
+        if( isset($_POST['price_from']) && 
+            is_numeric($_POST['price_from']) && $_POST['price_from'] > 0)
+        {
+            $priceFrom = htmlspecialchars($_POST['price_from']);
+        }
+
+        if( isset($_POST['price_to']) && 
+            is_numeric($_POST['price_to']) && $_POST['price_to'] > 0)
+        {
+            $priceTo = htmlspecialchars($_POST['price_to']);
+        }
+
         $offset = 0;
         if(isset($_POST['offset']))
         {
             $offset = $_POST['offset'];
         }
         
-        $arGames = $this->mCatalog->getLastUpdates($offset);
+        $arGames = $this->mCatalog->getLastUpdates($offset, $priceFrom, $priceTo);
         
         if(empty($arGames))
         {

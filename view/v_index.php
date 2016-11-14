@@ -93,6 +93,14 @@
                 <div class="side_left">
 
                     <div class="filter">
+                        <h2>Цена</h2>
+                        <div class="price_filter">
+                            <span>от</span>
+                            <input type="text" name="price_from" value="1">
+                            <span class="second">до</span>
+                            <input type="text" name="price_to" value="10000">
+                        </div>
+                        <br><br>
                         <h2>Платформа</h2>
                         <? foreach($platforms as $pl) : ?>
                             <button class="option platform" 

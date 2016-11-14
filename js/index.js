@@ -5,6 +5,8 @@ $(document).ready(function()
    
    var filterPlatformArray = [];
    var filterGenreArray = [];
+   var price_from = 1;
+   var price_to = 10000;
    
    togglePaginationUpdates();
    
@@ -29,7 +31,29 @@ $(document).ready(function()
     */
    $('.filter button.platform').on('click', handleFilterBtnClick);
    $('.filter button.genre').on('click', handleFilterBtnClick);
-   
+   $('input[name="price_from"]').on('change', handlePriceFilterChange);
+   $('input[name="price_to"]').on('change', handlePriceFilterChange);
+
+   /**
+    * Обработчик изменения поля цены
+    */
+   function handlePriceFilterChange()
+   {
+        price_from = parseInt($('input[name="price_from"]').val());
+        price_to = parseInt($('input[name="price_to"]').val());
+
+        if(price_from === NaN || price_from <= 0 ||
+           price_to === NaN || price_to <= 0)
+        {
+          console.log('invalid value');
+          return false;
+        }
+        var activePlatform = getActiveFilters(filterPlatformArray);
+        var activeGenre = getActiveFilters(filterGenreArray);
+        
+        filter(activePlatform, activeGenre);
+   }
+
    /**
     * Обработчик нажатия кнопки фильтра
     */
@@ -116,7 +140,9 @@ $(document).ready(function()
                 platformId: arPlatformFilter
             };
        }
-       
+
+       dataArray['price_from'] = price_from;
+       dataArray['price_to'] = price_to;
        
        $.ajax({
             type: 'POST',
@@ -386,7 +412,9 @@ $(document).ready(function()
         var data = { 
             offset: page,
             platformId: activePlatform,
-            genreId: activeGenre
+            genreId: activeGenre,
+            price_from: price_from,
+            price_to: price_to
         };
         
         $.ajax({
