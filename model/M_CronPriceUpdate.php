@@ -7,7 +7,7 @@ include_once 'M_CronUpdateLogger.php';
 
 
 /* шаг цикла */
-define(STEP, 5);
+define(STEP, 10);
 
 /* время между запусками циклов (60 сек) */
 define(STANDBY, 60);
@@ -18,7 +18,8 @@ function getData($msql)
     $query =  "SELECT Price.price_id, Price.new_price, Price.old_price, Link.link_id, Link.link "
             . "FROM t_total Total "
             . "LEFT JOIN t_link Link ON (Link.link_id=Total.link_id) "
-            . "LEFT JOIN t_price Price ON (Price.price_id=Total.price_id) ";
+            . "LEFT JOIN t_price Price ON (Price.price_id=Total.price_id) "
+            . "ORDER BY Price.lastUpdate ASC";
     return $msql->Select($query);
 }
 
@@ -78,15 +79,19 @@ foreach($dataSlice as $item)
     $arOldPrice[ $item['price_id'] ] = $item['new_price'];
 }
 
+echo "<pre>";
+print_r($arNewPrice);
+echo "</pre>";
+
 // Обновляем цены
 $mPrice = M_Price::Instance();
 $mPrice->updatePrice($arNewPrice, $arOldPrice);
 
 $offset += STEP;
 
-sleep(STANDBY);
+//sleep(STANDBY);
 
-if($offset < $totalDataItems)
+if($offset < 300)
 {
     goto loop;
 }

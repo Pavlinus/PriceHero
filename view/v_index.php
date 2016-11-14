@@ -183,13 +183,8 @@
     	        			</a>
     	        		</div>
     	        		<div class="item">
-    	        			<a href="http://steambuy.com/click.php?t=bn&i=7&partner=672517" target="_blank">
-    	        				<img src="../images/stock/siege_stock.jpg">
-    	        			</a>
-    	        		</div>
-    	        		<div class="item">
-    	        			<a href="http://steambuy.com/click.php?t=bn&i=12&partner=672517" target="_blank">
-    	        				<img src="../images/stock/division_stock.jpg">
+    	        			<a href="http://steambuy.com/click.php?t=bn&i=15&partner=672517" target="_blank">
+    	        				<img src="../images/stock/watchdogs2.jpg">
     	        			</a>
     	        		</div>
     	        		<div class="item">
