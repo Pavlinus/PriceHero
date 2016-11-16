@@ -5,18 +5,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link href="../images/favicon.ico" rel="shortcut icon" 
             type="image/vnd.microsoft.icon" />
-        <meta name="description" content="Выбираем лучшие цены среди множества интернет магазинов, таких как Steam, SteamBuy, SteamPay и других. Большой выбор дешевых игр на ПК и приставки PS (PlayStation) и XBox." />
-        <meta name="keywords" content="дешевые игры, купить игры дешево, каталог дешевых игр, купить игры для ps дешево, купить игры для xbox дешево, дешевые игры для приставок" />
+        <meta name="description" content="В нашем каталоге только дешевые игры от известных и надежных интернет магазинов. Steam ключи, множество игр для приставок PS3, PS4, XBox360 и XBoxOne. Купить дешевые игры по доступным ценам стало проще!" />
+        <meta name="keywords" content="дешевые игры, купить игры дешево, каталог дешевых игр, купить игры для ps дешево, купить игры для xbox дешево, дешевые игры для приставок, купить steam ключи" />
 
         <!-- Google+ meta -->
         <meta property = "og:image" content = "http://game2buy.ru/images/logo_small.png">
         <meta property = "og:title" content = "Game2Buy | Дешевые игры для приставок и ПК">
-        <meta property = "og:description" content = "Выбираем лучшие цены среди множества интернет магазинов. Большой выбор дешевых игр на ПК и приставки PS (PlayStation) и XBox.">
+        <meta property = "og:description" content = "В нашем каталоге только дешевые игры от известных и надежных интернет магазинов. Steam ключи, множество игр для приставок PS3, PS4, XBox360 и XBoxOne. Купить дешевые игры по доступным ценам стало проще!">
 
         <!-- Twitter meta -->
         <meta name = "twitter:title" content = "Game2Buy | Дешевые игры для приставок и ПК">
         <meta name = "twitter:site" content = "Game2Buy.ru">
-        <meta name = "twitter:description" content = "Выбираем лучшие цены среди множества интернет магазинов. Большой выбор дешевых игр на ПК и приставки PS (PlayStation) и XBox.">
+        <meta name = "twitter:description" content = "В нашем каталоге только дешевые игры от известных и надежных интернет магазинов. Steam ключи, множество игр для приставок PS3, PS4, XBox360 и XBoxOne. Купить дешевые игры по доступным ценам стало проще!">
         <meta name = "twitter:domain" content = "game2buy.ru">
         <meta name = "twitter:image:src" content = "http://game2buy.ru/images/logo_small.png">
 

@@ -8,7 +8,7 @@
 #cc-slider {
 	text-align: center;
 	margin: 0 auto;
-	height: 250px;
+	height: 350px;
 	/*max-width: 850px;*/
 }
 
@@ -39,7 +39,7 @@
 
 #cc-slides article img {
 	width: 100%;
-	height: 250px;
+	height: 350px;
 }
 
 #cc-slides .inner {

@@ -438,7 +438,7 @@ function checkLink($link, $siteId)
 
 // ------------------------ Игры для поиска и добавления ----------------------
 $games = array(
-  ''
+  'Tales of Zestiria'
 );
 
 

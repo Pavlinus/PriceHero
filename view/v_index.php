@@ -12,53 +12,54 @@
             <div id="overflow">
               <div class="inner">
 
+
                 <article>
                     <div class="cctooltip">
-                        <h3>Quantum Break</h3>
-                        <h3 class="price">595 руб</h3>
+                        <h3>H1Z1: King of the Kill</h3>
+                        <h3 class="price">649 руб</h3>
                     </div>
-                    <a href="index.php?c=index&act=game&name=quantumbreak">
-                        <img src="../pages/quantumbreak/quantumbreak.jpg"> 
+                    <a href="index.php?c=index&act=game&name=h1z1">
+                        <img src="../pages/h1z1/h1z1.jpg"> 
+                    </a>
+                </article>
+                
+                <article>
+                    <div class="cctooltip">
+                        <h3>Dishonored 2</h3>
+                        <h3 class="price">1499 руб</h3>
+                    </div>
+                    <a href="index.php?c=index&act=game&name=dishonored2">
+                        <img src="../pages/dishonored2/dishonored2.jpg"> 
                     </a>
                 </article>
 
                 <article>
                     <div class="cctooltip">
-                        <h3>Stellaris</h3>
-                        <h3 class="price">599 руб</h3>
+                        <h3>Yesterday Origins</h3>
+                        <h3 class="price">499 руб</h3>
                     </div>
-                    <a href="index.php?c=index&act=game&name=stellaris">
-                        <img src="../pages/stellaris/stellaris.jpg"> 
+                    <a href="index.php?c=index&act=game&name=yesterdayorigins">
+                        <img src="../pages/yesterdayorigins/yesterdayorigins.jpg"> 
                     </a>
                 </article>
 
                 <article>
                     <div class="cctooltip">
-                        <h3>Battlefield 1</h3>
-                        <h3 class="price">1 999 руб</h3>
+                        <h3>StarCraft II: Legacy of the Void</h3>
+                        <h3 class="price">695 руб</h3>
                     </div>
-                    <a href="index.php?c=index&act=game&name=battlefield1">
-                        <img src="../pages/battlefield1/battlefield1.jpg"> 
+                    <a href="index.php?c=index&act=game&name=starcraft2">
+                        <img src="../pages/starcraft2/starcraft2.jpg"> 
                     </a>
                 </article>
 
                 <article>
                     <div class="cctooltip">
-                        <h3>Dark souls 3</h3>
-                        <h3 class="price">1 295 руб</h3>
+                        <h3>Tyranny</h3>
+                        <h3 class="price">699 руб</h3>
                     </div>
-                    <a href="index.php?c=index&act=game&name=darksouls3">
-                        <img src="../pages/darksouls3/darksouls3.jpg"> 
-                    </a>
-                </article>
-
-                <article>
-                    <div class="cctooltip">
-                        <h3>DOOM</h3>
-                        <h3 class="price">799 руб</h3>
-                    </div>
-                    <a href="index.php?c=index&act=game&name=doom">
-                        <img src="../pages/doom/doom.jpg"> 
+                    <a href="index.php?c=index&act=game&name=tyranny">
+                        <img src="../pages/tyranny/tyranny.jpg"> 
                     </a>
                 </article>
 
@@ -87,7 +88,7 @@
         <h1 class="hidden">Game2Buy | Дешевые игры для приставок и ПК</h1>
 
         <div class="block_body">
-            <h2 class="title"><span>///</span> Последние обновления</h2>
+            <h2 class="title">Последние обновления</h2>
 
             <div class="main_container_wrapper">
                 <div class="side_left">
@@ -172,7 +173,7 @@
         <div class="block_sep"></div>
 
         <div class="block_body">
-            <h2 class="title"><span>///</span> Акции</h2>
+            <h2 class="title">Акции</h2>
 
             <div class="main_container_wrapper">
                 <div class="content stock">

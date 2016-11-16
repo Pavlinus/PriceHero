@@ -19,7 +19,7 @@ function getData($msql)
             . "FROM t_total Total "
             . "LEFT JOIN t_link Link ON (Link.link_id=Total.link_id) "
             . "LEFT JOIN t_price Price ON (Price.price_id=Total.price_id) "
-            . "ORDER BY Price.lastUpdate ASC";
+            . "ORDER BY Price.new_price ASC";
     return $msql->Select($query);
 }
 
