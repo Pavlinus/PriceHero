@@ -10,6 +10,8 @@ include_once "/model/M_ControlPanel.php";
 include_once "/model/M_Auth.php";
 include_once "/model/M_Game.php";
 include_once "/model/M_Catalog.php";
+include_once "/model/M_CheapHolidays.php";
+include_once "/model/M_Leaders.php";
 
 class C_Admin extends C_Base
 {
@@ -20,6 +22,8 @@ class C_Admin extends C_Base
     private $search;
     private $mGame;
     private $mCatalog;
+    private $mCheapHolidays;
+    private $mLeaders;
 
     public function __construct()
     {
@@ -56,6 +60,16 @@ class C_Admin extends C_Base
         if($this->mCatalog == null)
         {
             $this->mCatalog = M_Catalog::Instance();
+        }
+
+        if($this->mCheapHolidays == null)
+        {
+            $this->mCheapHolidays = M_CheapHolidays::Instance();
+        }
+
+        if($this->mLeaders == null)
+        {
+            $this->mLeaders = M_Leaders::Instance();
         }
     }
 
@@ -356,6 +370,80 @@ class C_Admin extends C_Base
             echo 0;
         }
         exit();
+    }
+
+
+    /**
+    * <p>Вывод интерфейса добавления игры</p>
+    * @return
+    */
+    public function action_cheapHolidays()
+    {
+        if(isset($_COOKIE['user']) && $_COOKIE['user'] == '007')
+        {
+            $gamesList = $this->cPanel->getGamesListAll();
+            $arGamesId = $this->mCheapHolidays->getGameIdList();
+            $holidaysGames = $this->mGame->getTblGameList($arGamesId);
+            
+            $this->content = $this->Template(
+                "view/v_admin_cheap_holidays.php", 
+                array(
+                    'gamesList' => $gamesList,
+                    'holidaysGames' => $holidaysGames
+                )
+            );
+        }
+    }
+
+
+    /**
+    * <p>Вывод интерфейса добавления игры</p>
+    * @return
+    */
+    public function action_cheapHolidaysAjax()
+    {
+        if(isset($_COOKIE['user']) && $_COOKIE['user'] == '007')
+        {
+            echo $this->mCheapHolidays->save($_POST['id_list']);
+            exit();
+        }
+    }
+
+
+    /**
+    * <p>Вывод интерфейса добавления игры</p>
+    * @return
+    */
+    public function action_leaders()
+    {
+        if(isset($_COOKIE['user']) && $_COOKIE['user'] == '007')
+        {
+            $gamesList = $this->cPanel->getGamesListAll();
+            $arGamesId = $this->mLeaders->getGameIdList();
+            $leaders = $this->mGame->getTblGameList($arGamesId);
+            
+            $this->content = $this->Template(
+                "view/v_admin_leaders.php", 
+                array(
+                    'gamesList' => $gamesList,
+                    'leaders' => $leaders
+                )
+            );
+        }
+    }
+
+
+    /**
+    * <p>Вывод интерфейса добавления игры</p>
+    * @return
+    */
+    public function action_leadersAjax()
+    {
+        if(isset($_COOKIE['user']) && $_COOKIE['user'] == '007')
+        {
+            echo $this->mLeaders->save($_POST['id_list']);
+            exit();
+        }
     }
 }
 

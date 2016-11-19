@@ -22,7 +22,7 @@
 </div>
 
 <div class="buy_container">
-	<span class="price">1499 руб</span>
+	<span class="price">1599 руб</span>
 	
 	<a href="http://steambuy.com/steam/dishonored-2/?partner=672517">
 		<span class="buy_button">В магазин</span>

@@ -493,4 +493,65 @@ $(document).ready(function() {
             }
         });
     }
+
+    // Добавление/удаление игр раздела Дешевые выходные
+    $('input.add_cheapHolidaysGame').click(function(event)
+    {
+       event.preventDefault();
+       var selectVal = $('select.cheapGamesSelect').val(); 
+       var selectName = $('select.cheapGamesSelect option:selected').text(); 
+       var newElem = 
+            "<div class='cheapItem' id='"+selectVal+"'>" +
+                "<span class='cheapName'>"+selectName+"</span>" +
+                "<span class='cheapDel'>Удалить</span>" +
+            "</div>";
+        $('div.cheapGamesList').append(newElem);
+        $('div.cheapItem[id="'+selectVal+'"] span.cheapDel').bind('click', cheapDel);
+    });
+
+    $('span.cheapDel').bind('click', cheapDel);
+
+    function cheapDel()
+    {
+        $(this).closest('div.cheapItem').remove();
+    }
+
+    $('input.save_cheapHolidaysGame').click(function(event)
+    {
+        event.preventDefault();
+        var url = 'index.php?c=suckmyadmincock&act=cheapHolidaysAjax';
+        var data = {};
+        var arId = [];
+        $.each($('div.cheapItem'), function()
+        {
+            var id = $(this).attr('id');
+            arId.push(id);
+        });
+
+        data = {'id_list' : arId};
+
+        if($(this).hasClass('leaders'))
+        {
+            url = 'index.php?c=suckmyadmincock&act=leadersAjax';
+        }
+
+        $.ajax({
+            url: url,
+            method: 'POST',
+            data: data,
+            cache: false,
+            success: function(res)
+            {
+                console.log(res);
+                if(res === '1')
+                {
+                    playInfoWindow('Данные сохранены');
+                }
+                else
+                {
+                    playInfoWindow('Ошибка сохранения');
+                }
+            }
+        });
+    });
 });

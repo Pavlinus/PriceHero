@@ -7,6 +7,8 @@ class C_Index extends C_Base
     private $fields;
     private $mTracker;
     private $search;
+    private $mCheapHolidays;
+    private $mLeaders;
     
     public function __construct()
     {
@@ -29,6 +31,16 @@ class C_Index extends C_Base
         {
             $this->search = M_Search::Instance();
         }
+
+        if($this->mCheapHolidays == null)
+        {
+            $this->mCheapHolidays = M_CheapHolidays::Instance();
+        }
+
+        if($this->mLeaders == null)
+        {
+            $this->mLeaders = M_Leaders::Instance();
+        }
     }
     
     /**
@@ -45,6 +57,20 @@ class C_Index extends C_Base
         $platforms = $this->fields->getFields('t_platform');
         $genres = $this->fields->getFields('t_genre');
 
+        $holidaysId = $this->mCheapHolidays->getGameIdList();
+        $holidaysGameList = $this->mCatalog->getGames(
+            $holidaysId, 
+            'Game.game_id', 
+            'AND Price.new_price <> 0', 
+            'ORDER BY Price.new_price ASC');
+
+        $leadersId = $this->mLeaders->getGameIdList();
+        $leadersGameList = $this->mCatalog->getGames(
+            $leadersId, 
+            'Game.game_id', 
+            'AND Price.new_price <> 0', 
+            'ORDER BY Price.new_price ASC');
+
         /* был запрос поиска с другой страницы */
         if(isset($_POST['search']))
         {
@@ -59,7 +85,9 @@ class C_Index extends C_Base
                     'gamesList' => $gamesList,
                     'platforms' => $platforms,
                     'genres' => $genres,
-                    'search' => $search
+                    'search' => $search,
+                    'holidays' => $holidaysGameList,
+                    'leaders' => $leadersGameList
                 )
         );
     }

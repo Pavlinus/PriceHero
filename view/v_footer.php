@@ -9,7 +9,6 @@
                     <a href="/index.php">Главная</a>
                     <a href="/index.php?c=about">О сервисе</a>
                     <a href="/index.php?c=room&act=response">Ваш отзыв</a>
-                    <a href="/index.php?c=faq">FAQ</a>
                     <!--div><span>&copy;&nbsp;2016</span></div-->
                 </div>
             </div>

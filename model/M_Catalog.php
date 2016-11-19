@@ -326,14 +326,18 @@ class M_Catalog
         $query .= "LEFT JOIN t_tracker Tracker ON (Tracker.game_id = total.game_id AND Tracker.user_id = $userId "
                 . "AND Tracker.platform_id = total.platform_id) ";
         
-        if($and && !empty($and))
+        if($and && !empty($and) && is_array($and))
         {
             foreach($and as $key => $cond)
             {
                 $andStr .= htmlspecialchars("AND $key IN (" . implode(",", $cond) . ") ");
             }
         }
-        
+        else if($and != '')
+        {
+            $andStr = $and;
+        }   
+
         $query .= "WHERE $where IN $arrStr $andStr $additional";
         //$query = htmlspecialchars($query);
         //echo $query;

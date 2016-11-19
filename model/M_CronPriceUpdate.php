@@ -19,7 +19,7 @@ function getData($msql)
             . "FROM t_total Total "
             . "LEFT JOIN t_link Link ON (Link.link_id=Total.link_id) "
             . "LEFT JOIN t_price Price ON (Price.price_id=Total.price_id) "
-            . "ORDER BY Price.new_price ASC";
+            . "ORDER BY Price.lastUpdate ASC";
     return $msql->Select($query);
 }
 
@@ -27,7 +27,7 @@ $msql = M_MSQL::Instance();
 $logger = M_CronUpdateLogger::Instance();
 $arData = getData($msql);
 $totalDataItems = count($arData);
-$offset = 0;
+$offset = 325;
 
 echo "Total table items: " . $totalDataItems . "\n";
 
@@ -91,7 +91,7 @@ $offset += STEP;
 
 //sleep(STANDBY);
 
-if($offset < 300)
+if($offset < $totalDataItems)
 {
     goto loop;
 }

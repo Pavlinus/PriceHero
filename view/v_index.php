@@ -1,82 +1,118 @@
 <section class="slider">
     <div class="container">
-        <article id="cc-slider">
-          <input checked="checked" name="cc-slider" id="slide1" type="radio">
-          <input name="cc-slider" id="slide2" type="radio">
-          <input name="cc-slider" id="slide3" type="radio">
-          <input name="cc-slider" id="slide4" type="radio">
-          <input name="cc-slider" id="slide5" type="radio">
-          <input name="cc-slider" id="slide6" type="radio">
 
-          <div id="cc-slides">
-            <div id="overflow">
-              <div class="inner">
-
-
-                <article>
-                    <div class="cctooltip">
-                        <h3>H1Z1: King of the Kill</h3>
-                        <h3 class="price">649 руб</h3>
+        
+        <!-- Slider main container -->
+        <div class="swiper-container">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                    <div class="slider_left">
+                        <a href="index.php?c=index&act=game&name=killingfloor2">
+                            <img src="../pages/killingfloor2/slide1.jpg" class="visible"> 
+                            <img src="../pages/killingfloor2/slide2.jpg"> 
+                            <img src="../pages/killingfloor2/slide3.jpg"> 
+                            <img src="../pages/killingfloor2/slide4.jpg"> 
+                            <img src="../pages/killingfloor2/slide5.jpg"> 
+                            <img src="../pages/killingfloor2/slide6.jpg"> 
+                        </a>
                     </div>
-                    <a href="index.php?c=index&act=game&name=h1z1">
-                        <img src="../pages/h1z1/h1z1.jpg"> 
-                    </a>
-                </article>
-                
-                <article>
-                    <div class="cctooltip">
-                        <h3>Dishonored 2</h3>
-                        <h3 class="price">1499 руб</h3>
+                    <div class="slider_right">
+                        <div class="descr">
+                            <h3 class="name">Killing Floor 2</h3>
+                            <div class="thumb">
+                                <img src="../pages/killingfloor2/slide2.jpg">
+                                <img src="../pages/killingfloor2/slide3.jpg">
+                                <img src="../pages/killingfloor2/slide4.jpg">
+                                <img src="../pages/killingfloor2/slide5.jpg">
+                                <img src="../pages/killingfloor2/slide6.jpg">
+                            </div>
+                            <div class="price">
+                                <h3>599 руб</h3>
+                            </div>
+                            <div class="addition">
+                                Ранний доступ
+                            </div>
+                        </div>
                     </div>
-                    <a href="index.php?c=index&act=game&name=dishonored2">
-                        <img src="../pages/dishonored2/dishonored2.jpg"> 
-                    </a>
-                </article>
+                </div>
 
-                <article>
-                    <div class="cctooltip">
-                        <h3>Yesterday Origins</h3>
-                        <h3 class="price">499 руб</h3>
+                <div class="swiper-slide">
+                    <div class="slider_left">
+                        <a href="index.php?c=index&act=game&name=dishonored2">
+                            <img src="../pages/dishonored2/slide1.jpg" class="visible"> 
+                            <img src="../pages/dishonored2/slide2.jpg"> 
+                            <img src="../pages/dishonored2/slide3.jpg"> 
+                            <img src="../pages/dishonored2/slide4.jpg"> 
+                            <img src="../pages/dishonored2/slide5.jpg"> 
+                            <img src="../pages/dishonored2/slide6.jpg"> 
+                            <img src="../pages/dishonored2/slide7.jpg"> 
+                        </a>
                     </div>
-                    <a href="index.php?c=index&act=game&name=yesterdayorigins">
-                        <img src="../pages/yesterdayorigins/yesterdayorigins.jpg"> 
-                    </a>
-                </article>
-
-                <article>
-                    <div class="cctooltip">
-                        <h3>StarCraft II: Legacy of the Void</h3>
-                        <h3 class="price">695 руб</h3>
+                    <div class="slider_right">
+                        <div class="descr">
+                            <h3 class="name">Dishonored 2</h3>
+                            <div class="thumb">
+                                <img src="../pages/dishonored2/slide2.jpg">
+                                <img src="../pages/dishonored2/slide3.jpg">
+                                <img src="../pages/dishonored2/slide4.jpg">
+                                <img src="../pages/dishonored2/slide5.jpg">
+                                <img src="../pages/dishonored2/slide6.jpg">
+                                <img src="../pages/dishonored2/slide7.jpg">
+                            </div>
+                            <div class="price">
+                                <h3>1599 руб</h3>
+                            </div>
+                            <div class="addition">
+                                Лидер продаж
+                            </div>
+                        </div>
                     </div>
-                    <a href="index.php?c=index&act=game&name=starcraft2">
-                        <img src="../pages/starcraft2/starcraft2.jpg"> 
-                    </a>
-                </article>
+                </div>
 
-                <article>
-                    <div class="cctooltip">
-                        <h3>Tyranny</h3>
-                        <h3 class="price">699 руб</h3>
+                <div class="swiper-slide">
+                    <div class="slider_left">
+                        <a href="index.php?c=index&act=game&name=35mm">
+                            <img src="../pages/35mm/slide1.jpg" class="visible"> 
+                            <img src="../pages/35mm/slide2.jpg"> 
+                            <img src="../pages/35mm/slide3.jpg"> 
+                            <img src="../pages/35mm/slide4.jpg"> 
+                            <img src="../pages/35mm/slide5.jpg"> 
+                            <img src="../pages/35mm/slide6.jpg"> 
+                            <img src="../pages/35mm/slide7.jpg"> 
+                        </a>
                     </div>
-                    <a href="index.php?c=index&act=game&name=tyranny">
-                        <img src="../pages/tyranny/tyranny.jpg"> 
-                    </a>
-                </article>
+                    <div class="slider_right">
+                        <div class="descr">
+                            <h3 class="name">35mm</h3>
+                            <div class="thumb">
+                                <img src="../pages/35mm/slide2.jpg">
+                                <img src="../pages/35mm/slide3.jpg">
+                                <img src="../pages/35mm/slide4.jpg">
+                                <img src="../pages/35mm/slide5.jpg">
+                                <img src="../pages/35mm/slide6.jpg">
+                                <img src="../pages/35mm/slide7.jpg">
+                            </div>
+                            <div class="price">
+                                <h3>95 руб</h3>
+                            </div>
+                            <div class="addition">
+                                Скидка
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-              </div>
             </div>
-          </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+            
+            <!-- If we need navigation buttons -->
+            <!--div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div-->
+        </div>
 
-          <div id="controls">
-            <label for="slide1"></label>
-            <label for="slide2"></label>
-            <label for="slide3"></label>
-            <label for="slide4"></label>
-            <label for="slide5"></label>
-            <label for="slide6"></label>
-          </div>
-
-        </article>
     </div>
 </section>
 
@@ -168,6 +204,63 @@
                     
                 </div>
             </div>
+        </div>
+
+        <div class="block_sep"></div>
+
+        <div class="block_body double">
+
+            <div class="main_container_wrapper">
+                <div class="content">
+                    <div class="holidays">
+                    <h2 class="title">Дешевые выходные</h2>
+                        
+                        <? $arShown = array(); ?>
+                        <? foreach($holidays as $game) : ?>
+                            <? if(!isset($arShown[$game['game']])) : ?>
+                                <a href="<?=$game['link']?>">
+                                    <div class="item">
+                                        <img src="<?=$game['image']?>">
+                                        <div class="descr">
+                                            <span class="name"><?=$game['game']?></span>
+                                            <span class="genre"><?=$game['genre']?></span>
+                                            <span class="price"><?=$game['price']?> руб.</span>
+                                        </div>
+                                    </div>
+                                </a>
+
+                                <? $arShown[$game['game']] = 1; ?>
+                            <? endif; ?>
+                        <? endforeach; ?>
+
+                    </div>
+                
+                    <div class="liders">
+                        <h2 class="title">Лидеры продаж</h2>
+                        <div class="lidersList">
+                            
+                            <? $arShown = array(); ?>
+                            <? foreach($leaders as $game) : ?>
+                                <? if(!isset($arShown[$game['game']])) : ?>
+                                    <a href="<?=$game['link']?>">
+                                        <div class="item">
+                                            <img src="<?=$game['image']?>">
+                                            <div class="descr">
+                                                <span class="name"><?=$game['game']?></span>
+                                                <span class="price"><?=$game['price']?> руб.</span>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                    <? $arShown[$game['game']] = 1; ?>
+                                <? endif; ?>
+                            <? endforeach; ?>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <div class="block_sep"></div>

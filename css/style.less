@@ -129,6 +129,100 @@ header {
         }
 }
 
+section {
+    &.slider {
+        max-height: 360px;
+        max-width: 1170px;
+        margin: 0 auto;
+        background: #636363;
+        background-image: url(../images/pattern.jpg);
+        
+        .slider_right, .slider_left {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .slider_right {
+            width: 370px;
+            position: relative;
+            height: 360px;
+            box-shadow: inset 0px 0px 100px black;
+        }
+
+        .slider_left {
+            width: 800px;
+            margin-right: -4px;
+            max-height: 360px;
+
+            img {
+                max-height: 360px;
+                display: none;
+                position: absolute;
+                top: 0;
+                left: 0;
+                /*box-shadow: 0px 0px 8px black;*/
+
+                &.visible {
+                    display: block;
+                }
+            }
+        }
+
+        .descr {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+
+            .thumb {
+
+                img {
+                    max-width: 165px;
+
+                    &:hover {
+                        opacity: .8;
+                    }
+                }
+            }
+
+            .addition {
+                padding-top: 15px;
+                font-family: "RobotoRegular";
+                color: #fafafa;
+                font-size: 14px;
+                background: rgba(94, 148, 90, .7);
+                padding: 5px 15px;
+                display: inline-block;
+                margin-top: 15px;
+            }
+
+            h3 {
+                padding-bottom: 15px;
+
+                &.name {
+                    color: #fafafa;
+                    text-transform: none;
+                    font-size: 20px;
+                }
+            }
+        }
+
+        .price {
+            bottom: 10px;
+            left: 10px;
+            display: inline-block;
+            margin-right: 10px;
+            
+            h3 {
+                color: #fafafa;
+                display: inline-block;
+                font-size: 16px;
+                text-transform: none;
+            }
+        }
+    }
+
+}
+
 .logo {
 	display: table-cell;
 	vertical-align: middle;
@@ -479,6 +573,130 @@ img.hidden {
     .products:last-of-type {
         .search_sep {
             display: none;
+        }
+    }
+
+    .liders {
+        position: absolute;
+        right: 5px;
+        top: 0px;
+        width: 280px;
+        margin-left: 5px;
+        display: inline-block;
+        vertical-align: top;
+        box-shadow: 0px 0px 10px #636363;
+        background: #636363;
+        padding: 0 20px 20px 20px;
+
+        .item {
+            position: relative;
+            border-bottom: 1px solid #DDDBFA;
+
+            img {
+                width: 145px;
+            }
+
+            .descr {
+                position: absolute;
+                width: 120px;
+                top: 0;
+                left: 155px;
+
+                span {
+                    display: block;
+                    color: #1d293e;
+                    font-family: "RobotoRegular";
+                    margin-top: 5px;
+                    font-size: 12px;
+                    
+                    &.name {
+                        font-family: "RobotoBold";
+                        color: #fafafa;
+                    }
+
+                    &.genre {
+                        font-size: 12px;
+                    }
+
+                    &.platform {
+
+                    }
+
+                    &.price {
+                        display: block;
+                        color: #DDDBFA;
+                        font-family: "RobotoBold";
+                        margin-top: 10px;
+                    }
+                }
+
+            }
+        }
+        
+
+        h2 {
+            margin: 0 !important;
+            color: #fafafa !important;
+        }
+    }
+
+    .holidays {
+        width: 820px;
+        margin-left: 15px;
+        display: inline-block;
+        vertical-align: top;
+        padding-bottom: 15px;
+
+        h2 {
+            margin: 0 !important;
+        }
+
+        .item {
+            background: #fafafa;
+            margin-bottom: 5px;
+            display: inline-block;
+            width: 400px;
+            position: relative;
+
+            img {
+                max-width: 200px;
+                display: inline-block;
+                vertical-align: top;
+            }
+
+            .descr {
+                position: absolute;
+                width: 190px;
+                top: 0;
+                left: 215px;
+
+                span {
+                    display: block;
+                    color: #1d293e;
+                    font-family: "RobotoRegular";
+                    margin-top: 5px;
+                    font-size: 14px;
+                    
+                    &.name {
+                        font-family: "RobotoBold";
+                    }
+
+                    &.genre {
+                        font-size: 12px;
+                    }
+
+                    &.platform {
+
+                    }
+
+                    &.price {
+                        display: block;
+                        color: #5e945a;
+                        font-family: "RobotoBold";
+                    }
+                }
+
+            }
         }
     }
 	
@@ -844,6 +1062,42 @@ img.hidden {
 		width: 250px;
 		max-width: 250px;
 		margin: 0 auto;
+
+        &.add_cheapHolidaysGame {
+            width: 400px;
+            max-width: 400px;
+
+            .cheapGamesList {
+                padding: 15px 10px;
+
+                .cheapItem {
+
+                    span {
+                        display: inline-block;
+
+                        &.cheapName {
+                            color: #1d293e;
+                            font-size: 12px;
+                            font-family: "RobotoRegular";
+                            margin-right: 10px;
+                        }
+
+                        &.cheapDel {
+                            padding: 3px 5px;
+                            border: none;
+                            background: #1d293e;
+                            color: #fafafa;
+                            font-size: 12px;
+                            font-family: "RobotoRegular";
+
+                            &:hover {
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 		
 		&.add_game {
 			width: 500px;
@@ -878,6 +1132,12 @@ img.hidden {
 			width: 100%;
 			padding: 10px;
 			border: 1px solid @c_lgrey;
+
+            &.cheapGamesSelect
+            {
+                width: 400px;
+                height: 250px;
+            }
 		}
 		
 		.item {

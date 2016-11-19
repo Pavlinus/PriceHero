@@ -46,6 +46,17 @@ class M_ControlPanel {
     /**
     * <p>Список игр (постраничный вывод).</p>
     */
+    public function getGamesListAll()
+    {
+        $query = "SELECT game_id, name FROM t_game ORDER BY name ASC";
+        
+        return $this->msql->Select($query);
+    }
+    
+
+    /**
+    * <p>Список игр (постраничный вывод).</p>
+    */
     public function getGamesList($page)
     {
         $itemsPerPage = 25;

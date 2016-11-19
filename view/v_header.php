@@ -2,7 +2,7 @@
 <html lang="ru-ru" dir="ltr">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
         <link href="../images/favicon.ico" rel="shortcut icon" 
             type="image/vnd.microsoft.icon" />
         <meta name="description" content="В нашем каталоге только дешевые игры от известных и надежных интернет магазинов. Steam ключи, множество игр для приставок PS3, PS4, XBox360 и XBoxOne. Купить дешевые игры по доступным ценам стало проще!" />
@@ -31,7 +31,9 @@
 
         <link rel="stylesheet/less" href="css/style.less" type="text/css" />
         <link rel="stylesheet" href="css/component.css" type="text/css" />
+        <link rel="stylesheet" href="css/swiper.css" type="text/css" />
         <title>Game2Buy | Дешевые игры для приставок и ПК</title>
+        <script src="js/swiper.min.js" type="text/javascript"></script>
         <script src="js/jquery.min.js" type="text/javascript"></script>
         <script src="js/jquery-ui.min.js" type="text/javascript"></script>
         <script src="js/less.js" type="text/javascript"></script>
@@ -61,13 +63,13 @@
                             </form>
                     </div>
                 </div>
-                <div class="room_btn">
+                <!--div class="room_btn">
                     <? if(!isset($_COOKIE['user_id'])) : ?>
                         <a href="index.php?c=room" class="form_btn enter">Войти</a>
                     <? else : ?>
                         <a href="index.php?c=room&act=logout" class="form_btn out">Выйти</a>
                     <? endif; ?>
-                </div>
+                </div-->
             </div>
         </div>
     </header>
