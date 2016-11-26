@@ -88,8 +88,9 @@ body {
 
 /* ================ MAIN ================ */
 .container {
-	width: 100%;
-	max-width: 1170px;
+	width: 1170px;
+    max-width: 1170px;
+	min-width: 1170px;
 	/*padding: 0 15px;*/
 	margin: 0 auto;
 }
@@ -674,9 +675,113 @@ img.hidden {
         }
     }
 
+    .luck {
+        padding: 0 15px;
+        position: relative;
+
+        .left_campaigns {
+            position: absolute;
+            bottom: 15px;
+
+            img {
+                height: 45px;
+            }
+        }
+
+        .right_campaigns {
+            position: absolute;
+            bottom: 15px;
+            right: 30px;
+
+            img {
+                height: 45px;
+            }
+        }
+
+        .luck_container {
+            margin-top: 15px;
+
+            .luck_logo {
+                text-align: center;
+                width: auto;
+                margin-top: 10px;
+
+                img {
+                    width: 150px;
+                }
+            }
+
+            &.steambuy {
+
+                .luck_item_container {
+                    
+                    a {
+
+                        .item {
+                            margin-right: 25px;
+
+                            img {
+                                width: auto;
+                                display: block;
+                            }
+                            
+                            span {
+                                position: relative;
+                                display: block;
+                                font-size: 20px;
+                                color: #636363;
+                                top: 0;
+                                left: 0;
+                            }
+                        }
+
+                    }
+                    
+                }
+            }
+
+            .luck_item_container {
+                width: 810px;
+                margin: 0 auto;
+                text-align: center;
+
+                a {
+
+                    &:last-of-type {
+
+                        .item {
+                            margin-right: 0px;
+                        }
+                    }
+                
+                    .item {
+                        display: inline-block;
+                        position: relative;
+                        margin-right: 15px;
+
+                        span {
+                            position: absolute;
+                            position: absolute;
+                            font-family: "RobotoBold";
+                            color: #fafafa;
+                            font-size: 40px;
+                            left: 25%;
+                            top: 45%;
+                            opacity: .7;
+                        }
+
+                        img {
+                            width: 250px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .holidays {
-        width: 820px;
         margin-left: 15px;
+        margin-right: 15px;
         display: inline-block;
         vertical-align: top;
         padding-bottom: 15px;
@@ -689,7 +794,7 @@ img.hidden {
             background: #fafafa;
             margin-bottom: 5px;
             display: inline-block;
-            width: 400px;
+            width: 365px;
             position: relative;
 
             img {
@@ -700,7 +805,7 @@ img.hidden {
 
             .descr {
                 position: absolute;
-                width: 190px;
+                width: 150px;
                 top: 0;
                 left: 215px;
 
@@ -709,7 +814,7 @@ img.hidden {
                     color: #1d293e;
                     font-family: "RobotoRegular";
                     margin-top: 5px;
-                    font-size: 14px;
+                    font-size: 13px;
                     
                     &.name {
                         font-family: "RobotoBold";
@@ -1555,10 +1660,21 @@ section {
 
                 .block_body {
 
+                    &.block_offer {
+
+                        .content {
+                            padding: 0 15px;
+                        }
+                    }
+
                     h2.title {
                         padding: 0.5em 0 0.5em 0em;
                         color: #636363;
                         margin-left: 30px;
+
+                        &.nomargin {
+                            margin: 0;
+                        }
 
                         span {
                             color: #5e945a;
@@ -1569,7 +1685,7 @@ section {
                     .main_container_wrapper {
                         display: table;
                         width: 100%;
-                        height: 400px;
+                        min-height: 400px;
                         /*padding-top: 15px;*/
                     }
                 }
@@ -1582,6 +1698,7 @@ footer {
 	
 	.container {
 		width: 1170px;
+        min-width: 1170px;
 		background: #373737;
 		max-width: 100%;
 		padding: 0;
@@ -1698,7 +1815,7 @@ div, span {
 .block_sep {
     width: 100%;
     height: 1px;
-    border-bottom: 1px solid #DDDBFA;
+    border-bottom: 3px solid #DDDBFA;
     margin: 0 auto;
 }
 

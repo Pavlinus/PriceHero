@@ -248,17 +248,17 @@
 
         <div class="block_sep"></div>
 
-        <div class="block_body double">
+        <div class="block_body block_offer">
 
             <div class="main_container_wrapper">
                 <div class="content">
                     <div class="holidays">
-                    <h2 class="title">Хочу экшена!</h2>
+                    <h2 class="title">Активные выходные</h2>
                         
                         <? $arShown = array(); ?>
                         <? foreach($holidays as $game) : ?>
                             <? if(!isset($arShown[$game['game']])) : ?>
-                                <a href="<?=$game['link']?>">
+                                <a target="_blank" href="<?=$game['link']?>">
                                     <div class="item">
                                         <img src="<?=$game['image']?>">
                                         <div class="descr">
@@ -274,33 +274,91 @@
                         <? endforeach; ?>
 
                     </div>
-                
-                    <div class="liders">
-                        <h2 class="title">Лидеры продаж</h2>
-                        <div class="lidersList">
-                            
-                            <? $arShown = array(); ?>
-                            <? foreach($leaders as $game) : ?>
-                                <? if(!isset($arShown[$game['game']])) : ?>
-                                    <a href="<?=$game['link']?>">
-                                        <div class="item">
-                                            <img src="<?=$game['image']?>">
-                                            <div class="descr">
-                                                <span class="name"><?=$game['game']?></span>
-                                                <span class="price"><?=$game['price']?> руб.</span>
-                                            </div>
-                                        </div>
-                                    </a>
+                </div>
+            </div>
+        </div>
 
-                                    <? $arShown[$game['game']] = 1; ?>
-                                <? endif; ?>
-                            <? endforeach; ?>
+        <div class="block_sep"></div>
 
+        <div class="block_body block_luck">
+
+            <div class="main_container_wrapper">
+                <div class="content">
+                    <div class="luck">
+                    <h2 class="title nomargin">Испытай удачу</h2>
+                        
+                        <div class="luck_container">
+                            <div class="luck_item_container">
+                                <a target="_blank" href="https://randomkey.pro/?ref=MzkzMDQ5MDI1">
+                                    <div class="item">
+                                        <span class="price">25 руб.</span>
+                                        <img src="../images/luck/luck_1.jpg">
+                                    </div>
+                                </a>
+                                <a target="_blank" href="https://randomkey.pro/?ref=MzkzMDQ5MDI1">
+                                    <div class="item">
+                                        <span class="price">35 руб.</span>
+                                        <img src="../images/luck/luck_2.jpg">
+                                    </div>
+                                </a>
+                                <a target="_blank" href="https://randomkey.pro/?ref=MzkzMDQ5MDI1">
+                                    <div class="item">
+                                        <span class="price">50 руб.</span>
+                                        <img src="../images/luck/luck_3.jpg">
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="luck_logo">
+                                <a target="_blank" href="https://randomkey.pro/?ref=MzkzMDQ5MDI1">
+                                    <img src="../images/luck/randomkey_crop.png">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="spacer_30"></div>
+
+                        <div class="luck_container steambuy">
+                            <div class="luck_item_container">
+                                <a target="_blank" href="http://steambuy.com/luck.php?partner=672517">
+                                    <div class="item">
+                                        <img src="../images/luck/luck_4.png">
+                                        <span class="price">65 руб.</span>
+                                    </div>
+                                </a>
+                                <a target="_blank" href="http://steambuy.com/luck.php?partner=672517">
+                                    <div class="item">
+                                        <img src="../images/luck/luck_5.png">
+                                        <span class="price">99 руб.</span>
+                                    </div>
+                                </a>
+                                <a target="_blank" href="http://steambuy.com/luck.php?partner=672517">
+                                    <div class="item">
+                                        <img src="../images/luck/luck_6.png">
+                                        <span class="price">295 руб.</span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="luck_logo">
+                                <a target="_blank" href="http://steambuy.com/?partner=672517">
+                                    <img src="../images/partners/steambuy.png">
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="spacer_30"></div>
+
+                        <div class="left_campaigns">
+                            <img src="../images/luck/steam_45.png">
+                            <img src="../images/luck/origin_45.png">
+                        </div>
+
+                        <div class="right_campaigns">
+                            <img src="../images/luck/battlenet_45.png">
+                            <img src="../images/luck/uplay_45.png">
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
 
         <div class="block_sep"></div>
@@ -334,6 +392,8 @@
                     </div>
                 </div>
         	</div>
+
+            <div class="spacer_30"></div>
 
         </div>
 
