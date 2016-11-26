@@ -50,49 +50,25 @@ class M_Search
         
         if(!empty($keywords))
         {
-            return $this->searchGameId($keywords, $strict);
+            //return $this->searchGameId($keywords, $strict);
+            return $this->searchGameId($gameName, $strict);
         }
         
         return false;
 	}
-        
-        
+
         /**
          * Поиск id игр, имена которых соответствуют ключевым словам
          * @param array $keywords ключевые слова названия игры
          * @return array массив id игр
          */
-        private function searchGameId($keywords, $strict = false)
+         private function searchGameId($gameName, $strict = false)
         {
             $tblKeyNum = 5;     // 5 ключей в таблице `t_keywords`
-            $keys = "(" . implode(",", $keywords) . ")";
-            $query = "SELECT game_id FROM t_keywords WHERE ";
-            $mode = "%";
-            
-            if($strict)
-            {
-                $mode = "";
-            }
+            //$keys = "(" . implode(",", $keywords) . ")";
+            $gameName = " LIKE '%" . trim(htmlspecialchars($gameName)) . "%'";
+            $sql = "SELECT game_id FROM t_game WHERE name $gameName";
 
-            for($i = 1; $i <= $tblKeyNum && $i <= $tblKeyNum; $i++)
-            {
-                //$query .= "key_".$i." IN ".$keys;
-                foreach ($keywords as $key => $value) 
-                {
-                    $query .= "key_".$i." LIKE '".$value."$mode'";
-                    if($key < count($keywords) - 1)
-                    {
-                        $query .= " OR ";
-                    }
-                }
-
-                if($i != $tblKeyNum)
-                {
-                    $query .= " OR ";
-                }
-            }
-
-            $sql = htmlspecialchars($query);
             $rows = $this->msql->Select($sql);
             $ids = array();
             
@@ -108,6 +84,59 @@ class M_Search
 
             return $ids;
         }
+        
+        
+        /**
+         * Поиск id игр, имена которых соответствуют ключевым словам
+         * @param array $keywords ключевые слова названия игры
+         * @return array массив id игр
+         */
+        // private function searchGameId($keywords, $strict = false)
+        // {
+        //     $tblKeyNum = 5;     // 5 ключей в таблице `t_keywords`
+        //     $keys = "(" . implode(",", $keywords) . ")";
+        //     $query = "SELECT game_id FROM t_keywords WHERE ";
+        //     $mode = "%";
+            
+        //     if($strict)
+        //     {
+        //         $mode = "";
+        //     }
+
+        //     for($i = 1; $i <= $tblKeyNum && $i <= $tblKeyNum; $i++)
+        //     {
+        //         //$query .= "key_".$i." IN ".$keys;
+        //         foreach ($keywords as $key => $value) 
+        //         {
+        //             $query .= "key_".$i." LIKE '".$value."$mode'";
+        //             if($key < count($keywords) - 1)
+        //             {
+        //                 $query .= " OR ";
+        //             }
+        //         }
+
+        //         if($i != $tblKeyNum)
+        //         {
+        //             $query .= " OR ";
+        //         }
+        //     }
+
+        //     $sql = htmlspecialchars($query);
+        //     $rows = $this->msql->Select($sql);
+        //     $ids = array();
+            
+        //     if(empty($rows))
+        //     {
+        //         return $ids;
+        //     }
+            
+        //     foreach($rows as $value)
+        //     {
+        //         $ids[] = $value['game_id'];
+        //     }
+
+        //     return $ids;
+        // }
         
         
         /**

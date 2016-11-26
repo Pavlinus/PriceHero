@@ -5,6 +5,7 @@ $(document).ready(function()
    
    var filterPlatformArray = [];
    var filterGenreArray = [];
+   var filterSteam = '';
    var price_from = 1;
    var price_to = 10000;
    
@@ -26,11 +27,13 @@ $(document).ready(function()
       filterGenreArray[ $(this).attr('value') ] = false;
    });
    
+
    /**
     * Обработка выбора фильтра
     */
    $('.filter button.platform').on('click', handleFilterBtnClick);
    $('.filter button.genre').on('click', handleFilterBtnClick);
+   $('.filter button.steam').on('click', handleFilterBtnClick);
    $('input[name="price_from"]').on('change', handlePriceFilterChange);
    $('input[name="price_to"]').on('change', handlePriceFilterChange);
 
@@ -62,14 +65,18 @@ $(document).ready(function()
         var filter_id = $(this).attr('value');
         var activePlatform = [];
         var activeGenre = [];
-        var filterName = 'genre';
+        var filterName = 'steam';
         var state = false;
         
         if($(this).hasClass('platform'))
         {
             filterName = 'platform';
         }
-        
+        else if($(this).hasClass('genre'))
+        {
+            filterName = 'genre';
+        }
+
         if($(this).hasClass('active'))
         {
             $(this).removeClass('active');
@@ -84,12 +91,25 @@ $(document).ready(function()
         switch(filterName)
         {
             case 'platform':
-                filterPlatformArray[ filter_id ] = state;
-                break;
+              resetFilter();
+              $(this).addClass('active');
+              filterPlatformArray[ filter_id ] = state;
+              break;
                 
            case 'genre':
-                filterGenreArray[ filter_id ] = state;
-                break;
+              filterGenreArray[ filter_id ] = state;
+              break;
+
+           case 'steam':
+              filterSteam = '';
+              if(state)
+              {
+                resetFilter();
+                setDefaultFilter();
+                $(this).addClass('active');
+                filterSteam = filter_id;
+              }
+              break;
         }
         
         checkFilterSet();
@@ -97,7 +117,25 @@ $(document).ready(function()
         activePlatform = getActiveFilters(filterPlatformArray);
         activeGenre = getActiveFilters(filterGenreArray);
         
-        filter(activePlatform, activeGenre);
+        filter(activePlatform, activeGenre, filterSteam);
+   }
+
+   /**
+    * Сброс фильтра по платформам и Steam
+    */
+   function resetFilter()
+   {
+        $('.filter button.platform').each(function()
+        {
+          filterPlatformArray[ $(this).attr('value') ] = false;
+          $(this).removeClass('active');
+        });
+
+        $('.filter button.steam').each(function()
+        {
+          filterSteam = '';
+          $(this).removeClass('active');
+        });
    }
    
    /**
@@ -124,26 +162,26 @@ $(document).ready(function()
     * Запрос фильтруемых данных
     * @param {int} arPlatformFilter Массив ID установленных фильтра платформ
     * @param {int} arGenreFilter Массив ID установленных фильтра жанров
+    * @param {int} steamFilter значение фильтра Steam
     */
-   function filter(arPlatformFilter, arGenreFilter)
+   function filter(arPlatformFilter, arGenreFilter, steamFilter)
    {
+       var dataArray = {platformId: arPlatformFilter};
        if(arGenreFilter.length > 0)
        {
-            var dataArray = {
-                platformId: arPlatformFilter,
-                genreId: arGenreFilter
-            };  
+            dataArray['genreId'] = arGenreFilter;
        }
-       else
+
+       if(steamFilter !== '')
        {
-            var dataArray = {
-                platformId: arPlatformFilter
-            };
+            dataArray['steamId'] = steamFilter;
        }
 
        dataArray['price_from'] = price_from;
        dataArray['price_to'] = price_to;
        
+       console.log(dataArray);
+
        $.ajax({
             type: 'POST',
             url: 'index.php?c=index&act=filter',
@@ -174,7 +212,7 @@ $(document).ready(function()
        $('div.pagination').fadeOut(0);
        last_updates_page = 0;
        
-       if(products === 9)
+       if(products === 12)
        {
            $('div.pagination').fadeIn(0);
        }
@@ -416,6 +454,11 @@ $(document).ready(function()
             price_from: price_from,
             price_to: price_to
         };
+
+        if(filterSteam !== '')
+        {
+            data['steamId'] = filterSteam;
+        }
         
         $.ajax({
             type: 'POST',

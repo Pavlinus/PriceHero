@@ -29,7 +29,7 @@
                                 <img src="../pages/killingfloor2/slide6.jpg">
                             </div>
                             <div class="price">
-                                <h3>599 руб</h3>
+                                <h3>699 руб</h3>
                             </div>
                             <div class="addition">
                                 Ранний доступ
@@ -104,6 +104,39 @@
                     </div>
                 </div>
 
+                <div class="swiper-slide">
+                    <div class="slider_left">
+                        <a href="index.php?c=index&act=game&name=injustice">
+                            <img src="../pages/injustice/slide1.jpg" class="visible"> 
+                            <img src="../pages/injustice/slide2.jpg"> 
+                            <img src="../pages/injustice/slide3.jpg"> 
+                            <img src="../pages/injustice/slide4.jpg"> 
+                            <img src="../pages/injustice/slide5.jpg"> 
+                            <img src="../pages/injustice/slide6.jpg"> 
+                            <img src="../pages/injustice/slide7.jpg"> 
+                        </a>
+                    </div>
+                    <div class="slider_right">
+                        <div class="descr">
+                            <h3 class="name">Injustice: Gods Among Us</h3>
+                            <div class="thumb">
+                                <img src="../pages/injustice/slide2.jpg">
+                                <img src="../pages/injustice/slide3.jpg">
+                                <img src="../pages/injustice/slide4.jpg">
+                                <img src="../pages/injustice/slide5.jpg">
+                                <img src="../pages/injustice/slide6.jpg">
+                                <img src="../pages/injustice/slide7.jpg">
+                            </div>
+                            <div class="price">
+                                <h3>149 руб</h3>
+                            </div>
+                            <div class="addition">
+                                Файтинг недели
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <!-- If we need pagination -->
             <div class="swiper-pagination"></div>
@@ -118,8 +151,6 @@
 
 <section class="main">
     <div class="container">
-        
-        <? include "h_menu.php"; ?>
         
         <h1 class="hidden">Game2Buy | Дешевые игры для приставок и ПК</h1>
 
@@ -138,6 +169,14 @@
                             <input type="text" name="price_to" value="10000">
                         </div>
                         <br><br>
+
+                        <h2>Steam</h2>
+                        <button class="option steam" 
+                                value="keys">
+                            Ключи
+                        </button>
+                        <br><br>
+
                         <h2>Платформа</h2>
                         <? foreach($platforms as $pl) : ?>
                             <button class="option platform" 
@@ -146,6 +185,7 @@
                             </button>
                         <? endforeach; ?>
                         <br><br>
+
                         <h2>Жанр</h2>
                         <? foreach($genres as $gen) : ?>
                             <button class="option genre" 
@@ -213,7 +253,7 @@
             <div class="main_container_wrapper">
                 <div class="content">
                     <div class="holidays">
-                    <h2 class="title">Дешевые выходные</h2>
+                    <h2 class="title">Хочу экшена!</h2>
                         
                         <? $arShown = array(); ?>
                         <? foreach($holidays as $game) : ?>

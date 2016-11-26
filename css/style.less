@@ -98,6 +98,40 @@ header {
 	
 	.container {
         background: #fafafa;
+
+        .menu {
+            display: table-cell;
+            vertical-align: middle;
+            padding: 0 20px;
+            background: #DDDBFA;
+            
+            li {
+                list-style: none;
+                display: inline-block;
+                
+                a {
+                    font-family: @f_bold;
+                    font-size: 0.875em;
+                    text-transform: uppercase;
+                    color: #1d293e;
+                    padding: 15px;
+                    display: block;
+                    
+                    &.active {
+                        color: #fafafa;
+                        text-shadow: 0 0 3px #636363;
+                    }
+                }
+                
+                &:hover {
+                    cursor: pointer;
+                    a {
+                        color: #fafafa;
+                        text-shadow: 0 0 3px #636363;
+                    }
+                }
+            }
+        }
 		
 		.header_wrapper {
 			display: table;
@@ -549,7 +583,7 @@ img.hidden {
     .pagination {
         position: absolute;
         right: 20px;
-        bottom: 15px;
+        bottom: 0px;
         
         div {
             display: inline-block;
@@ -702,6 +736,7 @@ img.hidden {
 	
 	.products {
             padding-top: 15px;
+            padding-bottom: 20px;
             
         &.transp {
             display: none;
@@ -1269,37 +1304,6 @@ section {
         
         .container {
             
-            .menu {
-                padding: 0 20px;
-                background: #DDDBFA;
-                
-                li {
-                    list-style: none;
-                    display: inline-block;
-                    
-                    a {
-                        font-family: @f_bold;
-                        font-size: 0.875em;
-                        text-transform: uppercase;
-                        color: #1d293e;
-                        padding: 15px;
-                        display: block;
-                        
-                        &.active {
-                            color: #fafafa;
-                            text-shadow: 0 0 3px #636363;
-                        }
-                    }
-                    
-                    &:hover {
-                        cursor: pointer;
-                        a {
-                            color: #fafafa;
-                            text-shadow: 0 0 3px #636363;
-                        }
-                    }
-                }
-            }
         }
 
         &.room {

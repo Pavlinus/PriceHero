@@ -125,6 +125,14 @@ class C_Index extends C_Base
         {
             $and['Genre.genre_id'] = $_POST['genreId'];
         }
+
+        if(isset($_POST['steamId']) && $_POST['steamId'] != '')
+        {
+            if($_POST['steamId'] == 'keys')
+            {
+                $and['Link.site_id'] = $this->mCatalog->getSteamSiteIdArray();
+            }
+        }
         
         $offset = 0;
         $priceList = $this->mCatalog->getPriceUpdates($offset, $priceFrom, $priceTo);

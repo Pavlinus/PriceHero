@@ -18,7 +18,7 @@
 </div>
 
 <div class="buy_container">
-	<span class="price">599 руб</span>
+	<span class="price">699 руб</span>
 	
 	<a href="http://steambuy.com/steam/killing-floor-2/?partner=672517">
 		<span class="buy_button">В магазин</span>

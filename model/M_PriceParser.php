@@ -31,6 +31,13 @@ class M_PriceParser
         $this->msql = M_MSQL::Instance();
         $this->logger = M_CronUpdateLogger::Instance();
     }
+
+
+    public function endParse()
+    {
+        self::$instance = null;
+        $this->msql->closeConnection();
+    }
     
     
     /**

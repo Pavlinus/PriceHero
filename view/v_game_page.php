@@ -1,8 +1,6 @@
 <section class="main room gamepage">
     <div class="container">
 
-        <? include "h_menu.php"; ?>
-
         <div class="image_container">
             <img src="<?=$image?>">
         </div>

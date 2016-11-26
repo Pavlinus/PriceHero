@@ -33,6 +33,13 @@ class M_Price
 
         return self::$instance;
     }
+
+
+    public function endPrice()
+    {
+        self::$instance = null;
+        $this->msql->closeConnection();
+    }
 	
 	
     /**

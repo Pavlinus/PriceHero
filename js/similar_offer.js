@@ -59,6 +59,12 @@ function moreClickHandler()
     var siteId = $(this).parents('div.item')
             .find('div[name="site_id"]').text();
     var price_from = $('input[name="price_from"]').val();
+    var steamFilter = '';
+
+    if($('.filter button.steam').hasClass('active'))
+    {
+        steamFilter = $('.filter button.steam').attr('value');
+    }
 
     moreObject = $(this);
 
@@ -66,7 +72,8 @@ function moreClickHandler()
         game_id: gameId,
         platform_id: platformId,
         site_id: siteId,
-        price_from: price_from
+        price_from: price_from,
+        steam: steamFilter
     };
 
     $.ajax({

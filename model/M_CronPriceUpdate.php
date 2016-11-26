@@ -3,7 +3,7 @@
 include_once "M_MSQL.php";
 include_once "M_PriceParser.php";
 include_once "M_Price.php";
-include_once 'M_CronUpdateLogger.php';
+//include_once 'M_CronUpdateLogger.php';
 
 
 /* шаг цикла */
@@ -24,10 +24,10 @@ function getData($msql)
 }
 
 $msql = M_MSQL::Instance();
-$logger = M_CronUpdateLogger::Instance();
+//$logger = M_CronUpdateLogger::Instance();
 $arData = getData($msql);
 $totalDataItems = count($arData);
-$offset = 325;
+$offset = 0;
 
 echo "Total table items: " . $totalDataItems . "\n";
 
@@ -55,7 +55,7 @@ foreach($priceParsed as $price)
             if($dataItem['link_id'] == $price['linkId'])
             {
                 $priceList[ $price['linkId'] ] = $dataItem['new_price'];
-                $logger->addLog($price['link_id']);
+                //$logger->addLog($price['link_id']);
             }
         }
     }
@@ -86,6 +86,7 @@ echo "</pre>";
 // Обновляем цены
 $mPrice = M_Price::Instance();
 $mPrice->updatePrice($arNewPrice, $arOldPrice);
+// $mPrice->endPrice();
 
 $offset += STEP;
 

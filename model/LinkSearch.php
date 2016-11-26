@@ -1,6 +1,5 @@
 <?php
 
-include_once "M_MSQL.php";
 include_once "M_Link.php";
 include_once "M_Game.php";
 include_once "M_Price.php";
@@ -281,7 +280,7 @@ function gameray($gameName, $siteId)
   global $arLinks;
   $host = 'http://www.gameray.ru/';
   $hostGameName = str_replace(' ', '-', $gameName);
-  $link = $host . strtolower($hostGameName) . "/";
+  $link = $host . strtolower($hostGameName) . "/?partner=209";
 
   if(checkLink($link, $siteId))
   {
@@ -438,13 +437,13 @@ function checkLink($link, $siteId)
 
 // ------------------------ Игры для поиска и добавления ----------------------
 $games = array(
-  'Surgeon Simulator Anniversary Edition'
+  'DmC Devil May Cry'
 );
 
 
 $arLinks = array();
 $linkParser = LinkSearchParser::Instance();
-$mSearch = M_Search::Instance();
+//$mSearch = M_Search::Instance();
 
 foreach($arSite as $siteName => $siteId)
 {
@@ -471,10 +470,10 @@ foreach($arLinks as $gameName => $game)
     '/upload/images/' . str_replace(' ', '_', strtolower($gameName)) . '.jpg';
 
   $gameId = $mGame->addGame($gameName, $genreId, $image);
-  $mGame->addGameKeywords($gameId, $gameName);
 
   if($gameId)
   {
+    $mGame->addGameKeywords($gameId, $gameName);
     $linksId = $mLink->addLinkExt($game);
     $priceList = $mPriceParser->parse($linksId);
     $priceId = $mPrice->addPrice($priceList);
@@ -491,7 +490,7 @@ foreach($arLinks as $gameName => $game)
   }
 }
 
-echo "<br><pre>";
+echo "<br><pre>arLinks";
 print_r($arLinks);
 echo "</pre>";
 

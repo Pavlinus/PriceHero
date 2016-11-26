@@ -1,17 +1,14 @@
 <?php
 include_once('simple_html_dom.php');
 
-$link = 'https://www.gamebuy.ru/xboxone/game/nba-2k17-xbox-one';
+$link = 'http://www.gameray.ru/dishonored-2/?partner=209';
 
 $html = file_get_html($link);
 $matches = null;
 
-foreach($html->find('div.panel-col-last span.uc-price') as $span)
+foreach($html->find('span[itemprop="price"]') as $span)
 {
-	echo $span->outertext;
-	$val = str_replace(' ', '', $span->outertext);
-    preg_match('/\d+/', $val, $matches);
-    break;
+    preg_match('/(\d)+/', $span->outertext, $matches);
 }
 
 print_r($matches);

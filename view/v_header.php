@@ -63,13 +63,9 @@
                             </form>
                     </div>
                 </div>
-                <!--div class="room_btn">
-                    <? if(!isset($_COOKIE['user_id'])) : ?>
-                        <a href="index.php?c=room" class="form_btn enter">Войти</a>
-                    <? else : ?>
-                        <a href="index.php?c=room&act=logout" class="form_btn out">Выйти</a>
-                    <? endif; ?>
-                </div-->
+
+                <? include "h_menu.php"; ?>
+
             </div>
         </div>
     </header>

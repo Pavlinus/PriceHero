@@ -74,7 +74,8 @@ class M_MSQL
 
             if (!$result) 
             {
-                //die(mysqli_error($this->connLink));
+                echo "<br>".mysqli_error($this->connLink);
+                echo "<br>".mysql_error();
                 return false;
             }
 
@@ -140,8 +141,13 @@ class M_MSQL
 		return $this->connLink;
 	}
         
-        public function getAffectedRows()
-        {
-            return mysqli_affected_rows($this->connLink);
-        }
+    public function getAffectedRows()
+    {
+        return mysqli_affected_rows($this->connLink);
+    }
+
+    public function closeConnection()
+    {
+    	mysqli_close($this->connLink);
+    }
 }

@@ -1,8 +1,6 @@
 <section class="main">
     <div class="container">
         
-        <? include "h_menu.php"; ?>
-        
         <div class="main_container_wrapper">
             <div class="content">
                 

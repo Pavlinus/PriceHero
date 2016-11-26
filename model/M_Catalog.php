@@ -12,14 +12,16 @@ class M_Catalog
 {
     private $msql;
     private static $instance;
+    private $arSteamSiteId;
     
     /* количество выводимых обновлений на странице */
-    const UPDATES_ON_PAGE = 9;
+    const UPDATES_ON_PAGE = 12;
     const ROWS_LIMIT = 100;
 
     public function __construct()
     {
         $this->msql = M_MSQL::Instance();
+        $this->arSteamSiteId = array(1,3,8,15);
     }
 
 
@@ -37,6 +39,12 @@ class M_Catalog
         return self::$instance;
     }
 
+
+    public function getSteamSiteIdArray()
+    {
+        return $this->arSteamSiteId;
+    }
+
     
     /**
      * Извлекает данные недавно добавленных игр
@@ -46,6 +54,7 @@ class M_Catalog
     public function getLastUpdates($offset = 0, $priceFrom = 1, $priceTo = 10000)
     {
         $priceId = $this->getPriceUpdates($offset, $priceFrom, $priceTo);
+
         $and = array(
             'total.platform_id' => array(1),
         );
@@ -60,6 +69,14 @@ class M_Catalog
         if(isset($_POST['genreId']) && !empty($_POST['genreId']))
         {
             $and['Genre.genre_id'] = $_POST['genreId'];
+        }
+
+        if(isset($_POST['steamId']) && $_POST['steamId'] != '')
+        {
+            if($_POST['steamId'] == 'keys')
+            {
+                $and['Link.site_id'] = $this->arSteamSiteId;
+            }
         }
         
         return $this->getGames($priceId, 'total.price_id', $and, $additional);
@@ -93,6 +110,15 @@ class M_Catalog
             $where .= "AND Game.genre_id IN ("
                     . implode(",", $_POST['genreId']) . ") ";
         }
+
+        if(isset($_POST['steamId']) && $_POST['steamId'] != '')
+        {
+            if($_POST['steamId'] == 'keys')
+            {
+                $where .= "AND Link.site_id IN ("
+                    . implode(",", $this->arSteamSiteId) . ") ";
+            }
+        }
         
         /* если пользователь авторизован, исключаем из выборки 
          * отслеживаемые им игры */
@@ -108,6 +134,7 @@ class M_Catalog
         $query =  "SELECT DISTINCT Game.game_id, Total.platform_id FROM t_game Game "
                 . "LEFT JOIN t_total Total ON (Total.game_id=Game.game_id) "
                 . "LEFT JOIN t_price Price ON (Price.price_id=Total.price_id) "
+                . "LEFT JOIN t_link Link ON (Link.link_id=Total.link_id) "
                 . $authCond['leftJoin']
                 . $where
                 . "ORDER BY Game.game_id DESC "
@@ -191,7 +218,7 @@ class M_Catalog
         }
         
         $lowestPrice = $this->getLowestPriceId($arGamesId, array(), $priceFrom, $priceTo);
-        
+
         return array_slice($lowestPrice, 0, self::UPDATES_ON_PAGE);
     }
     
@@ -216,6 +243,16 @@ class M_Catalog
             $platformSet = htmlspecialchars($platformStr);
             $inPlatformId = "AND Total.platform_id IN $platformSet";
         }
+
+        $inLinkId = '';
+        if(isset($_POST['steamId']) && $_POST['steamId'] != '')
+        {
+            if($_POST['steamId'] == 'keys')
+            {
+                $steamId = "(" . implode(",", $this->arSteamSiteId) . ")";
+                $inLinkId = "AND Link.site_id IN $steamId";
+            }
+        }
         
         $inGamesId = "(". implode(",", $arGamesId) .")";
         
@@ -224,8 +261,9 @@ class M_Catalog
                 . "FROM t_total Total "
                 . "LEFT JOIN t_game Game USING(game_id) "
                 . "LEFT JOIN t_price Price USING(price_id) "
+                . "LEFT JOIN t_link Link USING(link_id) "
                 . "WHERE Price.new_price <> 0 AND Total.game_id IN $inGamesId $inPlatformId "
-                . "AND Price.new_price >= $priceFrom AND Price.new_price <= $priceTo "
+                . "AND Price.new_price >= $priceFrom AND Price.new_price <= $priceTo $inLinkId"
                 . "ORDER BY price ASC ";
 
         $rows = $this->msql->Select($query);
@@ -369,6 +407,13 @@ class M_Catalog
             $platformId = htmlspecialchars($_POST['platform_id']);
             $siteId = htmlspecialchars($_POST['site_id']);
             $priceFrom = htmlspecialchars($_POST['price_from']);
+            $steamCondition = '';
+
+            if(isset($_POST['steam']) && $_POST['steam'] != '')
+            {
+                $in = implode(", ", $this->arSteamSiteId);
+                $steamCondition = " AND Link.site_id IN ($in) ";
+            }
             
             $query =  "SELECT Link.link as link, Site.name as site, "
                     . "Price.new_price as price "
@@ -379,9 +424,9 @@ class M_Catalog
                     . "WHERE Total.game_id=$gameId AND "
                     . "Total.platform_id=$platformId AND "
                     . "Site.site_id<>$siteId AND "
-                    . "Price.new_price<>0 AND Price.new_price >= $priceFrom "
+                    . "Price.new_price<>0 AND Price.new_price >= $priceFrom $steamCondition"
                     . "ORDER BY price ASC";
-            
+            //echo $query;
             $rows = $this->msql->Select($query);
             
             return $rows;
