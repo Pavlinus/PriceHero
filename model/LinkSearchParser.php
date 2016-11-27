@@ -178,7 +178,7 @@ class LinkSearchParser
             return false;
         }
 
-        return true;
+        return $matches[0];
     }
 
 
@@ -205,7 +205,7 @@ class LinkSearchParser
             return false;
         }
         
-        return true;
+        return $matches[0];
     }
 
 
@@ -231,7 +231,7 @@ class LinkSearchParser
             return false;
         }
         
-        return true;
+        return $matches[0];
     }
 
 
@@ -257,7 +257,7 @@ class LinkSearchParser
             return false;
         }
         
-        return true;
+        return $matches[0];
     }
 
 
@@ -362,7 +362,7 @@ class LinkSearchParser
             return false;
         }
         
-        return true;
+        return str_replace(" ", "", $matches[0]);
     }
     
     
@@ -388,7 +388,7 @@ class LinkSearchParser
             return false;
         }
 
-        return true;
+        return $matches[0];
     }
     
     
@@ -460,7 +460,7 @@ class LinkSearchParser
             return false;
         }
 
-        return true;
+        return $matches[0];
     }
 
 
@@ -485,7 +485,7 @@ class LinkSearchParser
             return false;
         }
 
-        return true;
+        return $matches[0];
     }
 
 
@@ -510,7 +510,7 @@ class LinkSearchParser
             return false;
         }
 
-        return true;
+        return $matches[0];
     }
     
     
@@ -535,7 +535,7 @@ class LinkSearchParser
             return false;
         }
 
-        return true;
+        return $matches[0];
     }
     
     

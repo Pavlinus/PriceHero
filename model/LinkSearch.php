@@ -9,8 +9,8 @@ include_once "M_PriceParser.php";
 include_once "LinkSearchParser.php";
 
 /* лимит выборки цен */
-define(STEP, 3);
-define(STANDBY, 15);
+define(STEP, 5);
+define(STANDBY, 30);
 
 $arSite = array(
   'steambuy' => 1,
@@ -44,13 +44,15 @@ function playo($gameName, $siteId)
   $partner = '?s=d1v9c00v';
   $hostGameName = str_replace(' ', '_', $gameName);
   $link = $host . strtolower($hostGameName) . "/";
+  $price = checkLink($link . $partner, $siteId);
 
-  if(checkLink($link . $partner, $siteId))
+  if($price)
   {
     $arLinks[ $gameName ][] = array(
       'link' => $link . $partner,
       'site_id' => $siteId,
-      'platform_id' => 1
+      'platform_id' => 1,
+      'price' => $price
     );
   }
 
@@ -87,12 +89,15 @@ function gamebuy($gameName, $siteId)
     foreach ($platform as $name) 
     {
       $link = $host . $name . "/game/" . $hostGameName . $arPostfix[$name];
-      if(checkLink($link, $siteId))
+      $price = checkLink($link, $siteId);
+
+      if($price)
       {
         $arLinks[ $gameName ][] = array(
           'link' => $link,
           'site_id' => $siteId,
-          'platform_id' => $platformId
+          'platform_id' => $platformId,
+          'price' => $price
         );
       }
     }
@@ -139,12 +144,15 @@ function nextgame($gameName, $siteId)
     foreach ($platform as $name) 
     {
       $link = $host . $arPlatformPath[$name] . $hostGameName . $arPostfix[$name] . "/";
-      if(checkLink($link, $siteId))
+      $price = checkLink($link, $siteId);
+
+      if($price)
       {
         $arLinks[ $gameName ][] = array(
           'link' => $link,
           'site_id' => $siteId,
-          'platform_id' => $platformId
+          'platform_id' => $platformId,
+          'price' => $price
         );
       }
     }
@@ -175,12 +183,15 @@ function playgames($gameName, $siteId)
     foreach ($platform as $name) 
     {
       $link = $host . strtolower($hostGameName) . "-" . $name . "/";
-      if(checkLink($link, $siteId))
+      $price = checkLink($link, $siteId);
+
+      if($price)
       {
         $arLinks[ $gameName ][] = array(
           'link' => $link,
           'site_id' => $siteId,
-          'platform_id' => $platformId
+          'platform_id' => $platformId,
+          'price' => $price
         );
       }
     }
@@ -210,12 +221,15 @@ function gzonline($gameName, $siteId)
     foreach ($platform as $name) 
     {
       $link = $host . $hostGameName . "-_rus-" . $name . "/";
-      if(checkLink($link, $siteId))
+      $price = checkLink($link, $siteId);
+
+      if($price)
       {
         $arLinks[ $gameName ][] = array(
           'link' => $link,
           'site_id' => $siteId,
-          'platform_id' => $platformId
+          'platform_id' => $platformId,
+          'price' => $price
         );
       }
     }
@@ -255,14 +269,17 @@ function gamepark($gameName, $siteId)
     foreach ($platform as $name) 
     {
       $link = $host . $arPlatformPath[$name] . $hostGameName . $name . "/";
-      if(checkLink($link, $siteId))
+      $price = checkLink($link, $siteId);
+
+      if($price)
       {
         $link = str_replace(':', '%3A', $link);
         $link = str_replace('/', '%2F', $link);
         $arLinks[ $gameName ][] = array(
           'link' => $partner . $link,
           'site_id' => $siteId,
-          'platform_id' => $platformId
+          'platform_id' => $platformId,
+          'price' => $price
         );
       }
     }
@@ -281,13 +298,15 @@ function gameray($gameName, $siteId)
   $host = 'http://www.gameray.ru/';
   $hostGameName = str_replace(' ', '-', $gameName);
   $link = $host . strtolower($hostGameName) . "/?partner=209";
+  $price = checkLink($link, $siteId);
 
-  if(checkLink($link, $siteId))
+  if($price)
   {
     $arLinks[ $gameName ][] = array(
       'link' => $link,
       'site_id' => $siteId,
-      'platform_id' => 1
+      'platform_id' => 1,
+      'price' => $price
     );
   }
 
@@ -308,12 +327,15 @@ function steampay($gameName, $siteId)
 
   if(check404($link . $partner))
   {
-    if(checkLink($link, $siteId))
+    $price = checkLink($link, $siteId);
+
+    if($price)
     {
       $arLinks[ $gameName ][] = array(
         'link' => $link . $partner,
         'site_id' => $siteId,
-        'platform_id' => 1
+        'platform_id' => 1,
+        'price' => $price
       );
     }
   }
@@ -336,12 +358,15 @@ function steambuy($gameName, $siteId)
   $link = $linkBase . $name . '/';
   if(check404($link . $partner))
   {
-    if(checkLink($link, $siteId))
+    $price = checkLink($link, $siteId);
+
+    if($price)
     {
       $arLinks[ $gameName ][] = array(
         'link' => $link . $partner,
         'site_id' => $siteId,
-        'platform_id' => 1
+        'platform_id' => 1,
+        'price' => $price
       );
     }
   }
@@ -377,12 +402,15 @@ function lozman($gameName, $siteId)
       }
 
       $link = $linkBase . $name . '/';
-      if(checkLink($link, $siteId))
+      $price = checkLink($link, $siteId);
+
+      if($price)
       {
         $arLinks[ $gameName ][] = array(
           'link' => $link,
           'site_id' => $siteId,
-          'platform_id' => $platformId
+          'platform_id' => $platformId,
+          'price' => $price
         );
       }
     }
@@ -437,7 +465,7 @@ function checkLink($link, $siteId)
 
 // ------------------------ Игры для поиска и добавления ----------------------
 $games = array(
-  'DmC Devil May Cry'
+  'Wolfenstein The New Order'
 );
 
 
@@ -463,32 +491,44 @@ $mPriceParser = M_PriceParser::Instance();
 
 echo "<br>Adding games ...<br>";
 
-foreach($arLinks as $gameName => $game)
+$gameName = $games[0];
+$game = $arLinks[ $gameName ];
+
+set_time_limit(0);
+
+$genreId = 1;
+$image = 
+  '/upload/images/' . str_replace(' ', '_', strtolower($gameName)) . '.jpg';
+
+$gameId = $mGame->addGame($gameName, $genreId, $image);
+
+if($gameId)
 {
-  $genreId = 1;
-  $image = 
-    '/upload/images/' . str_replace(' ', '_', strtolower($gameName)) . '.jpg';
+  $mGame->addGameKeywords($gameId, $gameName);
+  $newLinks = $mLink->addLinkExt($game);
 
-  $gameId = $mGame->addGame($gameName, $genreId, $image);
-
-  if($gameId)
+  $priceList = array();
+  foreach($newLinks as $linkData)
   {
-    $mGame->addGameKeywords($gameId, $gameName);
-    $linksId = $mLink->addLinkExt($game);
-    $priceList = $mPriceParser->parse($linksId);
-    $priceId = $mPrice->addPrice($priceList);
-    $totalId = $mTotal->addTotal($gameId, $linksId, $priceId);
+    $priceList[] = array(
+      'linkId' => $linkData['linkId'],
+      'price' => $linkData['price']
+    );
   }
 
-  if($totalId)
-  {
-    echo $gameName . " : SUCCESS<br>";
-  }
-  else
-  {
-    echo $gameName . " : FAILED<br>";
-  }
+  $priceId = $mPrice->addPrice($priceList);
+  $totalId = $mTotal->addTotal($gameId, $newLinks, $priceId);
 }
+
+if($totalId)
+{
+  echo $gameName . " : SUCCESS<br>";
+}
+else
+{
+  echo $gameName . " : FAILED<br>";
+}
+
 
 echo "<br><pre>arLinks";
 print_r($arLinks);

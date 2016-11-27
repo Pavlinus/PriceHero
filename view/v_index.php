@@ -6,7 +6,141 @@
         <div class="swiper-container">
             <!-- Additional required wrapper -->
             <div class="swiper-wrapper">
+                
                 <!-- Slides -->
+
+                <div class="swiper-slide">
+                    <div class="slider_left">
+                        <a target="_blank" href="http://steambuy.com/steam/middle-earth-shadow-of-mordor/?partner=672517">
+                            <img src="../pages/shadow-of-mordor/slide1.jpg" class="visible"> 
+                            <img src="../pages/shadow-of-mordor/slide2.jpg"> 
+                            <img src="../pages/shadow-of-mordor/slide3.jpg"> 
+                            <img src="../pages/shadow-of-mordor/slide4.jpg"> 
+                            <img src="../pages/shadow-of-mordor/slide5.jpg"> 
+                            <img src="../pages/shadow-of-mordor/slide6.jpg"> 
+                            <img src="../pages/shadow-of-mordor/slide7.jpg"> 
+                        </a>
+                    </div>
+                    <div class="slider_right">
+                        <div class="descr">
+                            <h3 class="name">Middle-earth: Shadow of Mordor</h3>
+                            <div class="thumb">
+                                <img src="../pages/shadow-of-mordor/slide2.jpg">
+                                <img src="../pages/shadow-of-mordor/slide3.jpg">
+                                <img src="../pages/shadow-of-mordor/slide4.jpg">
+                                <img src="../pages/shadow-of-mordor/slide5.jpg">
+                                <img src="../pages/shadow-of-mordor/slide6.jpg">
+                                <img src="../pages/shadow-of-mordor/slide7.jpg">
+                            </div>
+                            <div class="price">
+                                <h3>295 руб</h3>
+                            </div>
+                            <div class="addition">
+                                Скидка
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="slider_left">
+                        <a target="_blank" href="http://steambuy.com/uplay/tom-clancy-s-ghost-recon-wildlands/?partner=672517">
+                            <img src="../pages/tcgrwildlands/slide1.jpg" class="visible"> 
+                            <img src="../pages/tcgrwildlands/slide2.jpg"> 
+                            <img src="../pages/tcgrwildlands/slide3.jpg"> 
+                            <img src="../pages/tcgrwildlands/slide4.jpg"> 
+                            <img src="../pages/tcgrwildlands/slide5.jpg"> 
+                            <img src="../pages/tcgrwildlands/slide6.jpg"> 
+                            <img src="../pages/tcgrwildlands/slide7.jpg"> 
+                        </a>
+                    </div>
+                    <div class="slider_right">
+                        <div class="descr">
+                            <h3 class="name">Tom Clancy's Ghost Recon® Wildlands</h3>
+                            <div class="thumb">
+                                <img src="../pages/tcgrwildlands/slide2.jpg">
+                                <img src="../pages/tcgrwildlands/slide3.jpg">
+                                <img src="../pages/tcgrwildlands/slide4.jpg">
+                                <img src="../pages/tcgrwildlands/slide5.jpg">
+                                <img src="../pages/tcgrwildlands/slide6.jpg">
+                                <img src="../pages/tcgrwildlands/slide7.jpg">
+                            </div>
+                            <div class="price">
+                                <h3>1695 руб</h3>
+                            </div>
+                            <div class="addition">
+                                Предзаказ
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="swiper-slide">
+                    <div class="slider_left">
+                        <a target="_blank" href="http://steambuy.com/steam/dark-souls-2-scholar-of-the-first-sin/?partner=672517">
+                            <img src="../pages/darksouls2/slide1.jpg" class="visible"> 
+                            <img src="../pages/darksouls2/slide2.jpg"> 
+                            <img src="../pages/darksouls2/slide3.jpg"> 
+                            <img src="../pages/darksouls2/slide4.jpg"> 
+                            <img src="../pages/darksouls2/slide5.jpg"> 
+                            <img src="../pages/darksouls2/slide6.jpg"> 
+                            <img src="../pages/darksouls2/slide7.jpg"> 
+                        </a>
+                    </div>
+                    <div class="slider_right">
+                        <div class="descr">
+                            <h3 class="name">Dark Souls 2: Scholar of The First Sin</h3>
+                            <div class="thumb">
+                                <img src="../pages/darksouls2/slide2.jpg">
+                                <img src="../pages/darksouls2/slide3.jpg">
+                                <img src="../pages/darksouls2/slide4.jpg">
+                                <img src="../pages/darksouls2/slide5.jpg">
+                                <img src="../pages/darksouls2/slide6.jpg">
+                                <img src="../pages/darksouls2/slide7.jpg">
+                            </div>
+                            <div class="price">
+                                <h3>495 руб</h3>
+                            </div>
+                            <div class="addition">
+                                Скидка
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="swiper-slide">
+                    <div class="slider_left">
+                        <a target="_blank" href="http://steambuy.com/steam/counter-strike-global-offensive/?partner=672517">
+                            <img src="../pages/csgo/slide1.jpg" class="visible"> 
+                            <img src="../pages/csgo/slide2.jpg"> 
+                            <img src="../pages/csgo/slide3.jpg"> 
+                            <img src="../pages/csgo/slide4.jpg"> 
+                            <img src="../pages/csgo/slide5.jpg"> 
+                            <img src="../pages/csgo/slide6.jpg"> 
+                            <img src="../pages/csgo/slide7.jpg"> 
+                        </a>
+                    </div>
+                    <div class="slider_right">
+                        <div class="descr">
+                            <h3 class="name">Counter-Strike: Global Offensive</h3>
+                            <div class="thumb">
+                                <img src="../pages/csgo/slide2.jpg">
+                                <img src="../pages/csgo/slide3.jpg">
+                                <img src="../pages/csgo/slide4.jpg">
+                                <img src="../pages/csgo/slide5.jpg">
+                                <img src="../pages/csgo/slide6.jpg">
+                                <img src="../pages/csgo/slide7.jpg">
+                            </div>
+                            <div class="price">
+                                <h3>339 руб</h3>
+                            </div>
+                            <div class="addition">
+                                Скидка
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="swiper-slide">
                     <div class="slider_left">
                         <a href="index.php?c=index&act=game&name=killingfloor2">
@@ -33,105 +167,6 @@
                             </div>
                             <div class="addition">
                                 Ранний доступ
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="slider_left">
-                        <a href="index.php?c=index&act=game&name=dishonored2">
-                            <img src="../pages/dishonored2/slide1.jpg" class="visible"> 
-                            <img src="../pages/dishonored2/slide2.jpg"> 
-                            <img src="../pages/dishonored2/slide3.jpg"> 
-                            <img src="../pages/dishonored2/slide4.jpg"> 
-                            <img src="../pages/dishonored2/slide5.jpg"> 
-                            <img src="../pages/dishonored2/slide6.jpg"> 
-                            <img src="../pages/dishonored2/slide7.jpg"> 
-                        </a>
-                    </div>
-                    <div class="slider_right">
-                        <div class="descr">
-                            <h3 class="name">Dishonored 2</h3>
-                            <div class="thumb">
-                                <img src="../pages/dishonored2/slide2.jpg">
-                                <img src="../pages/dishonored2/slide3.jpg">
-                                <img src="../pages/dishonored2/slide4.jpg">
-                                <img src="../pages/dishonored2/slide5.jpg">
-                                <img src="../pages/dishonored2/slide6.jpg">
-                                <img src="../pages/dishonored2/slide7.jpg">
-                            </div>
-                            <div class="price">
-                                <h3>1599 руб</h3>
-                            </div>
-                            <div class="addition">
-                                Лидер продаж
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="slider_left">
-                        <a href="index.php?c=index&act=game&name=35mm">
-                            <img src="../pages/35mm/slide1.jpg" class="visible"> 
-                            <img src="../pages/35mm/slide2.jpg"> 
-                            <img src="../pages/35mm/slide3.jpg"> 
-                            <img src="../pages/35mm/slide4.jpg"> 
-                            <img src="../pages/35mm/slide5.jpg"> 
-                            <img src="../pages/35mm/slide6.jpg"> 
-                            <img src="../pages/35mm/slide7.jpg"> 
-                        </a>
-                    </div>
-                    <div class="slider_right">
-                        <div class="descr">
-                            <h3 class="name">35mm</h3>
-                            <div class="thumb">
-                                <img src="../pages/35mm/slide2.jpg">
-                                <img src="../pages/35mm/slide3.jpg">
-                                <img src="../pages/35mm/slide4.jpg">
-                                <img src="../pages/35mm/slide5.jpg">
-                                <img src="../pages/35mm/slide6.jpg">
-                                <img src="../pages/35mm/slide7.jpg">
-                            </div>
-                            <div class="price">
-                                <h3>95 руб</h3>
-                            </div>
-                            <div class="addition">
-                                Скидка
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="swiper-slide">
-                    <div class="slider_left">
-                        <a href="index.php?c=index&act=game&name=injustice">
-                            <img src="../pages/injustice/slide1.jpg" class="visible"> 
-                            <img src="../pages/injustice/slide2.jpg"> 
-                            <img src="../pages/injustice/slide3.jpg"> 
-                            <img src="../pages/injustice/slide4.jpg"> 
-                            <img src="../pages/injustice/slide5.jpg"> 
-                            <img src="../pages/injustice/slide6.jpg"> 
-                            <img src="../pages/injustice/slide7.jpg"> 
-                        </a>
-                    </div>
-                    <div class="slider_right">
-                        <div class="descr">
-                            <h3 class="name">Injustice: Gods Among Us</h3>
-                            <div class="thumb">
-                                <img src="../pages/injustice/slide2.jpg">
-                                <img src="../pages/injustice/slide3.jpg">
-                                <img src="../pages/injustice/slide4.jpg">
-                                <img src="../pages/injustice/slide5.jpg">
-                                <img src="../pages/injustice/slide6.jpg">
-                                <img src="../pages/injustice/slide7.jpg">
-                            </div>
-                            <div class="price">
-                                <h3>149 руб</h3>
-                            </div>
-                            <div class="addition">
-                                Файтинг недели
                             </div>
                         </div>
                     </div>

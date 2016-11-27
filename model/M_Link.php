@@ -99,6 +99,8 @@ class M_Link
             {
                 $linksData[] = array(
                     'linkId' => $id,
+                    'link' => $item['link'],
+                    'price' => $item['price'],
                     'site_id' => htmlspecialchars($item['site_id']),
                     'platform' => htmlspecialchars($item['platform_id'])
                 );
